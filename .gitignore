@@ -116,4 +116,12 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+## Compiled JavaScript files
+functions/**/*.js
+functions/**/*.js.map
+functions/lib/
+
+# Typescript v1 declaration files
+typings/
+
 # End of https://www.gitignore.io/api/node
