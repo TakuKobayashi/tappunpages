@@ -1,0 +1,6 @@
+FONTS USED:
+
+- JF Shinonome Gothic 12
+- Super Mario 256
+- Roboto Regular (どのsans-serifでも良いと思います)
+- ArcadeClassic
