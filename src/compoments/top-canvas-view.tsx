@@ -1,7 +1,9 @@
 import React from 'react';
+import backgroundImage from '../images/bg-1080p.png'
 
 export class TopCanvasView extends React.Component {
   private canvas: HTMLCanvasElement | null = null;
+  private ctx: CanvasRenderingContext2D | null = null;
   private frameId: number | null = null;
 
   constructor(props: any) {
@@ -13,6 +15,15 @@ export class TopCanvasView extends React.Component {
 
   onCanvasLoaded = (canvas: HTMLCanvasElement) => {
     this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    const _image = new Image();
+    _image.src = backgroundImage;
+    _image.onload = () => {
+      if(!this.ctx){
+        return;
+      }
+      this.ctx.drawImage(_image, 0, 0, _image.width, _image.height);
+    }
   };
 
   componentWillUnmount() {
