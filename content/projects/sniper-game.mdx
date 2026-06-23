@@ -1,0 +1,49 @@
+---
+title: "Multiplayer PLATEAU Sniper Game"
+description: "国土交通省の3D都市データ PLATEAU を使ったリアルタイム対戦スナイパーゲーム。Unity + Next.js + PartyKit/WebRTC で構築。"
+date: "2024-10-01"
+tags: ["Unity", "WebRTC", "PLATEAU", "Cloudflare", "Next.js", "PartyKit"]
+featured: true
+github: "https://github.com/taptappun"
+related: ["ai-vtuber", "ar-timecapsule"]
+---
+
+## Overview
+
+国土交通省が公開している 3D 都市データ「PLATEAU」を Unity に取り込み、
+リアルタイム対戦スナイパーゲームとして実装したプロジェクト。
+
+マルチプレイヤー通信は PartyKit (Cloudflare Durable Objects ベース) と WebRTC を組み合わせ、
+低レイテンシのリアルタイム同期を実現。
+
+## Architecture
+
+```
+Unity Client (PLATEAU 3D city)
+  ↕ WebRTC (P2P)
+PartyKit / Cloudflare Durable Objects
+  ↕ REST API
+Next.js Frontend (lobby / matchmaking)
+  ↕
+Cloudflare Workers + D1 (score / rooms)
+```
+
+## Key Features
+
+- **PLATEAU 統合** — 実在する都市を戦場として使用
+- **リアルタイム同期** — WebRTC P2P + PartyKit によるルーム管理
+- **弾道シミュレーション** — 距離・風速・重力を考慮した物理演算
+- **マッチメイキング** — Next.js + Cloudflare Workers
+
+## Technical Highlights
+
+PLATEAU の 3D Tiles データを Unity で動的ロードし、ストリーミングレンダリング。
+MessagePack によるバイナリシリアライズで通信量を最小化。
+
+## Stack
+
+- **Game Engine**: Unity 2022 LTS, C#
+- **3D Data**: PLATEAU (国土交通省 3D 都市モデル)
+- **Multiplayer**: PartyKit, WebRTC, Cloudflare Durable Objects
+- **Web**: Next.js 15, TypeScript
+- **Serialization**: MessagePack

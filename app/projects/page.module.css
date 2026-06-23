@@ -1,0 +1,201 @@
+.page {
+  padding-top: calc(60px + var(--space-16));
+  padding-bottom: var(--space-32);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.header {
+  padding: var(--space-12) 0 var(--space-12);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.filterBtn {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+  display: inline-block;
+}
+
+.filterBtn:hover,
+.filterBtn.active {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-dim);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+/* Card */
+.card {
+  display: block;
+  padding: var(--space-6);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover {
+  border-color: var(--color-border-light);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 60px rgba(0,0,0,0.5);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.cardMeta {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.featuredBadge {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  background: var(--color-primary-dim);
+  border: 1px solid rgba(0,232,122,0.3);
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.cardArrow {
+  color: var(--color-text-muted);
+  font-size: var(--text-xl);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.card:hover .cardArrow {
+  transform: translate(3px, -3px);
+  color: var(--color-primary);
+}
+
+.cardTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.cardDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-top: calc(60px + var(--space-8));
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

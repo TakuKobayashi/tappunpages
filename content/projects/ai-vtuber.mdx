@@ -1,0 +1,46 @@
+---
+title: "AI VTuber Voice Communication System"
+description: "リアルタイム音声対話AIキャラクターシステム。Next.js + VOICEVOX + VRM/VRMA レンダリングで構築した没入型AIアシスタント。"
+date: "2024-11-01"
+tags: ["Next.js", "AI", "WebRTC", "VRM", "VOICEVOX", "TypeScript", "Hono"]
+featured: true
+github: "https://github.com/taptappun"
+related: ["sniper-game", "ar-timecapsule"]
+---
+
+## Overview
+
+Next.js + Hono + VOICEVOX + VRM/VRMA レンダリングで構築したリアルタイム AI VTuber システム。
+テキスト入力または音声入力に対して、3D キャラクターが音声で応答するインタラクティブな AI アシスタント。
+
+## Architecture
+
+```
+User Input (text/voice)
+  → Next.js Frontend (VRM rendering)
+  → Hono API (Cloudflare Workers)
+  → LLM (OpenAI / Gemini)
+  → VOICEVOX (text-to-speech)
+  → VRM character animation
+```
+
+## Key Features
+
+- **VRM/VRMA rendering** — Three.js ベースの 3D キャラクター表示
+- **VOICEVOX 統合** — 高品質な日本語 TTS
+- **会話履歴管理** — Jotai によるステート管理
+- **RPG メッセージウィンドウ** — ゲームライクな UI
+- **i18n 対応** — 日本語/英語の切り替え
+
+## Technical Highlights
+
+リアルタイム音声合成のレイテンシ最適化として、テキスト生成と音声合成をストリーミングでパイプライン処理。
+VRM アニメーションと音声の同期を WebAudio API で制御。
+
+## Stack
+
+- **Frontend**: Next.js 15, TypeScript, Three.js, @pixiv/three-vrm
+- **Backend**: Hono, Cloudflare Workers
+- **AI**: OpenAI GPT-4, Gemini
+- **TTS**: VOICEVOX Engine
+- **State**: Jotai

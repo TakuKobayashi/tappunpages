@@ -1,44 +1,191 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# taptappun.dev — Portfolio
 
-## Available Scripts
+> 海外案件獲得のための「営業装置として機能するポートフォリオサイト」
 
-In the project directory, you can run:
+**Stack**: Next.js 15 (App Router) · TypeScript · CSS Modules · Cloudflare Pages
 
-### `npm start`
+---
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Quick Start
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
 
-### `npm test`
+`http://localhost:3000` で即起動。
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+portfolio/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx          # Root layout + metadata
+│   ├── page.tsx            # Home (JA)
+│   ├── about/page.tsx      # About
+│   ├── projects/           # Projects list + detail
+│   ├── blog/               # Blog list + detail
+│   ├── contact/page.tsx    # Contact (form)
+│   ├── en/page.tsx         # English home
+│   ├── api/contact/        # Edge API route
+│   ├── sitemap.ts          # Auto sitemap
+│   └── robots.ts           # robots.txt
+├── components/
+│   ├── layout/             # Nav, Footer
+│   ├── sections/           # ContactForm
+│   └── ui/                 # MDXContent
+├── content/
+│   ├── projects/*.mdx      # Project articles (MDX CMS)
+│   └── blog/*.mdx          # Blog posts (MDX CMS)
+├── lib/
+│   ├── projects.ts         # Project loader
+│   └── blog.ts             # Blog post loader
+├── styles/
+│   └── globals.css         # Design tokens + reset
+├── wrangler.jsonc          # Cloudflare config
+└── .env.example
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Adding Content
 
-### `npm run eject`
+### New Project
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+# Create file: content/projects/my-project.mdx
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```mdx
+---
+title: "Project Title"
+description: "Short description"
+date: "2024-12-01"
+tags: ["Next.js", "AI", "Cloudflare"]
+featured: true
+github: "https://github.com/taptappun/repo"
+demo: "https://demo.example.com"
+related: ["other-project-slug"]
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Overview
+...
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### New Blog Post
 
-## Learn More
+```bash
+# Create file: content/blog/my-post.mdx
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```mdx
+---
+title: "Post Title"
+description: "Short description"
+date: "2024-12-01"
+tags: ["TypeScript", "Cloudflare"]
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Introduction
+...
+```
+
+SignalForge などの CLI ツールから自動生成する場合は、
+この frontmatter 形式に合わせた出力を設定してください。
+
+---
+
+## Environment Variables
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable              | Required | Description              |
+|-----------------------|----------|--------------------------|
+| `DISCORD_WEBHOOK_URL` | Optional | Discord 通知先 Webhook    |
+| `RESEND_API_KEY`      | Optional | Resend メール API キー    |
+| `NOTIFY_EMAIL`        | Optional | 通知先メールアドレス      |
+
+---
+
+## Build
+
+```bash
+npm run build   # → ./out/ に静的ファイル生成
+```
+
+---
+
+## Deploy to Cloudflare Pages
+
+### Option A: Git 連携（推奨）
+
+1. GitHub に push
+2. Cloudflare Dashboard → Pages → Create a project
+3. **Build command**: `npm run build`
+4. **Build output directory**: `out`
+5. **Environment variables** を設定
+
+### Option B: CLI
+
+```bash
+npm install -g wrangler
+wrangler pages deploy out --project-name taptappun-portfolio
+```
+
+### Secrets の設定
+
+```bash
+wrangler pages secret put DISCORD_WEBHOOK_URL
+wrangler pages secret put RESEND_API_KEY
+wrangler pages secret put NOTIFY_EMAIL
+```
+
+---
+
+## Design System
+
+デザインは元の Sketch/PDF デザインのトーンを継承しつつ、
+Global Product Engineer Portfolio としてアップグレード。
+
+| Token                  | Value          | Usage                     |
+|------------------------|----------------|---------------------------|
+| `--color-bg`           | `#080c14`      | Page background           |
+| `--color-primary`      | `#00e87a`      | Accent / CTA / neon green |
+| `--color-text`         | `#e8ecf4`      | Body text                 |
+| `--color-text-secondary` | `#7a8399`    | Subdued text              |
+| `--font-body`          | Roboto         | Body copy                 |
+| `--font-mono`          | Roboto Mono    | Code, labels, badges      |
+
+---
+
+## SEO Checklist
+
+- [x] `<title>` / `<meta description>` per page
+- [x] Open Graph tags
+- [x] Twitter Card
+- [x] JSON-LD (Person schema)
+- [x] `/sitemap.xml` (auto-generated)
+- [x] `/robots.txt`
+- [x] Semantic HTML (`<main>`, `<nav>`, `<article>`, `aria-label`)
+
+---
+
+## i18n
+
+| Route   | Language |
+|---------|----------|
+| `/`     | 日本語    |
+| `/en`   | English  |
+
+全ページの完全翻訳対応は `/en/*` ルートに追加してください。
+
+---
+
+## License
+
+MIT © taptappun

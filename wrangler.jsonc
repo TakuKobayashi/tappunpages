@@ -1,0 +1,17 @@
+{
+  // Cloudflare Pages configuration
+  "name": "taptappun-portfolio",
+  "compatibility_date": "2024-12-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "out",
+
+  // Environment variables (set secrets via wrangler CLI or dashboard)
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://taptappun.dev"
+  }
+
+  // Secrets (set via: wrangler pages secret put DISCORD_WEBHOOK_URL):
+  // - DISCORD_WEBHOOK_URL
+  // - RESEND_API_KEY
+  // - NOTIFY_EMAIL
+}

@@ -1,0 +1,305 @@
+.page {
+  padding-top: calc(60px + var(--space-16));
+  padding-bottom: var(--space-32);
+}
+
+.hero {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6) var(--space-20);
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.heroEyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.heroEyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+  color: var(--color-text);
+}
+
+.heroTitle span {
+  color: var(--color-primary);
+}
+
+.heroBio {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Profile card */
+.profileCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: 80px;
+}
+
+.avatarWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-blue) 100%);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text-inverse);
+}
+
+.profileName {
+  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--color-text);
+}
+
+.profileRole {
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+}
+
+.profileLocation {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.profileDivider {
+  height: 1px;
+  background: var(--color-border);
+}
+
+.profileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.profileLink:hover {
+  color: var(--color-primary);
+  border-color: rgba(0, 232, 122, 0.2);
+  background: var(--color-primary-dim);
+}
+
+.profileLinkIcon {
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Timeline section */
+.timelineSection {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.sectionTitle {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: var(--space-12);
+}
+
+.sectionEyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.sectionEyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.timeline {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-border) 80%,
+    transparent
+  );
+}
+
+.timelineItem {
+  position: relative;
+  padding-bottom: var(--space-10);
+}
+
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-8));
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  background: var(--color-primary);
+  border: 2px solid var(--color-bg);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-primary-glow);
+}
+
+.timelineYear {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.timelineTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+.timelineOrg {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.timelineDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* Values section */
+.valuesSection {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-20) var(--space-6);
+}
+
+.valuesInner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+
+.valueCard {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+}
+
+.valueIcon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.valueTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.valueDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .profileCard {
+    position: static;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
