@@ -1,306 +1,175 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import styles from "@/app/page.module.css";
 
 export const metadata: Metadata = {
   title: "taptappun — Product Engineer",
-  description:
-    "Full-stack Product Engineer based in Tokyo. Specializing in MVP development, AI integration, Fintech, mobile apps, and rapid prototyping.",
+  description: "Full-stack Product Engineer based in Tokyo. MVP development, AI, Fintech, mobile apps, rapid prototyping.",
   alternates: { canonical: "https://taptappun.dev/en" },
 };
 
-const EXPERTISE = [
-  {
-    icon: "⚡",
-    title: "Rapid Prototyping",
-    desc: "From vague requirements to working code. Fastest possible time to first commit, first demo, first feedback.",
-  },
-  {
-    icon: "📱",
-    title: "Mobile × Full-stack",
-    desc: "Android/iOS through backend and infra — solo. Monorepo architecture, clean separation, everything connected.",
-  },
-  {
-    icon: "🤖",
-    title: "AI Integration",
-    desc: "LLM, voice, vision — embedded into products to multiply value. Not demos. Shipping features.",
-  },
-  {
-    icon: "💳",
-    title: "Fintech",
-    desc: "Crypto exchange, payment flows, security-critical systems. Real production fintech experience.",
-  },
-  {
-    icon: "🏆",
-    title: "Hackathon Winner",
-    desc: "Multiple hackathon wins. High-pressure rapid delivery is a competitive advantage, not a stressor.",
-  },
-  {
-    icon: "🌏",
-    title: "Global Ready",
-    desc: "Traveled 20+ countries. Strong async communication. English/Japanese. Remote-first mindset.",
-  },
+const PROJECTS = [
+  { title: "AI VTuber System",       href: "/projects/ai-vtuber",     tags: ["Next.js","AI","VRM"] },
+  { title: "Sniper Game (PLATEAU)",  href: "/projects/sniper-game",   tags: ["Unity","WebRTC","Cloudflare"] },
+  { title: "Medication App",         href: "/projects/medication-app",tags: ["Android","iOS","OCR"] },
+  { title: "AR Timecapsule",         href: "/projects/ar-timecapsule",tags: ["Unity AR","Cloudflare","R2"] },
 ];
 
-const FEATURED_PROJECTS = [
-  {
-    title: "AI VTuber Voice System",
-    desc: "Real-time AI character with voice dialogue. Next.js + VOICEVOX + VRM/VRMA rendering.",
-    tags: ["Next.js", "AI", "WebRTC", "VRM"],
-    href: "/projects/ai-vtuber",
-  },
-  {
-    title: "Multiplayer Sniper Game",
-    desc: "Real-time PvP game using PLATEAU 3D city data. Unity + Next.js + PartyKit/WebRTC.",
-    tags: ["Unity", "WebRTC", "PLATEAU", "Cloudflare"],
-    href: "/projects/sniper-game",
-  },
-  {
-    title: "Medication Management App",
-    desc: "OCR + QR-based medication tracking. Full-stack Android/iOS dual-platform implementation.",
-    tags: ["Android", "iOS", "OCR", "SQLite"],
-    href: "/projects/medication-app",
-  },
-  {
-    title: "AR Timecapsule Platform",
-    desc: "Location-based AR messaging platform. Cloudflare Workers + Unity AR Foundation.",
-    tags: ["Unity AR", "Cloudflare", "Geohash", "R2"],
-    href: "/projects/ar-timecapsule",
-  },
+const TOOLS = [
+  { title: "SignalForge CLI",  desc: "Git activity → auto-generated bilingual social posts", href: "/projects" },
+  { title: "RecStudio",        desc: "Browser screen recording + Whisper transcription",       href: "/projects" },
+  { title: "demo-video-gen",   desc: "AI-driven promo video generation CLI",                   href: "/projects" },
 ];
 
-const HOW_I_WORK = [
-  {
-    num: "01",
-    title: "Build Fast",
-    desc: "Don't wait for perfect specs. Turn hypotheses into running code immediately.",
-  },
-  {
-    num: "02",
-    title: "Show Early",
-    desc: "Put something in front of stakeholders fast. Compress the feedback loop.",
-  },
-  {
-    num: "03",
-    title: "Iterate",
-    desc: "Spec changes aren't problems. Architecture that welcomes change, mindset that embraces it.",
-  },
-  {
-    num: "04",
-    title: "Ship It",
-    desc: "Working software is the only metric. Owned end-to-end: design → deploy.",
-  },
-];
-
-const TECH_STACK = [
-  { category: "Mobile", items: ["Kotlin", "Jetpack Compose", "Swift", "SwiftUI", "Android SDK"] },
-  { category: "Frontend", items: ["Next.js", "TypeScript", "React", "Angular", "CSS Modules"] },
-  { category: "Backend", items: ["Cloudflare Workers", "Hono", "Drizzle ORM", "Node.js", "Rust"] },
-  { category: "Infra / DB", items: ["Cloudflare D1", "KV", "R2", "Durable Objects", "SQLite"] },
-  { category: "AI / ML", items: ["OpenAI", "Gemini", "Groq", "Whisper", "VOICEVOX"] },
-  { category: "Game / XR", items: ["Unity", "AR Foundation", "PLATEAU", "WebRTC", "LiveKit"] },
+const HOW = [
+  { n:"01", title:"Build Fast",  desc:"Turn ambiguous requirements into running code immediately." },
+  { n:"02", title:"Show Early",  desc:"Put working demos in front of stakeholders fast." },
+  { n:"03", title:"Iterate",     desc:"Spec changes aren't problems. Architecture that welcomes change." },
+  { n:"04", title:"Ship It",     desc:"Working software is the only metric. Owned end-to-end." },
 ];
 
 export default function EnglishHomePage() {
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────── */}
-      <section className={styles.hero} aria-label="Hero">
-        <div className={styles.heroBg} aria-hidden="true">
-          <div className={styles.heroGlow} />
-          <div className={styles.heroGlow2} />
-        </div>
-        <div className={styles.heroInner}>
-          <div>
-            <div className={styles.heroBadge}>
-              <span className={styles.badgeDot} />
-              <span className={styles.badgeText}>Available for new projects</span>
-            </div>
-            <h1 className={styles.heroHeadline}>
-              <span className={styles.highlight}>Product</span>{" "}Engineer
-              <span className={styles.sub}>Build fast. Ship early. Iterate.</span>
-            </h1>
-            <p className={styles.heroDesc}>
-              Full-stack engineer with a strong product mindset, based in Tokyo.
-              I turn ambiguous requirements into working products — solo.
-              Android · iOS · Web · Backend. MVP to production.
-            </p>
-            <div className={styles.heroActions}>
-              <Link href="/projects" className={styles.btnPrimary}>View Projects →</Link>
-              <Link href="/contact" className={styles.btnSecondary}>Let&apos;s Work Together</Link>
-            </div>
-            <div className={styles.heroStats}>
-              <div className={styles.stat}>
-                <span className={styles.statValue}>20<span>+</span></span>
-                <span className={styles.statLabel}>Countries visited</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.stat}>
-                <span className={styles.statValue}><span>#</span>1</span>
-                <span className={styles.statLabel}>Hackathon wins</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.stat}>
-                <span className={styles.statValue}>5<span>+</span></span>
-                <span className={styles.statLabel}>Years building</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.stat}>
-                <span className={styles.statValue}><span>∞</span></span>
-                <span className={styles.statLabel}>Iteration cycles</span>
-              </div>
-            </div>
-          </div>
-          <div className={styles.heroVisual} aria-hidden="true">
-            <div className={styles.terminal}>
-              <div className={styles.terminalBar}>
-                <span className={`${styles.termDot} ${styles.red}`} />
-                <span className={`${styles.termDot} ${styles.amber}`} />
-                <span className={`${styles.termDot} ${styles.green}`} />
-                <span className={styles.termTitle}>taptappun@dev</span>
-              </div>
-              <div className={styles.termBody}>
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>whoami</span>
-                </div>
-                <div className={styles.termOut}>Product Engineer, Tokyo</div>
-                <br />
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>cat strengths.txt</span>
-                </div>
-                <div className={styles.termOut}>Android, iOS, Web, Backend</div>
-                <div className={styles.termOut}>AI, Fintech, Game Dev</div>
-                <div className={styles.termOut}>MVP, Rapid Prototyping</div>
-                <br />
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>npm run build:product</span>
-                </div>
-                <div className={styles.termSuccess}>✓ Compiled successfully</div>
-                <div className={styles.termSuccess}>✓ Ready to ship</div>
-                <br />
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}><span className={styles.termCursor} /></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="page-bg-fixed bg-game" aria-hidden="true" />
+      <div className="page-wrap">
 
-      {/* ── EXPERTISE ─────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.expertise}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>What I do</span>
-            <h2 className={styles.sectionTitle}>Expertise</h2>
-            <p className={styles.sectionDesc}>
-              Everything a product needs to go from idea to users — owned solo.
-            </p>
-          </div>
-          <div className={styles.expertiseGrid}>
-            {EXPERTISE.map((item) => (
-              <div key={item.title} className={styles.expertiseCard}>
-                <span className={styles.expertiseIcon} aria-hidden="true">{item.icon}</span>
-                <h3 className={styles.expertiseCardTitle}>{item.title}</h3>
-                <p className={styles.expertiseCardDesc}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* ── HERO ─────────────────────────────────────── */}
+        <section aria-label="Hero" style={{
+          minHeight: "100vh",
+          display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center",
+          textAlign: "center",
+          padding: "0 var(--sp6)",
+          paddingTop: "var(--topbar-h)",
+          position: "relative",
+        }}>
+          <h1 style={{
+            fontFamily: "var(--font-logo)",
+            fontSize: "clamp(2.2rem, 8vw, 5.5rem)",
+            letterSpacing: "0.03em",
+            color: "var(--white)",
+            WebkitTextStroke: "3px var(--black)",
+            textShadow: "4px 4px 0 rgba(0,0,0,0.3)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            gap: "clamp(6px, 1.5vw, 16px)",
+            marginBottom: "var(--sp6)",
+          }}>
+            TAP
+            <span style={{
+              width: "clamp(24px,4vw,56px)", height: "clamp(24px,4vw,56px)",
+              background: "radial-gradient(circle at 35% 30%, #ff8888 0%, #cc0000 60%, #880000 100%)",
+              borderRadius: "50%", border: "clamp(2px,0.4vw,4px) solid var(--black)",
+              boxShadow: "inset -2px -3px 4px rgba(0,0,0,0.4), inset 2px 2px 4px rgba(255,200,200,0.3), 0 4px 12px rgba(0,0,0,0.4)",
+              display: "inline-block", flexShrink: 0, position: "relative",
+            }}>
+              <span style={{ position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"clamp(10px,2vw,22px)",color:"rgba(80,0,0,0.7)",fontWeight:900,lineHeight:1 }}>✕</span>
+            </span>
+            TAPPUN
+          </h1>
 
-      {/* ── FEATURED PROJECTS ─────────────────────────── */}
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Selected work</span>
-            <h2 className={styles.sectionTitle}>Featured Projects</h2>
-          </div>
-          <div className={styles.projectsGrid}>
-            {FEATURED_PROJECTS.map((project) => (
-              <Link key={project.title} href={project.href} className={styles.projectCard}>
-                <div className={styles.projectCardHeader}>
-                  <h3 className={styles.projectCardTitle}>{project.title}</h3>
-                  <span className={styles.projectCardArrow} aria-hidden="true">↗</span>
-                </div>
-                <p className={styles.projectCardDesc}>{project.desc}</p>
-                <div className={styles.projectCardTags}>
-                  {project.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
-              </Link>
-            ))}
-          </div>
-          <Link href="/projects" className={styles.viewAllLink}>All projects →</Link>
-        </div>
-      </section>
-
-      {/* ── HOW I WORK ────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.howIWork}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Philosophy</span>
-            <h2 className={styles.sectionTitle}>How I Work</h2>
-            <p className={styles.sectionDesc}>
-              Shipping beats perfecting. Feedback beats assumptions. Ownership beats delegation.
-            </p>
-          </div>
-          <div className={styles.howGrid}>
-            {HOW_I_WORK.map((item) => (
-              <div key={item.num} className={styles.howCard}>
-                <span className={styles.howNum}>{item.num}</span>
-                <h3 className={styles.howTitle}>{item.title}</h3>
-                <p className={styles.howDesc}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TECH STACK ────────────────────────────────── */}
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Skills</span>
-            <h2 className={styles.sectionTitle}>Tech Stack</h2>
-          </div>
-          <div className={styles.techCategories}>
-            {TECH_STACK.map((cat) => (
-              <div key={cat.category} className={styles.techCategory}>
-                <span className={styles.techCategoryLabel}>{cat.category}</span>
-                <div className={styles.techList}>
-                  {cat.items.map((item) => (
-                    <span key={item} className={styles.techItem}>{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ───────────────────────────────────────── */}
-      <section className={styles.ctaBanner}>
-        <div className={styles.ctaBannerGlow} aria-hidden="true" />
-        <div className={styles.ctaBannerInner}>
-          <h2 className={styles.ctaBannerTitle}>
-            Let&apos;s build something<br /><em>that ships.</em>
-          </h2>
-          <p className={styles.ctaBannerDesc}>
-            MVP, prototype, greenfield product — any stage, any size.
-            I&apos;ll take your idea from zero to deployed.
+          <p style={{ fontFamily:"var(--font-heading)",fontSize:"clamp(0.9rem,2.5vw,1.4rem)",color:"var(--white)",letterSpacing:"0.08em",textShadow:"2px 2px 0 rgba(0,0,0,0.4)",marginBottom:"var(--sp4)" }}>
+            Product Engineer — Build fast. Ship early. Iterate.
           </p>
-          <div className={styles.heroActions}>
-            <Link href="/contact" className={styles.btnPrimary}>Start a project →</Link>
-            <Link href="/about" className={styles.btnSecondary}>Learn more about me</Link>
+          <p style={{ fontSize:"var(--text-base)",color:"rgba(255,255,255,0.9)",textShadow:"1px 1px 3px rgba(0,0,0,0.5)",maxWidth:480,lineHeight:1.7,marginBottom:"var(--sp8)" }}>
+            Full-stack engineer with a product mindset, based in Tokyo.
+            Android · iOS · Web · Backend — solo. MVP to production.
+          </p>
+
+          <div style={{ display:"flex",gap:"var(--sp3)",flexWrap:"wrap",justifyContent:"center",marginBottom:"var(--sp12)" }}>
+            <Link href="/projects" className="btn-more yellow-btn">View Projects ▶</Link>
+            <Link href="/contact"  className="btn-more white-btn">Let&apos;s Work Together</Link>
           </div>
-        </div>
-      </section>
+
+          {/* Stats */}
+          <div style={{ display:"flex",gap:"var(--sp6)",flexWrap:"wrap",justifyContent:"center" }}>
+            {[["20+","Countries visited"],["#1","Hackathon wins"],["5+","Years building"]].map(([v,l]) => (
+              <div key={l} style={{ textAlign:"center" }}>
+                <div style={{ fontFamily:"var(--font-heading)",fontSize:"var(--text-3xl)",color:"var(--yellow)",textShadow:"2px 2px 0 rgba(0,0,0,0.4)",letterSpacing:"0.05em" }}>{v}</div>
+                <div style={{ fontSize:"var(--text-xs)",color:"rgba(255,255,255,0.8)",textShadow:"1px 1px 2px rgba(0,0,0,0.4)",textTransform:"uppercase",letterSpacing:"0.1em" }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── PROJECTS ─────────────────────────────────── */}
+        <section className="section-band band-blue" aria-label="Projects">
+          <div className="container">
+            <h2 className="section-heading yellow">PROJECTS</h2>
+            <div style={{ display:"flex",flexWrap:"wrap",gap:"var(--sp3)",justifyContent:"center",marginBottom:"var(--sp6)" }}>
+              {PROJECTS.map(p => (
+                <Link key={p.title} href={p.href} className="sq-card" style={{ width:140, height:140 }}>
+                  <div className="sq-thumb" style={{ background:"linear-gradient(135deg, #a8e4f4 0%, #5ac8e8 100%)",flex:1,display:"flex",alignItems:"center",justifyContent:"center" }}>
+                    <span style={{ fontSize:"2.5rem" }}>🎮</span>
+                  </div>
+                  <div className="sq-label"><span>{p.title}</span></div>
+                </Link>
+              ))}
+            </div>
+            <div style={{ textAlign:"right" }}>
+              <Link href="/projects" className="btn-more white-btn" style={{ fontSize:"var(--text-xs)" }}>See all ▶</Link>
+            </div>
+          </div>
+        </section>
+
+        <div style={{ height:50,background:"linear-gradient(to bottom right, #5AC8E8 50%, #7CC87A 50%)" }} aria-hidden="true" />
+
+        {/* ── TOOLS ────────────────────────────────────── */}
+        <section className="section-band band-green" aria-label="Tools">
+          <div className="container">
+            <h2 className="section-heading white">TOOLS</h2>
+            <div className="list-container">
+              <ul className="list-items">
+                {TOOLS.map(t => (
+                  <li key={t.title} className="list-item">
+                    <a href={t.href}>
+                      <div className="li-thumb" style={{ background:"linear-gradient(135deg, #7CC87A, #5AAD58)",display:"flex",alignItems:"center",justifyContent:"center" }}>
+                        <span style={{ fontSize:"1.6rem" }}>🛠</span>
+                      </div>
+                      <div className="li-body">
+                        <span className="li-title">{t.title}</span>
+                        <span className="li-desc">{t.desc}</span>
+                      </div>
+                      <div className="li-arrow">▶</div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <div style={{ height:50,background:"linear-gradient(to bottom right, #7CC87A 50%, #FFE180 50%)" }} aria-hidden="true" />
+
+        {/* ── HOW I WORK ───────────────────────────────── */}
+        <section className="section-band band-yellow" aria-label="How I work">
+          <div className="container">
+            <h2 className="section-heading" style={{ color:"var(--text-dark)" }}>HOW I WORK</h2>
+            <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(220px, 1fr))",gap:"var(--sp4)" }}>
+              {HOW.map(h => (
+                <div key={h.n} style={{ background:"rgba(255,255,255,0.85)",borderRadius:"var(--r-lg)",padding:"var(--sp5)",boxShadow:"var(--shadow-card)" }}>
+                  <div style={{ fontFamily:"var(--font-heading)",fontSize:"var(--text-2xl)",color:"var(--sky)",marginBottom:"var(--sp2)" }}>{h.n}</div>
+                  <div style={{ fontWeight:700,fontSize:"var(--text-lg)",marginBottom:"var(--sp2)" }}>{h.title}</div>
+                  <p style={{ fontSize:"var(--text-sm)",color:"var(--text-mid)",lineHeight:1.7 }}>{h.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CTA ──────────────────────────────────────── */}
+        <section style={{ background:"var(--black)",padding:"var(--sp20) var(--sp6)",textAlign:"center" }}>
+          <h2 style={{ fontFamily:"var(--font-heading)",fontSize:"clamp(1.8rem,4vw,3rem)",color:"var(--yellow)",letterSpacing:"0.05em",marginBottom:"var(--sp4)",textShadow:"2px 2px 0 rgba(0,0,0,0.4)" }}>
+            LET&apos;S BUILD TOGETHER
+          </h2>
+          <p style={{ color:"rgba(255,255,255,0.7)",marginBottom:"var(--sp8)",fontSize:"var(--text-base)" }}>
+            MVP, prototype, greenfield — any stage. I&apos;ll take your idea from zero to deployed.
+          </p>
+          <Link href="/contact" className="btn-more yellow-btn" style={{ fontSize:"var(--text-base)",padding:"var(--sp3) var(--sp8)" }}>
+            Get in touch ▶
+          </Link>
+        </section>
+
+      </div>
     </>
   );
 }

@@ -1,68 +1,51 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllProjects } from "@/lib/projects";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description:
-    "Full-stack Product Engineer として開発したプロジェクト一覧。AI・Fintech・モバイル・ゲーム開発など。",
+  description: "Full-stack Product Engineer として開発したプロジェクト一覧。",
 };
-
-const ALL_TAGS = [
-  "All", "Android", "iOS", "Next.js", "AI", "Fintech", "Unity",
-  "Cloudflare", "WebRTC", "AR",
-];
 
 export default async function ProjectsPage() {
   const projects = await getAllProjects();
-
   return (
-    <main className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.eyebrow}>Selected work</div>
-        <h1 className={styles.title}>Projects</h1>
-        <p className={styles.desc}>
-          MVP・プロトタイプから本番リリースまで。
-          速く作り、早く見せ、繰り返す文化で作ったプロダクトたち。
-        </p>
-      </header>
+    <>
+      <div className="page-bg-fixed bg-green" aria-hidden="true" />
+      <div className="page-wrap">
 
-      {/* Tag filters (static for SSG) */}
-      <nav className={styles.filters} aria-label="Filter by tag">
-        {ALL_TAGS.map((tag) => (
-          <span key={tag} className={`${styles.filterBtn} ${tag === "All" ? styles.active : ""}`}>
-            {tag}
-          </span>
-        ))}
-      </nav>
+        {/* Header band */}
+        <section style={{ padding: "var(--sp12) var(--sp6) var(--sp8)" }}>
+          <div className="container">
+            <h1 className="section-heading white">PROJECTS</h1>
 
-      {/* Grid */}
-      <div className={styles.grid}>
-        {projects.map((project) => (
-          <Link
-            key={project.slug}
-            href={`/projects/${project.slug}`}
-            className={styles.card}
-          >
-            <div className={styles.cardHeader}>
-              <div className={styles.cardMeta}>
-                {project.featured && (
-                  <span className={styles.featuredBadge}>Featured</span>
-                )}
-              </div>
-              <span className={styles.cardArrow} aria-hidden="true">↗</span>
+            <div className="list-container">
+              <ul className="list-items">
+                {projects.map(p => (
+                  <li key={p.slug} className="list-item">
+                    <Link href={`/projects/${p.slug}`}>
+                      <div className="li-thumb" style={{
+                        background: "linear-gradient(135deg, #a8e4f4 0%, #5ac8e8 100%)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                      }}>
+                        <span style={{ fontSize: "1.6rem" }}>🎮</span>
+                      </div>
+                      <div className="li-body">
+                        <span className="li-title">
+                          {p.featured && <span style={{ fontSize: "var(--text-xs)", background: "var(--yellow-dark)", color: "var(--text-dark)", padding: "1px 5px", borderRadius: "var(--r-sm)", marginRight: "var(--sp2)", fontWeight: 700 }}>★</span>}
+                          {p.title}
+                        </span>
+                        <span className="li-desc">{p.description}</span>
+                      </div>
+                      <div className="li-arrow">▶</div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h2 className={styles.cardTitle}>{project.title}</h2>
-            <p className={styles.cardDesc}>{project.description}</p>
-            <div className={styles.cardTags}>
-              {project.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>{tag}</span>
-              ))}
-            </div>
-          </Link>
-        ))}
+          </div>
+        </section>
       </div>
-    </main>
+    </>
   );
 }

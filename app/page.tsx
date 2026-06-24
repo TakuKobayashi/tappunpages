@@ -1,384 +1,295 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import styles from "./page.module.css";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "taptappun — Product Engineer",
-  description:
-    "Full-stack Product Engineer specializing in MVP development, AI, Fintech, and Rapid Prototyping. Build fast, show early, iterate.",
+  description: "Full-stack Product Engineer. MVP開発・AI・Fintech・Rapid Prototyping. Build fast, show early, iterate.",
 };
 
-const EXPERTISE = [
-  {
-    icon: "⚡",
-    title: "Rapid Prototyping",
-    desc: "曖昧な要件からでも即座に動くものを作る。仮説を最速でコードに変換。",
-  },
-  {
-    icon: "📱",
-    title: "Mobile × Full-stack",
-    desc: "Android/iOS からバックエンド・インフラまで一人で完結。モノレポ構成が得意。",
-  },
-  {
-    icon: "🤖",
-    title: "AI Integration",
-    desc: "LLM・音声・画像認識を既存プロダクトに組み込み、価値を急拡大する。",
-  },
-  {
-    icon: "💳",
-    title: "Fintech",
-    desc: "仮想通貨取引所・決済フロー・セキュリティ要件のある金融系プロダクトの実装経験。",
-  },
-  {
-    icon: "🏆",
-    title: "Hackathon Winner",
-    desc: "多数のハッカソンに参加・受賞。プレッシャー下での高速開発が武器。",
-  },
-  {
-    icon: "🌏",
-    title: "Global Ready",
-    desc: "20カ国以上の海外経験。非同期コミュニケーション・英語での開発に対応。",
-  },
+const PROJECTS = [
+  { title: "AI VTuber System",        href: "/projects/ai-vtuber",     tags: ["Next.js","AI","VRM"] },
+  { title: "Sniper Game (PLATEAU)",   href: "/projects/sniper-game",   tags: ["Unity","WebRTC","Cloudflare"] },
+  { title: "Medication App",          href: "/projects/medication-app",tags: ["Android","iOS","OCR"] },
+  { title: "AR Timecapsule",          href: "/projects/ar-timecapsule",tags: ["Unity AR","Cloudflare","R2"] },
 ];
 
-const FEATURED_PROJECTS = [
-  {
-    title: "AI VTuber Voice System",
-    desc: "Next.js + VOICEVOX + VRM/VRMA。リアルタイム音声対話AIキャラクターシステムの設計・実装。",
-    tags: ["Next.js", "AI", "WebRTC", "VRM"],
-    href: "/projects/ai-vtuber",
-  },
-  {
-    title: "Multiplayer Sniper Game",
-    desc: "PLATEAUの3D都市データを使ったリアルタイム対戦ゲーム。Unity + Next.js + PartyKit/WebRTC。",
-    tags: ["Unity", "WebRTC", "PLATEAU", "Cloudflare"],
-    href: "/projects/sniper-game",
-  },
-  {
-    title: "Medication Management App",
-    desc: "OCR + QRコードによる服薬管理アプリ。Android/iOS 両対応のフルスタック実装。",
-    tags: ["Android", "iOS", "OCR", "SQLite"],
-    href: "/projects/medication-app",
-  },
-  {
-    title: "AR Timecapsule Platform",
-    desc: "位置情報 × ARでメッセージを残すプラットフォーム。Cloudflare Workers + Unity AR Foundation。",
-    tags: ["Unity AR", "Cloudflare", "Geohash", "R2"],
-    href: "/projects/ar-timecapsule",
-  },
+const TOOLS = [
+  { title: "SignalForge CLI",  desc: "Git活動から自動SNS投稿生成",     href: "/projects" },
+  { title: "RecStudio",        desc: "ブラウザ録画 + Whisper文字起こし", href: "/projects" },
+  { title: "demo-video-gen",   desc: "AI駆動のプロモ動画自動生成 CLI",  href: "/projects" },
 ];
 
-const HOW_I_WORK = [
-  {
-    num: "01",
-    title: "Build Fast",
-    desc: "完璧を待たずに動くものを作る。最初のコミットまでの時間を最短に。",
-  },
-  {
-    num: "02",
-    title: "Show Early",
-    desc: "早い段階でステークホルダーに見せる。フィードバックループを最速で回す。",
-  },
-  {
-    num: "03",
-    title: "Iterate",
-    desc: "仕様変更を恐れない。変化に強いアーキテクチャと心理的柔軟性。",
-  },
-  {
-    num: "04",
-    title: "Ship It",
-    desc: "動くプロダクトこそが唯一の指標。デプロイまでを一貫して担う。",
-  },
+const ARTICLES = [
+  { title: "Cloudflare Workers + Hono でゼロコスト API",  desc: "2024-11-15", href: "/blog/cloudflare-workers-hono-zero-cost" },
+  { title: "Android × iOS 共通 ActiveRecord パターン",    desc: "2024-10-20", href: "/blog" },
+  { title: "MessagePack で通信量を 70% 削減した話",       desc: "2024-09-05", href: "/blog" },
 ];
 
-const TECH_STACK = [
-  {
-    category: "Mobile",
-    items: ["Kotlin", "Jetpack Compose", "Swift", "SwiftUI", "Android SDK"],
-  },
-  {
-    category: "Frontend",
-    items: ["Next.js", "TypeScript", "React", "Angular", "CSS Modules"],
-  },
-  {
-    category: "Backend",
-    items: ["Cloudflare Workers", "Hono", "Drizzle ORM", "Node.js", "Rust"],
-  },
-  {
-    category: "Infra / DB",
-    items: ["Cloudflare D1", "KV", "R2", "Durable Objects", "SQLite"],
-  },
-  {
-    category: "AI / ML",
-    items: ["OpenAI", "Gemini", "Groq", "Whisper", "VOICEVOX"],
-  },
-  {
-    category: "Game / XR",
-    items: ["Unity", "AR Foundation", "PLATEAU", "WebRTC", "LiveKit"],
-  },
+const HOW = [
+  { n:"01", title:"Build Fast",  desc:"曖昧な要件でも即コードへ。最初のデモまでを最短で。" },
+  { n:"02", title:"Show Early",  desc:"早い段階でステークホルダーに見せ、フィードバックを取る。" },
+  { n:"03", title:"Iterate",     desc:"仕様変更を恐れない。変化に強い設計と心理的柔軟性。" },
+  { n:"04", title:"Ship It",     desc:"動くプロダクトが唯一の指標。デプロイまで一貫して担う。" },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────── */}
-      <section className={styles.hero} aria-label="Hero">
-        <div className={styles.heroBg} aria-hidden="true">
-          <div className={styles.heroGlow} />
-          <div className={styles.heroGlow2} />
-        </div>
+      {/* ── FIXED BACKGROUND ───────────────────────── */}
+      <div className="page-bg-fixed bg-game" aria-hidden="true" />
 
-        <div className={styles.heroInner}>
-          <div>
-            {/* Badge */}
-            <div className={styles.heroBadge}>
-              <span className={styles.badgeDot} />
-              <span className={styles.badgeText}>
-                Available for new projects
-              </span>
-            </div>
+      <div className="page-wrap">
 
-            {/* Headline */}
-            <h1 className={styles.heroHeadline}>
-              <span className={styles.highlight}>Product</span>
-              {" "}Engineer
-              <span className={styles.sub}>
-                Build fast. Ship early. Iterate.
-              </span>
-            </h1>
+        {/* ── HERO SECTION ───────────────────────────── */}
+        <section
+          aria-label="Hero"
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "0 var(--sp6)",
+            paddingTop: "var(--topbar-h)",
+            position: "relative",
+          }}
+        >
+          {/* Logo */}
+          <h1 style={{
+            fontFamily: "var(--font-logo)",
+            fontSize: "clamp(2.2rem, 8vw, 5.5rem)",
+            letterSpacing: "0.03em",
+            color: "var(--white)",
+            WebkitTextStroke: "3px var(--black)",
+            textShadow: "4px 4px 0 rgba(0,0,0,0.3), -2px -2px 0 rgba(255,255,255,0.1)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "clamp(6px, 1.5vw, 16px)",
+            marginBottom: "var(--sp6)",
+          }}>
+            TAP
+            <span style={{
+              width: "clamp(24px, 4vw, 56px)",
+              height: "clamp(24px, 4vw, 56px)",
+              background: "radial-gradient(circle at 35% 30%, #ff8888 0%, #cc0000 60%, #880000 100%)",
+              borderRadius: "50%",
+              border: "clamp(2px,0.4vw,4px) solid var(--black)",
+              boxShadow: "inset -2px -3px 4px rgba(0,0,0,0.4), inset 2px 2px 4px rgba(255,200,200,0.3), 0 4px 12px rgba(0,0,0,0.4)",
+              display: "inline-block",
+              flexShrink: 0,
+              position: "relative",
+            }}>
+              {/* ✕ on ball */}
+              <span style={{
+                position: "absolute", inset: 0,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "clamp(10px,2vw,22px)",
+                color: "rgba(80,0,0,0.7)",
+                fontWeight: 900,
+                lineHeight: 1,
+              }}>✕</span>
+            </span>
+            TAPPUN
+          </h1>
 
-            {/* Description */}
-            <p className={styles.heroDesc}>
-              Full-stack engineer with a product mindset.
-              MVP開発からAI・Fintech・ゲームまで、
-              曖昧な要件を動くプロダクトに変換します。
-              Android / iOS / Web / Backend を一人で完結。
-            </p>
-
-            {/* CTA */}
-            <div className={styles.heroActions}>
-              <Link href="/projects" className={styles.btnPrimary}>
-                View Projects →
-              </Link>
-              <Link href="/contact" className={styles.btnSecondary}>
-                Let&apos;s Work Together
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className={styles.heroStats} aria-label="Key numbers">
-              <div className={styles.stat}>
-                <span className={styles.statValue}>
-                  20<span>+</span>
-                </span>
-                <span className={styles.statLabel}>Countries visited</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.stat}>
-                <span className={styles.statValue}>
-                  <span>#</span>1
-                </span>
-                <span className={styles.statLabel}>Hackathon wins</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.stat}>
-                <span className={styles.statValue}>
-                  5<span>+</span>
-                </span>
-                <span className={styles.statLabel}>Years building</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.stat}>
-                <span className={styles.statValue}>
-                  <span>∞</span>
-                </span>
-                <span className={styles.statLabel}>Iteration cycles</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Terminal visual */}
-          <div className={styles.heroVisual} aria-hidden="true">
-            <div className={styles.terminal}>
-              <div className={styles.terminalBar}>
-                <span className={`${styles.termDot} ${styles.red}`} />
-                <span className={`${styles.termDot} ${styles.amber}`} />
-                <span className={`${styles.termDot} ${styles.green}`} />
-                <span className={styles.termTitle}>taptappun@dev</span>
-              </div>
-              <div className={styles.termBody}>
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>whoami</span>
-                </div>
-                <div className={styles.termOut}>Product Engineer</div>
-                <br />
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>cat skills.txt</span>
-                </div>
-                <div className={styles.termOut}>Android, iOS, Web, Backend</div>
-                <div className={styles.termOut}>AI, Fintech, Game Dev</div>
-                <div className={styles.termOut}>MVP, Rapid Prototyping</div>
-                <br />
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>
-                    npm run build:product
-                  </span>
-                </div>
-                <div className={styles.termSuccess}>
-                  ✓ Compiled successfully
-                </div>
-                <div className={styles.termSuccess}>
-                  ✓ Ready to ship
-                </div>
-                <br />
-                <div className={styles.termLine}>
-                  <span className={styles.termPrompt}>❯</span>
-                  <span className={styles.termCmd}>
-                    <span className={styles.termCursor} />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── EXPERTISE ─────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.expertise}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>What I do</span>
-            <h2 className={styles.sectionTitle}>Expertise</h2>
-            <p className={styles.sectionDesc}>
-              プロダクトを前進させるために必要なことを、
-              一人で完結できる技術スタックと思考力。
-            </p>
-          </div>
-          <div className={styles.expertiseGrid}>
-            {EXPERTISE.map((item) => (
-              <div key={item.title} className={styles.expertiseCard}>
-                <span className={styles.expertiseIcon} aria-hidden="true">
-                  {item.icon}
-                </span>
-                <h3 className={styles.expertiseCardTitle}>{item.title}</h3>
-                <p className={styles.expertiseCardDesc}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURED PROJECTS ─────────────────────────── */}
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Selected work</span>
-            <h2 className={styles.sectionTitle}>Featured Projects</h2>
-          </div>
-          <div className={styles.projectsGrid}>
-            {FEATURED_PROJECTS.map((project) => (
-              <Link
-                key={project.title}
-                href={project.href}
-                className={styles.projectCard}
-              >
-                <div className={styles.projectCardHeader}>
-                  <h3 className={styles.projectCardTitle}>{project.title}</h3>
-                  <span className={styles.projectCardArrow} aria-hidden="true">↗</span>
-                </div>
-                <p className={styles.projectCardDesc}>{project.desc}</p>
-                <div className={styles.projectCardTags}>
-                  {project.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            ))}
-          </div>
-          <Link href="/projects" className={styles.viewAllLink}>
-            All projects →
-          </Link>
-        </div>
-      </section>
-
-      {/* ── HOW I WORK ────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.howIWork}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Philosophy</span>
-            <h2 className={styles.sectionTitle}>How I Work</h2>
-            <p className={styles.sectionDesc}>
-              プロダクト開発における私の思想。
-              完璧主義よりも、動くものを早く届けることを優先する。
-            </p>
-          </div>
-          <div className={styles.howGrid}>
-            {HOW_I_WORK.map((item) => (
-              <div key={item.num} className={styles.howCard}>
-                <span className={styles.howNum}>{item.num}</span>
-                <h3 className={styles.howTitle}>{item.title}</h3>
-                <p className={styles.howDesc}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TECH STACK ────────────────────────────────── */}
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Skills</span>
-            <h2 className={styles.sectionTitle}>Tech Stack</h2>
-          </div>
-          <div className={styles.techCategories}>
-            {TECH_STACK.map((cat) => (
-              <div key={cat.category} className={styles.techCategory}>
-                <span className={styles.techCategoryLabel}>
-                  {cat.category}
-                </span>
-                <div className={styles.techList}>
-                  {cat.items.map((item) => (
-                    <span key={item} className={styles.techItem}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA BANNER ────────────────────────────────── */}
-      <section className={styles.ctaBanner}>
-        <div className={styles.ctaBannerGlow} aria-hidden="true" />
-        <div className={styles.ctaBannerInner}>
-          <h2 className={styles.ctaBannerTitle}>
-            Let&apos;s build something
-            <br />
-            <em>that ships.</em>
-          </h2>
-          <p className={styles.ctaBannerDesc}>
-            MVP・プロトタイプ・新規事業の立ち上げなど、
-            どんな段階でもお気軽にご相談ください。
-            アイデアを動くプロダクトに変えます。
+          {/* Tagline */}
+          <p style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "clamp(0.9rem, 2.5vw, 1.4rem)",
+            color: "var(--white)",
+            letterSpacing: "0.08em",
+            textShadow: "2px 2px 0 rgba(0,0,0,0.4)",
+            marginBottom: "var(--sp4)",
+          }}>
+            Product Engineer — Build fast. Ship early. Iterate.
           </p>
-          <div className={styles.heroActions}>
-            <Link href="/contact" className={styles.btnPrimary}>
-              Start a project →
-            </Link>
-            <Link href="/about" className={styles.btnSecondary}>
-              Learn more about me
-            </Link>
+          <p style={{
+            fontSize: "var(--text-base)",
+            color: "rgba(255,255,255,0.9)",
+            textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
+            maxWidth: 480,
+            lineHeight: 1.7,
+            marginBottom: "var(--sp8)",
+          }}>
+            フルスタックエンジニア。Android・iOS・Web・Backend を一人で完結。
+            MVP開発・AI統合・Fintech・ゲーム開発の経験多数。
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display: "flex", gap: "var(--sp3)", flexWrap: "wrap", justifyContent: "center", marginBottom: "var(--sp12)" }}>
+            <Link href="/projects" className="btn-more yellow-btn">制作物を見る ▶</Link>
+            <Link href="/contact"  className="btn-more white-btn">お仕事のご相談</Link>
           </div>
-        </div>
-      </section>
+
+          {/* Down arrow */}
+          <div style={{ position: "absolute", bottom: "var(--sp8)", left: "50%", transform: "translateX(-50%)" }}>
+            <Image
+              src="/images/down-arrow.webp"
+              alt="Scroll down"
+              width={80}
+              height={30}
+              className="down-arrow-btn"
+              unoptimized
+            />
+          </div>
+        </section>
+
+        {/* ── PROJECTS SECTION ───────────────────────── */}
+        <section className="section-band band-blue" aria-label="Projects">
+          <div className="container">
+            <h2 className="section-heading yellow">PROJECTS</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--sp3)", justifyContent: "center", marginBottom: "var(--sp6)" }}>
+              {PROJECTS.map(p => (
+                <Link
+                  key={p.title}
+                  href={p.href}
+                  className="sq-card"
+                  style={{ width: 140, height: 140 }}
+                >
+                  <div className="sq-thumb" style={{ background: "linear-gradient(135deg, #a8e4f4 0%, #5ac8e8 100%)", flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ fontSize: "2.5rem" }}>🎮</span>
+                  </div>
+                  <div className="sq-label">
+                    <span>{p.title}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <Link href="/projects" className="btn-more white-btn" style={{ fontSize: "var(--text-xs)" }}>もっと見る ▶</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Diagonal divider blue→green */}
+        <div style={{ height: 50, background: "linear-gradient(to bottom right, #5AC8E8 50%, #7CC87A 50%)" }} aria-hidden="true" />
+
+        {/* ── TOOLS SECTION ──────────────────────────── */}
+        <section className="section-band band-green" aria-label="Tools">
+          <div className="container">
+            <h2 className="section-heading white">TOOLS</h2>
+            <div className="list-container">
+              <ul className="list-items">
+                {TOOLS.map(t => (
+                  <li key={t.title} className="list-item">
+                    <a href={t.href}>
+                      <div className="li-thumb" style={{ background: "linear-gradient(135deg, #7CC87A, #5AAD58)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ fontSize: "1.6rem" }}>🛠</span>
+                      </div>
+                      <div className="li-body">
+                        <span className="li-title">{t.title}</span>
+                        <span className="li-desc">{t.desc}</span>
+                      </div>
+                      <div className="li-arrow">▶</div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style={{ textAlign: "right", marginTop: "var(--sp4)" }}>
+              <Link href="/projects" className="btn-more white-btn" style={{ fontSize: "var(--text-xs)" }}>もっと見る ▶</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Diagonal divider green→yellow */}
+        <div style={{ height: 50, background: "linear-gradient(to bottom right, #7CC87A 50%, #FFE180 50%)" }} aria-hidden="true" />
+
+        {/* ── ARTICLES SECTION ───────────────────────── */}
+        <section className="section-band band-yellow" aria-label="Articles">
+          <div className="container">
+            <h2 className="section-heading" style={{ color: "var(--text-dark)" }}>ARTICLES</h2>
+            <div className="list-container">
+              <ul className="list-items">
+                {ARTICLES.map(a => (
+                  <li key={a.title} className="list-item">
+                    <a href={a.href}>
+                      <div className="li-thumb" style={{ background: "linear-gradient(135deg, #FFE180, #FFDC6C)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ fontSize: "1.6rem" }}>📝</span>
+                      </div>
+                      <div className="li-body">
+                        <span className="li-title">{a.title}</span>
+                        <span className="li-desc">{a.desc}</span>
+                      </div>
+                      <div className="li-arrow">▶</div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style={{ textAlign: "right", marginTop: "var(--sp4)" }}>
+              <Link href="/blog" className="btn-more yellow-btn" style={{ fontSize: "var(--text-xs)" }}>もっと見る ▶</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Diagonal divider yellow→sky */}
+        <div style={{ height: 50, background: "linear-gradient(to bottom right, #FFE180 50%, #A8E4F4 50%)" }} aria-hidden="true" />
+
+        {/* ── HOW I WORK ─────────────────────────────── */}
+        <section className="section-band band-teal" aria-label="How I work">
+          <div className="container">
+            <h2 className="section-heading white">HOW I WORK</h2>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "var(--sp4)",
+            }}>
+              {HOW.map(h => (
+                <div
+                  key={h.n}
+                  style={{
+                    background: "rgba(255,255,255,0.85)",
+                    borderRadius: "var(--r-lg)",
+                    padding: "var(--sp5)",
+                    boxShadow: "var(--shadow-card)",
+                  }}
+                >
+                  <div style={{
+                    fontFamily: "var(--font-heading)",
+                    fontSize: "var(--text-2xl)",
+                    color: "var(--sky)",
+                    marginBottom: "var(--sp2)",
+                  }}>{h.n}</div>
+                  <div style={{ fontWeight: 700, fontSize: "var(--text-lg)", marginBottom: "var(--sp2)" }}>{h.title}</div>
+                  <p style={{ fontSize: "var(--text-sm)", color: "var(--text-mid)", lineHeight: 1.7 }}>{h.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CTA ────────────────────────────────────── */}
+        <section
+          aria-label="Contact CTA"
+          style={{
+            background: "var(--black)",
+            padding: "var(--sp20) var(--sp6)",
+            textAlign: "center",
+          }}
+        >
+          <h2 style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "clamp(1.8rem, 4vw, 3rem)",
+            color: "var(--yellow)",
+            letterSpacing: "0.05em",
+            marginBottom: "var(--sp4)",
+            textShadow: "2px 2px 0 rgba(0,0,0,0.4)",
+          }}>
+            LET&apos;S BUILD TOGETHER
+          </h2>
+          <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "var(--sp8)", fontSize: "var(--text-base)" }}>
+            MVP・プロトタイプ・新規事業、どんな段階でもご相談ください。
+          </p>
+          <Link href="/contact" className="btn-more yellow-btn" style={{ fontSize: "var(--text-base)", padding: "var(--sp3) var(--sp8)" }}>
+            お問い合わせ ▶
+          </Link>
+        </section>
+
+      </div>
     </>
   );
 }

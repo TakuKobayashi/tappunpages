@@ -3,120 +3,95 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styles from "./Nav.module.css";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
+  { href: "/",        label: "ホーム" },
+  { href: "/about",   label: "お前は誰よ？" },
+  { href: "/projects",label: "制作物" },
+  { href: "/blog",    label: "記事" },
   { href: "/contact", label: "Contact" },
 ];
 
-// Pixel-art cat logo mark (4x4 grid)
-const LOGO_GRID = [
-  false, true,  true,  false,
-  true,  true,  true,  true,
-  true,  false, false, true,
-  false, true,  true,  false,
-];
-
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
-      <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
-        <div className={styles.inner}>
+      {/* Fixed topbar */}
+      <header className="topbar" role="banner">
+        {/* White nav */}
+        <div className="topbar-nav">
           {/* Logo */}
-          <Link href="/" className={styles.logo} aria-label="taptappun home">
-            <div className={styles.logoMark} aria-hidden="true">
-              {LOGO_GRID.map((on, i) => (
-                <div
-                  key={i}
-                  className={`${styles.logoDot} ${on ? "" : styles.off}`}
-                />
-              ))}
-            </div>
-            <span className={styles.logoText}>
-              taptappun<span>.</span>dev
-            </span>
+          <Link href="/" className="topbar-logo" aria-label="taptappun home">
+            TAP<span className="logo-dot" aria-hidden="true" />TAPPUN
           </Link>
 
           {/* Desktop links */}
-          <div className={styles.links} role="navigation" aria-label="Main navigation">
-            {NAV_LINKS.map((link) => (
+          <nav className="topbar-links" aria-label="Main navigation">
+            {NAV_LINKS.map(l => (
               <Link
-                key={link.href}
-                href={link.href}
-                className={`${styles.link} ${
-                  (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href))
-                    ? styles.active
-                    : ""
-                }`}
+                key={l.href}
+                href={l.href}
+                className={isActive(l.href) ? "active" : ""}
               >
-                {link.label}
+                {l.label}
               </Link>
             ))}
-          </div>
+          </nav>
 
-          {/* Right side */}
-          <div className={styles.right}>
-            <Link href="/en" className={styles.langToggle} aria-label="Switch to English">
-              EN
-            </Link>
-            <Link href="/contact" className={styles.ctaBtn}>
-              Hire me
-            </Link>
+          {/* Right */}
+          <div className="topbar-right">
+            <Link href="/en" className="btn-lang" aria-label="English version">EN</Link>
             <button
-              className={`${styles.menuBtn} ${menuOpen ? styles.open : ""}`}
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
+              className={`btn-menu-toggle${open ? " open" : ""}`}
+              onClick={() => setOpen(v => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
             >
-              <span className={styles.menuLine} />
-              <span className={styles.menuLine} />
-              <span className={styles.menuLine} />
+              <span className="menu-line" />
+              <span className="menu-line" />
+              <span className="menu-line" />
             </button>
           </div>
         </div>
-      </nav>
+
+        {/* Black ticker */}
+        <div className="topbar-ticker" aria-label="Latest news">
+          <span className="ticker-date">
+            {new Date().toLocaleDateString("ja-JP", { year:"numeric", month:"2-digit", day:"2-digit" })}
+          </span>
+          <span className="ticker-text">
+            Available for new projects — MVP・AI・Fintech・Mobile 開発のご相談はお気軽に
+          </span>
+        </div>
+      </header>
 
       {/* Mobile drawer */}
       <div
-        className={`${styles.drawer} ${menuOpen ? styles.open : ""}`}
+        className={`topbar-drawer${open ? " open" : ""}`}
         role="navigation"
         aria-label="Mobile navigation"
       >
-        {NAV_LINKS.map((link) => (
+        {NAV_LINKS.map(l => (
           <Link
-            key={link.href}
-            href={link.href}
-            className={`${styles.drawerLink} ${
-              (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href))
-                ? styles.active
-                : ""
-            }`}
+            key={l.href}
+            href={l.href}
+            className={`drawer-link${isActive(l.href) ? " active" : ""}`}
           >
-            {link.label}
+            {l.label}
           </Link>
         ))}
-        <Link href="/en" className={styles.drawerLink}>
-          English Version →
-        </Link>
+        <Link href="/en" className="drawer-link">English →</Link>
       </div>
+
+      {/* Spacer */}
+      <div className="topbar-spacer" aria-hidden="true" />
     </>
   );
 }

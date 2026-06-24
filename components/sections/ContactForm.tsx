@@ -1,20 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import styles from "@/app/contact/page.module.css";
 
 type Status = "idle" | "loading" | "success" | "error";
 
 const PROJECT_TYPES = [
-  "MVP Development",
-  "AI Integration",
-  "Mobile App (Android/iOS)",
-  "Web App / Full-stack",
-  "Fintech / Crypto",
-  "Game Development",
-  "Technical Consulting",
-  "Other",
+  "MVP Development", "AI Integration", "Mobile App (Android/iOS)",
+  "Web App / Full-stack", "Fintech / Crypto", "Game Development",
+  "Technical Consulting", "Other",
 ];
+
+const s: Record<string, React.CSSProperties> = {
+  card: {
+    background: "rgba(255,255,255,0.92)",
+    borderRadius: "var(--r-xl)",
+    padding: "var(--sp6)",
+    boxShadow: "var(--shadow-md)",
+  },
+  label: {
+    fontSize: "var(--text-xs)",
+    fontFamily: "var(--font-mono)",
+    color: "var(--text-mid)",
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.1em",
+    display: "block",
+    marginBottom: "var(--sp1)",
+  },
+  input: {
+    width: "100%",
+    background: "rgba(90,200,232,0.06)",
+    border: "1px solid var(--border-gray)",
+    borderRadius: "var(--r-md)",
+    padding: "var(--sp2) var(--sp3)",
+    fontFamily: "var(--font-body)",
+    fontSize: "var(--text-sm)",
+    color: "var(--text-dark)",
+    outline: "none",
+    transition: "border-color 120ms ease",
+  },
+  row: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--sp3)" },
+  field: { display: "flex", flexDirection: "column" as const, gap: "var(--sp1)" },
+};
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -24,28 +50,24 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
-
     const form = e.currentTarget;
     const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      company: (form.elements.namedItem("company") as HTMLInputElement).value,
+      name:        (form.elements.namedItem("name")        as HTMLInputElement).value,
+      email:       (form.elements.namedItem("email")       as HTMLInputElement).value,
+      company:     (form.elements.namedItem("company")     as HTMLInputElement).value,
       projectType: (form.elements.namedItem("projectType") as HTMLSelectElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      message:     (form.elements.namedItem("message")     as HTMLTextAreaElement).value,
     };
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || "送信に失敗しました");
+        throw new Error((err as { error?: string }).error || "送信に失敗しました");
       }
-
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -55,118 +77,74 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className={styles.formCard}>
-        <div className={styles.successBox}>
-          <div className={styles.successIcon}>✅</div>
-          <div className={styles.successTitle}>Message sent!</div>
-          <p className={styles.successDesc}>
-            ご連絡ありがとうございます。
-            24時間以内にご返信いたします。
-          </p>
-        </div>
+      <div style={{ ...s.card, textAlign: "center", padding: "var(--sp16)" }}>
+        <div style={{ fontSize: "3rem", marginBottom: "var(--sp4)" }}>✅</div>
+        <div style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-2xl)", marginBottom: "var(--sp3)", letterSpacing: "0.05em" }}>SENT!</div>
+        <p style={{ fontSize: "var(--text-sm)", color: "var(--text-mid)" }}>
+          ご連絡ありがとうございます。<br />24時間以内にご返信いたします。
+        </p>
       </div>
     );
   }
 
   return (
-    <div className={styles.formCard}>
-      <h2 className={styles.formTitle}>Send a message</h2>
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        <div className={styles.formRow}>
-          <div className={styles.field}>
-            <label htmlFor="name" className={styles.label}>
-              Name *
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              className={styles.input}
-              placeholder="Taro Yamada"
-              autoComplete="name"
-            />
+    <div style={s.card}>
+      <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-2xl)", marginBottom: "var(--sp5)", letterSpacing: "0.05em", color: "var(--text-dark)" }}>
+        SEND MESSAGE
+      </h2>
+      <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "var(--sp4)" }}>
+        <div style={s.row}>
+          <div style={s.field}>
+            <label htmlFor="name" style={s.label}>Name *</label>
+            <input id="name" name="name" type="text" required style={s.input} placeholder="Taro Yamada" />
           </div>
-          <div className={styles.field}>
-            <label htmlFor="email" className={styles.label}>
-              Email *
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className={styles.input}
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
+          <div style={s.field}>
+            <label htmlFor="email" style={s.label}>Email *</label>
+            <input id="email" name="email" type="email" required style={s.input} placeholder="you@company.com" />
           </div>
         </div>
 
-        <div className={styles.field}>
-          <label htmlFor="company" className={styles.label}>
-            Company / Organization
-          </label>
-          <input
-            id="company"
-            name="company"
-            type="text"
-            className={styles.input}
-            placeholder="Acme Inc. (optional)"
-          />
+        <div style={s.field}>
+          <label htmlFor="company" style={s.label}>Company</label>
+          <input id="company" name="company" type="text" style={s.input} placeholder="Acme Inc. (optional)" />
         </div>
 
-        <div className={styles.field}>
-          <label htmlFor="projectType" className={styles.label}>
-            Project Type *
-          </label>
-          <select
-            id="projectType"
-            name="projectType"
-            required
-            className={styles.select}
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Select project type
-            </option>
-            {PROJECT_TYPES.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
+        <div style={s.field}>
+          <label htmlFor="projectType" style={s.label}>Project Type *</label>
+          <select id="projectType" name="projectType" required style={{ ...s.input, appearance: "none" as const }} defaultValue="">
+            <option value="" disabled>Select project type</option>
+            {PROJECT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
           </select>
         </div>
 
-        <div className={styles.field}>
-          <label htmlFor="message" className={styles.label}>
-            Message *
-          </label>
+        <div style={s.field}>
+          <label htmlFor="message" style={s.label}>Message *</label>
           <textarea
-            id="message"
-            name="message"
-            required
-            className={styles.textarea}
+            id="message" name="message" required rows={5}
+            style={{ ...s.input, resize: "vertical", lineHeight: 1.6, minHeight: 120 }}
             placeholder="プロジェクトの概要・課題・スケジュール感などを教えてください。"
-            rows={5}
           />
         </div>
 
         {status === "error" && (
-          <div className={styles.errorMsg} role="alert">
-            {errorMsg}
-          </div>
+          <div role="alert" style={{
+            fontSize: "var(--text-sm)", color: "#cc0000",
+            padding: "var(--sp3)", borderRadius: "var(--r-md)",
+            background: "rgba(204,0,0,0.06)", border: "1px solid rgba(204,0,0,0.2)",
+            textAlign: "center",
+          }}>{errorMsg}</div>
         )}
 
         <button
           type="submit"
-          className={styles.submitBtn}
           disabled={status === "loading"}
+          className="btn-more yellow-btn"
+          style={{ width: "100%", fontSize: "var(--text-base)", padding: "var(--sp3)", opacity: status === "loading" ? 0.6 : 1 }}
         >
-          {status === "loading" ? "Sending…" : "Send Message →"}
+          {status === "loading" ? "Sending…" : "Send Message ▶"}
         </button>
 
-        <p className={styles.formFooter}>
+        <p style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)", textAlign: "center" }}>
           返信は24時間以内。英語・日本語どちらでも対応します。
         </p>
       </form>

@@ -1,64 +1,59 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "Product Engineering・AI・Mobile開発に関する技術ブログ。",
+  description: "Product Engineering・AI・Mobile 開発の技術ブログ。",
 };
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
-
   return (
-    <main className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.eyebrow}>Writing</div>
-        <h1 className={styles.title}>Blog</h1>
-        <p className={styles.desc}>
-          Product Engineering・AI・Mobile開発の知見を発信。
-          SignalForge などの CLI ツールから自動生成される記事も流し込み予定。
-        </p>
-      </header>
+    <>
+      <div className="page-bg-fixed bg-yellow" aria-hidden="true" />
+      <div className="page-wrap">
+        <section style={{ padding: "var(--sp12) var(--sp6)" }}>
+          <div className="container">
+            <h1 className="section-heading" style={{ color: "var(--text-dark)" }}>ARTICLES</h1>
 
-      {posts.length === 0 ? (
-        <div className={styles.empty}>
-          <span className={styles.emptyIcon}>✍️</span>
-          <p className={styles.emptyText}>Coming soon — 記事を準備中です。</p>
-        </div>
-      ) : (
-        <div className={styles.list}>
-          {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className={styles.postCard}
-            >
-              <div className={styles.postMeta}>
-                <time className={styles.postDate} dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString("ja-JP", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-                {post.readingTime && (
-                  <span className={styles.readTime}>{post.readingTime}</span>
-                )}
+            {posts.length === 0 ? (
+              <div style={{
+                background: "rgba(255,255,255,0.85)",
+                borderRadius: "var(--r-xl)",
+                padding: "var(--sp16)",
+                textAlign: "center",
+                border: "2px dashed var(--border-gray)",
+              }}>
+                <span style={{ fontSize: "2rem", display: "block", marginBottom: "var(--sp4)" }}>✍️</span>
+                <p style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", color: "var(--text-muted)" }}>Coming soon — 記事を準備中です。</p>
               </div>
-              <h2 className={styles.postTitle}>{post.title}</h2>
-              <p className={styles.postDesc}>{post.description}</p>
-              <div className={styles.postTags}>
-                {post.tags?.map((tag) => (
-                  <span key={tag} className={styles.tag}>{tag}</span>
-                ))}
+            ) : (
+              <div className="list-container">
+                <ul className="list-items">
+                  {posts.map(p => (
+                    <li key={p.slug} className="list-item">
+                      <Link href={`/blog/${p.slug}`}>
+                        <div className="li-thumb" style={{
+                          background: "linear-gradient(135deg, #FFE180, #FFDC6C)",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>
+                          <span style={{ fontSize: "1.6rem" }}>📝</span>
+                        </div>
+                        <div className="li-body">
+                          <span className="li-title">{p.title}</span>
+                          <span className="li-desc">{p.date}{p.readingTime ? ` · ${p.readingTime}` : ""}</span>
+                        </div>
+                        <div className="li-arrow">▶</div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </Link>
-          ))}
-        </div>
-      )}
-    </main>
+            )}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
