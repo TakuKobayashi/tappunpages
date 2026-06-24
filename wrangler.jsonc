@@ -1,17 +1,29 @@
 {
-  // Cloudflare Pages configuration
+  // ============================================================
+  // Cloudflare Pages — taptappun portfolio
+  // Deploy: pnpm run deploy
+  // ============================================================
+
   "name": "taptappun-portfolio",
   "compatibility_date": "2024-12-01",
   "compatibility_flags": ["nodejs_compat"],
+
+  // Next.js static export output directory
   "pages_build_output_dir": "out",
 
-  // Environment variables (set secrets via wrangler CLI or dashboard)
+  // Public environment variables (non-secret)
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://taptappun.dev"
   }
 
-  // Secrets (set via: wrangler pages secret put DISCORD_WEBHOOK_URL):
-  // - DISCORD_WEBHOOK_URL
-  // - RESEND_API_KEY
-  // - NOTIFY_EMAIL
+  // ── Secret environment variables ────────────────────────────
+  // Set via CLI (do NOT put actual values here):
+  //
+  //   pnpm cf:secret DISCORD_WEBHOOK_URL
+  //   pnpm cf:secret RESEND_API_KEY
+  //   pnpm cf:secret NOTIFY_EMAIL
+  //
+  // Or via Cloudflare Dashboard:
+  //   Pages > taptappun-portfolio > Settings > Environment variables
+  // ────────────────────────────────────────────────────────────
 }
