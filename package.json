@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && wrangler pages deploy out",
-    "deploy:preview": "next build && wrangler pages deploy out --branch preview",
-    "cf:secret": "wrangler pages secret put",
-    "cf:tail": "wrangler pages deployment tail"
+    "deploy": "next build && wrangler deploy",
+    "deploy:preview": "next build && wrangler deploy --env preview",
+    "worker:dev": "wrangler dev",
+    "cf:secret": "wrangler secret put",
+    "cf:tail": "wrangler tail"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -28,6 +28,6 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "typescript": "^6.0.3",
-    "wrangler": "^4.103.0"
+    "wrangler": "^4.19.0"
   }
 }

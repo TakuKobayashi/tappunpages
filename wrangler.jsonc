@@ -1,29 +1,42 @@
 {
   // ============================================================
-  // Cloudflare Pages — taptappun portfolio
-  // Deploy: pnpm run deploy
+  // Cloudflare Workers — taptappun.dev
+  //
+  // 構成:
+  //   - Worker スクリプト: worker/src/index.ts (Hono)
+  //   - 静的アセット:      out/ (Next.js SSG output)
+  //   - /api/* → Hono で処理
+  //   - それ以外 → Assets から静的配信
+  //
+  // デプロイ: pnpm run deploy
   // ============================================================
 
   "name": "taptappun-portfolio",
-  "compatibility_date": "2024-12-01",
+  "main": "worker/src/index.ts",
+  "compatibility_date": "2025-06-01",
   "compatibility_flags": ["nodejs_compat"],
 
-  // Next.js static export output directory
-  "pages_build_output_dir": "out",
+  // Workers Assets — Next.js の静的ファイルを配信
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    // SPAモード: 404時に index.html を返さず 404.html を使う (SSG なので不要)
+    "not_found_handling": "404-page"
+  },
 
-  // Public environment variables (non-secret)
+  // 公開環境変数 (非シークレット)
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://taptappun.dev"
   }
 
-  // ── Secret environment variables ────────────────────────────
-  // Set via CLI (do NOT put actual values here):
+  // ── シークレット環境変数 ──────────────────────────────────
+  // 下記コマンドで登録 (値をここには書かない):
   //
-  //   pnpm cf:secret DISCORD_WEBHOOK_URL
-  //   pnpm cf:secret RESEND_API_KEY
-  //   pnpm cf:secret NOTIFY_EMAIL
+  //   pnpm run cf:secret DISCORD_WEBHOOK_URL
+  //   pnpm run cf:secret RESEND_API_KEY
+  //   pnpm run cf:secret NOTIFY_EMAIL
   //
-  // Or via Cloudflare Dashboard:
-  //   Pages > taptappun-portfolio > Settings > Environment variables
-  // ────────────────────────────────────────────────────────────
+  // または Cloudflare Dashboard:
+  //   Workers & Pages > taptappun-portfolio > Settings > Variables and Secrets
+  // ─────────────────────────────────────────────────────────
 }
