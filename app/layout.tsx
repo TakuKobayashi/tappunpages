@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { LangDetector } from "@/components/i18n/LangDetector";
 import { seoMetadata } from "@/components/seo/metadata";
 import { baseUrl, githubUrl, twitterUrl } from "@/components/seo/accounts";
 
@@ -25,13 +26,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Person",
               name: "taptappun",
               url: baseUrl,
-              sameAs: [twitterUrl,githubUrl],
+              sameAs: [twitterUrl, githubUrl],
               jobTitle: "Product Engineer",
             }),
           }}
         />
       </head>
       <body>
+        {/* ブラウザ言語自動検出（初回のみリダイレクト） */}
+        <LangDetector />
         <Nav />
         <main>{children}</main>
         <Footer />

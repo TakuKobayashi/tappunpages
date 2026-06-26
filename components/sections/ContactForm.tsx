@@ -1,50 +1,44 @@
 "use client";
 
 import { useState } from "react";
+import type { Locale } from "@/lib/i18n/dictionaries";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
-type Status = "idle" | "loading" | "success" | "error";
+interface Props {
+  locale?: Locale;
+}
 
-const PROJECT_TYPES = [
-  "MVP Development", "AI Integration", "Mobile App (Android/iOS)",
-  "Web App / Full-stack", "Fintech / Crypto", "Game Development",
-  "Technical Consulting", "Other",
-];
-
-const s: Record<string, React.CSSProperties> = {
-  card: {
-    background: "rgba(255,255,255,0.92)",
-    borderRadius: "var(--r-xl)",
-    padding: "var(--sp6)",
-    boxShadow: "var(--shadow-md)",
-  },
-  label: {
-    fontSize: "var(--text-xs)",
-    fontFamily: "var(--font-mono)",
-    color: "var(--text-mid)",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.1em",
-    display: "block",
-    marginBottom: "var(--sp1)",
-  },
-  input: {
-    width: "100%",
-    background: "rgba(90,200,232,0.06)",
-    border: "1px solid var(--border-gray)",
-    borderRadius: "var(--r-md)",
-    padding: "var(--sp2) var(--sp3)",
-    fontFamily: "var(--font-body)",
-    fontSize: "var(--text-sm)",
-    color: "var(--text-dark)",
-    outline: "none",
-    transition: "border-color 120ms ease",
-  },
-  row: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--sp3)" },
-  field: { display: "flex", flexDirection: "column" as const, gap: "var(--sp1)" },
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: "rgba(90,200,232,0.06)",
+  border: "1px solid var(--border-gray)",
+  borderRadius: "var(--r-md)",
+  padding: "var(--sp2) var(--sp3)",
+  fontFamily: "var(--font-body)",
+  fontSize: "var(--text-sm)",
+  color: "var(--text-dark)",
+  outline: "none",
 };
 
-export function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
+const labelStyle: React.CSSProperties = {
+  fontSize: "var(--text-xs)",
+  fontFamily: "var(--font-mono)",
+  color: "var(--text-mid)",
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
+};
+
+const fieldStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "var(--sp1)",
+};
+
+export function ContactForm({ locale = "ja" }: Props) {
+  const [status, setStatus] = useState<"idle"|"loading"|"success"|"error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const t = getDictionary(locale).contact.form;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -65,88 +59,74 @@ export function ContactForm() {
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error((err as { error?: string }).error || "送信に失敗しました");
+        const err = await res.json().catch(() => ({})) as { error?: string };
+        throw new Error(err.error || t.error.default);
       }
       setStatus("success");
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "送信に失敗しました");
+      setErrorMsg(err instanceof Error ? err.message : t.error.default);
     }
   }
 
   if (status === "success") {
     return (
-      <div style={{ ...s.card, textAlign: "center", padding: "var(--sp16)" }}>
-        <div style={{ fontSize: "3rem", marginBottom: "var(--sp4)" }}>✅</div>
-        <div style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-2xl)", marginBottom: "var(--sp3)", letterSpacing: "0.05em" }}>SENT!</div>
-        <p style={{ fontSize: "var(--text-sm)", color: "var(--text-mid)" }}>
-          ご連絡ありがとうございます。<br />24時間以内にご返信いたします。
-        </p>
+      <div style={{ background:"rgba(255,255,255,0.92)",borderRadius:"var(--r-xl)",padding:"var(--sp6)",boxShadow:"var(--shadow-md)",textAlign:"center" }}>
+        <div style={{ fontSize:"3rem",marginBottom:"var(--sp4)" }}>✅</div>
+        <div style={{ fontFamily:"var(--font-heading)",fontSize:"var(--text-2xl)",marginBottom:"var(--sp3)",letterSpacing:"0.05em" }}>{t.success.title}</div>
+        <p style={{ fontSize:"var(--text-sm)",color:"var(--text-mid)",whiteSpace:"pre-line" }}>{t.success.desc}</p>
       </div>
     );
   }
 
   return (
-    <div style={s.card}>
-      <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-2xl)", marginBottom: "var(--sp5)", letterSpacing: "0.05em", color: "var(--text-dark)" }}>
-        SEND MESSAGE
-      </h2>
-      <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "var(--sp4)" }}>
-        <div style={s.row}>
-          <div style={s.field}>
-            <label htmlFor="name" style={s.label}>Name *</label>
-            <input id="name" name="name" type="text" required style={s.input} placeholder="Taro Yamada" />
+    <div style={{ background:"rgba(255,255,255,0.92)",borderRadius:"var(--r-xl)",padding:"var(--sp6)",boxShadow:"var(--shadow-md)" }}>
+      <h2 style={{ fontFamily:"var(--font-heading)",fontSize:"var(--text-2xl)",marginBottom:"var(--sp5)",letterSpacing:"0.05em",color:"var(--text-dark)" }}>{t.title}</h2>
+      <form onSubmit={handleSubmit} noValidate style={{ display:"flex",flexDirection:"column",gap:"var(--sp4)" }}>
+        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"var(--sp3)" }}>
+          <div style={fieldStyle}>
+            <label htmlFor="name" style={labelStyle}>Name *</label>
+            <input id="name" name="name" type="text" required style={inputStyle} placeholder={t.namePlaceholder} />
           </div>
-          <div style={s.field}>
-            <label htmlFor="email" style={s.label}>Email *</label>
-            <input id="email" name="email" type="email" required style={s.input} placeholder="you@company.com" />
+          <div style={fieldStyle}>
+            <label htmlFor="email" style={labelStyle}>Email *</label>
+            <input id="email" name="email" type="email" required style={inputStyle} placeholder={t.emailPlaceholder} />
           </div>
         </div>
 
-        <div style={s.field}>
-          <label htmlFor="company" style={s.label}>Company</label>
-          <input id="company" name="company" type="text" style={s.input} placeholder="Acme Inc. (optional)" />
+        <div style={fieldStyle}>
+          <label htmlFor="company" style={labelStyle}>Company</label>
+          <input id="company" name="company" type="text" style={inputStyle} placeholder={t.companyPlaceholder} />
         </div>
 
-        <div style={s.field}>
-          <label htmlFor="projectType" style={s.label}>Project Type *</label>
-          <select id="projectType" name="projectType" required style={{ ...s.input, appearance: "none" as const }} defaultValue="">
-            <option value="" disabled>Select project type</option>
-            {PROJECT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+        <div style={fieldStyle}>
+          <label htmlFor="projectType" style={labelStyle}>Project Type *</label>
+          <select id="projectType" name="projectType" required defaultValue="" style={{ ...inputStyle, appearance:"none" as const }}>
+            <option value="" disabled>{t.selectPlaceholder}</option>
+            {(t.projectTypes as readonly string[]).map((pt) => <option key={pt} value={pt}>{pt}</option>)}
           </select>
         </div>
 
-        <div style={s.field}>
-          <label htmlFor="message" style={s.label}>Message *</label>
-          <textarea
-            id="message" name="message" required rows={5}
-            style={{ ...s.input, resize: "vertical", lineHeight: 1.6, minHeight: 120 }}
-            placeholder="プロジェクトの概要・課題・スケジュール感などを教えてください。"
+        <div style={fieldStyle}>
+          <label htmlFor="message" style={labelStyle}>Message *</label>
+          <textarea id="message" name="message" required rows={5}
+            style={{ ...inputStyle, resize:"vertical",lineHeight:1.6,minHeight:120 }}
+            placeholder={t.messagePlaceholder}
           />
         </div>
 
         {status === "error" && (
-          <div role="alert" style={{
-            fontSize: "var(--text-sm)", color: "#cc0000",
-            padding: "var(--sp3)", borderRadius: "var(--r-md)",
-            background: "rgba(204,0,0,0.06)", border: "1px solid rgba(204,0,0,0.2)",
-            textAlign: "center",
-          }}>{errorMsg}</div>
+          <div role="alert" style={{ fontSize:"var(--text-sm)",color:"#cc0000",padding:"var(--sp3)",borderRadius:"var(--r-md)",background:"rgba(204,0,0,0.06)",border:"1px solid rgba(204,0,0,0.2)",textAlign:"center" }}>
+            {errorMsg}
+          </div>
         )}
 
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="btn-more yellow-btn"
-          style={{ width: "100%", fontSize: "var(--text-base)", padding: "var(--sp3)", opacity: status === "loading" ? 0.6 : 1 }}
-        >
-          {status === "loading" ? "Sending…" : "Send Message ▶"}
+        <button type="submit" disabled={status === "loading"} className="btn-more yellow-btn"
+          style={{ width:"100%",fontSize:"var(--text-base)",padding:"var(--sp3)",opacity:status==="loading"?0.6:1 }}>
+          {status === "loading" ? t.sending : t.submit}
         </button>
 
-        <p style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)", textAlign: "center" }}>
-          返信は24時間以内。英語・日本語どちらでも対応します。
-        </p>
+        <p style={{ fontSize:"var(--text-xs)",color:"var(--text-muted)",textAlign:"center" }}>{t.footer}</p>
       </form>
     </div>
   );

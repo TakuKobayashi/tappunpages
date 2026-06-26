@@ -3,36 +3,51 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const NAV_LINKS = [
-  { href: "/",        label: "ホーム" },
-  { href: "/about",   label: "お前は誰よ？" },
-  { href: "/projects",label: "制作物" },
-  { href: "/blog",    label: "記事" },
-  { href: "/contact", label: "Contact" },
-];
+import { getLocaleFromPath, switchLocalePath } from "@/lib/i18n/routing";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  const locale = getLocaleFromPath(pathname);
+  const t = getDictionary(locale);
+
+  // ナビリンクのベースパス（ロケールプレフィックスを除いた絶対パス）
+  const base = locale === "en" ? "/en" : "";
+
+  const NAV_LINKS = [
+    { href: `${base}/`,         label: t.nav.home },
+    { href: `${base}/about`,    label: t.nav.about },
+    { href: `${base}/projects`, label: t.nav.projects },
+    { href: `${base}/blog`,     label: t.nav.blog },
+    { href: `${base}/contact`,  label: t.nav.contact },
+  ];
+
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    const normalized = href.replace(/\/$/, "") || "/";
+    const normalizedPath = pathname.replace(/\/$/, "") || "/";
+    if (normalized === base || normalized === `${base}/`) {
+      return normalizedPath === (base || "/");
+    }
+    return normalizedPath.startsWith(normalized);
+  };
+
+  // 言語切り替えパス
+  const toLocale = locale === "ja" ? "en" : "ja";
+  const langSwitchPath = switchLocalePath(pathname, toLocale);
 
   return (
     <>
-      {/* Fixed topbar */}
       <header className="topbar" role="banner">
         {/* White nav */}
         <div className="topbar-nav">
-          {/* Logo */}
-          <Link href="/" className="topbar-logo" aria-label="taptappun home">
+          <Link href={`${base}/`} className="topbar-logo" aria-label="taptappun home">
             TAP<span className="logo-dot" aria-hidden="true" />TAPPUN
           </Link>
 
-          {/* Desktop links */}
           <nav className="topbar-links" aria-label="Main navigation">
             {NAV_LINKS.map(l => (
               <Link
@@ -45,9 +60,15 @@ export function Nav() {
             ))}
           </nav>
 
-          {/* Right */}
           <div className="topbar-right">
-            <Link href="/en" className="btn-lang" aria-label="English version">EN</Link>
+            {/* 言語切り替えボタン */}
+            <Link
+              href={langSwitchPath}
+              className="btn-lang"
+              aria-label={t.nav.langSwitchLabel}
+            >
+              {t.nav.langSwitch}
+            </Link>
             <button
               className={`btn-menu-toggle${open ? " open" : ""}`}
               onClick={() => setOpen(v => !v)}
@@ -64,11 +85,11 @@ export function Nav() {
         {/* Black ticker */}
         <div className="topbar-ticker" aria-label="Latest news">
           <span className="ticker-date">
-            {new Date().toLocaleDateString("ja-JP", { year:"numeric", month:"2-digit", day:"2-digit" })}
+            {new Date().toLocaleDateString(locale === "ja" ? "ja-JP" : "en-US", {
+              year: "numeric", month: "2-digit", day: "2-digit",
+            })}
           </span>
-          <span className="ticker-text">
-            Available for new projects — MVP・AI・Fintech・Mobile 開発のご相談はお気軽に
-          </span>
+          <span className="ticker-text">{t.ticker.text}</span>
         </div>
       </header>
 
@@ -87,10 +108,11 @@ export function Nav() {
             {l.label}
           </Link>
         ))}
-        <Link href="/en" className="drawer-link">English →</Link>
+        <Link href={langSwitchPath} className="drawer-link">
+          {t.nav.langSwitch} →
+        </Link>
       </div>
 
-      {/* Spacer */}
       <div className="topbar-spacer" aria-hidden="true" />
     </>
   );

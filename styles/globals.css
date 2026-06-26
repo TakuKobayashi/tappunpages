@@ -575,3 +575,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* =============================================
+   CTA SECTION — bright sky-blue (replaces black)
+   ============================================= */
+.section-cta {
+  background-image: url('/images/bg-blue.webp');
+  background-size: cover;
+  background-position: center;
+  padding: var(--sp20) var(--sp6);
+  text-align: center;
+  position: relative;
+  border-top: 3px solid rgba(255,255,255,0.3);
+}
+
+.section-cta h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--text-dark);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sp4);
+  -webkit-text-stroke: 1px rgba(0,0,0,0.12);
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.12);
+}
+
+.section-cta p {
+  color: rgba(0,0,0,0.7);
+  margin-bottom: var(--sp8);
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
