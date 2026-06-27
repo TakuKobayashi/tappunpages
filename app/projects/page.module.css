@@ -109,7 +109,12 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
   opacity: 0;
   transition: opacity var(--transition-base);
 }
@@ -117,7 +122,7 @@
 .card:hover {
   border-color: var(--color-border-light);
   transform: translateY(-4px);
-  box-shadow: 0 16px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.5);
 }
 
 .card:hover::before {
@@ -143,7 +148,7 @@
   font-family: var(--font-mono);
   color: var(--color-primary);
   background: var(--color-primary-dim);
-  border: 1px solid rgba(0,232,122,0.3);
+  border: 1px solid rgba(0, 232, 122, 0.3);
   padding: 1px var(--space-2);
   border-radius: var(--radius-sm);
 }
@@ -151,7 +156,9 @@
 .cardArrow {
   color: var(--color-text-muted);
   font-size: var(--text-xl);
-  transition: transform var(--transition-fast), color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast);
   flex-shrink: 0;
 }
 

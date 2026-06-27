@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import readingTime from "reading-time";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import readingTime from 'reading-time';
 
 export interface BlogPost {
   slug: string;
@@ -13,7 +13,7 @@ export interface BlogPost {
   content: string;
 }
 
-const BLOG_DIR = path.join(process.cwd(), "content", "blog");
+const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
 function ensureDir() {
   if (!fs.existsSync(BLOG_DIR)) {
@@ -25,18 +25,18 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   ensureDir();
   const files = fs
     .readdirSync(BLOG_DIR)
-    .filter((f) => f.endsWith(".mdx") || f.endsWith(".md"));
+    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'));
 
   const posts = files.map((file) => {
-    const slug = file.replace(/\.(mdx?|md)$/, "");
-    const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf-8");
+    const slug = file.replace(/\.(mdx?|md)$/, '');
+    const raw = fs.readFileSync(path.join(BLOG_DIR, file), 'utf-8');
     const { data, content } = matter(raw);
     const rt = readingTime(content);
     return {
       slug,
       title: data.title ?? slug,
-      description: data.description ?? "",
-      date: data.date ?? "",
+      description: data.description ?? '',
+      date: data.date ?? '',
       tags: Array.isArray(data.tags) ? data.tags : [],
       readingTime: `${Math.ceil(rt.minutes)} min read`,
       content,
@@ -49,22 +49,22 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   ensureDir();
   const mdxPath = path.join(BLOG_DIR, `${slug}.mdx`);
-  const mdPath  = path.join(BLOG_DIR, `${slug}.md`);
+  const mdPath = path.join(BLOG_DIR, `${slug}.md`);
   const filePath = fs.existsSync(mdxPath)
     ? mdxPath
     : fs.existsSync(mdPath)
-    ? mdPath
-    : null;
+      ? mdPath
+      : null;
   if (!filePath) return null;
 
-  const raw = fs.readFileSync(filePath, "utf-8");
+  const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
   const rt = readingTime(content);
   return {
     slug,
     title: data.title ?? slug,
-    description: data.description ?? "",
-    date: data.date ?? "",
+    description: data.description ?? '',
+    date: data.date ?? '',
     tags: Array.isArray(data.tags) ? data.tags : [],
     readingTime: `${Math.ceil(rt.minutes)} min read`,
     content,

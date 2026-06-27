@@ -91,12 +91,12 @@ portfolio/
 
 ```ts
 // worker/src/api/webhook.ts
-import { Hono } from "hono";
-import type { Env } from "../index";
+import { Hono } from 'hono';
+import type { Env } from '../index';
 
 const webhook = new Hono<{ Bindings: Env }>();
 
-webhook.post("/webhook", async (c) => {
+webhook.post('/webhook', async (c) => {
   // 処理
   return c.json({ ok: true });
 });
@@ -106,8 +106,8 @@ export default webhook;
 
 ```ts
 // worker/src/index.ts に追加
-import webhook from "./api/webhook";
-app.route("/api", webhook);   // → POST /api/webhook
+import webhook from './api/webhook';
+app.route('/api', webhook); // → POST /api/webhook
 ```
 
 ---
@@ -122,15 +122,16 @@ app.route("/api", webhook);   // → POST /api/webhook
 
 ```mdx
 ---
-title: "Project Title"
-description: "Short description"
-date: "2025-01-01"
-tags: ["Next.js", "AI"]
+title: 'Project Title'
+description: 'Short description'
+date: '2025-01-01'
+tags: ['Next.js', 'AI']
 featured: true
-github: "https://github.com/taptappun/repo"
+github: 'https://github.com/taptappun/repo'
 ---
 
 ## Overview
+
 ...
 ```
 
@@ -148,11 +149,11 @@ github: "https://github.com/taptappun/repo"
 cp .env.example .env.local
 ```
 
-| 変数 | 必須 | 説明 |
-|------|------|------|
+| 変数                  | 必須 | 説明                     |
+| --------------------- | ---- | ------------------------ |
 | `DISCORD_WEBHOOK_URL` | 任意 | Discord 通知 Webhook URL |
-| `RESEND_API_KEY` | 任意 | Resend API キー |
-| `NOTIFY_EMAIL` | 任意 | 通知先メールアドレス |
+| `RESEND_API_KEY`      | 任意 | Resend API キー          |
+| `NOTIFY_EMAIL`        | 任意 | 通知先メールアドレス     |
 
 ---
 

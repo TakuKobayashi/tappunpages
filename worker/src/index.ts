@@ -8,10 +8,10 @@
  * 追加の API を作る場合は api/ フォルダに route を追加してください。
  */
 
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { logger } from "hono/logger";
-import contact from "./api/contact";
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { logger } from 'hono/logger';
+import contact from './api/contact';
 
 // Env bindings (wrangler.jsonc で定義)
 export interface Env {
@@ -24,22 +24,22 @@ export interface Env {
 const app = new Hono<{ Bindings: Env }>();
 
 // ── Middleware ──────────────────────────────────────────────
-app.use("*", logger());
+app.use('*', logger());
 app.use(
-  "/api/*",
+  '/api/*',
   cors({
-    origin: ["https://taptappun.dev", "http://localhost:3000"],
-    allowMethods: ["GET", "POST", "OPTIONS"],
-    allowHeaders: ["Content-Type"],
+    origin: ['https://taptappun.dev', 'http://localhost:3000'],
+    allowMethods: ['GET', 'POST', 'OPTIONS'],
+    allowHeaders: ['Content-Type'],
   })
 );
 
 // ── API Routes ──────────────────────────────────────────────
-app.route("/api", contact);
+app.route('/api', contact);
 
 // ── Static Assets fallthrough ───────────────────────────────
 // /api/* 以外はすべて Next.js の静的ファイルとして配信
-app.all("*", async (c) => {
+app.all('*', async (c) => {
   return c.env.ASSETS.fetch(c.req.raw);
 });
 

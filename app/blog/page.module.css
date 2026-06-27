@@ -130,7 +130,9 @@
   border-radius: var(--radius-xl);
 }
 
-.emptyIcon { font-size: 2rem; }
+.emptyIcon {
+  font-size: 2rem;
+}
 
 .emptyText {
   font-size: var(--text-sm);

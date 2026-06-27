@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 export interface Project {
   slug: string;
@@ -15,7 +15,7 @@ export interface Project {
   content: string;
 }
 
-const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
+const PROJECTS_DIR = path.join(process.cwd(), 'content', 'projects');
 
 function ensureDir() {
   if (!fs.existsSync(PROJECTS_DIR)) {
@@ -25,17 +25,19 @@ function ensureDir() {
 
 export async function getAllProjects(): Promise<Project[]> {
   ensureDir();
-  const files = fs.readdirSync(PROJECTS_DIR).filter((f) => f.endsWith(".mdx") || f.endsWith(".md"));
+  const files = fs
+    .readdirSync(PROJECTS_DIR)
+    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'));
 
   const projects = files.map((file) => {
-    const slug = file.replace(/\.(mdx?|md)$/, "");
-    const raw = fs.readFileSync(path.join(PROJECTS_DIR, file), "utf-8");
+    const slug = file.replace(/\.(mdx?|md)$/, '');
+    const raw = fs.readFileSync(path.join(PROJECTS_DIR, file), 'utf-8');
     const { data, content } = matter(raw);
     return {
       slug,
       title: data.title ?? slug,
-      description: data.description ?? "",
-      date: data.date ?? "",
+      description: data.description ?? '',
+      date: data.date ?? '',
       tags: Array.isArray(data.tags) ? data.tags : [],
       featured: data.featured ?? false,
       github: data.github,
@@ -55,17 +57,21 @@ export async function getAllProjects(): Promise<Project[]> {
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   ensureDir();
   const mdxPath = path.join(PROJECTS_DIR, `${slug}.mdx`);
-  const mdPath  = path.join(PROJECTS_DIR, `${slug}.md`);
-  const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null;
+  const mdPath = path.join(PROJECTS_DIR, `${slug}.md`);
+  const filePath = fs.existsSync(mdxPath)
+    ? mdxPath
+    : fs.existsSync(mdPath)
+      ? mdPath
+      : null;
   if (!filePath) return null;
 
-  const raw = fs.readFileSync(filePath, "utf-8");
+  const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
   return {
     slug,
     title: data.title ?? slug,
-    description: data.description ?? "",
-    date: data.date ?? "",
+    description: data.description ?? '',
+    date: data.date ?? '',
     tags: Array.isArray(data.tags) ? data.tags : [],
     featured: data.featured ?? false,
     github: data.github,

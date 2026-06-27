@@ -177,7 +177,9 @@
   height: 2px;
   background: var(--color-text);
   border-radius: 1px;
-  transition: transform var(--transition-base), opacity var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    opacity var(--transition-base);
 }
 
 .menuBtn.open .menuLine:nth-child(1) {

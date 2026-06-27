@@ -1,35 +1,105 @@
-import { MetadataRoute } from "next";
-import { getAllProjects } from "@/lib/projects";
-import { getAllPosts } from "@/lib/blog";
+import { MetadataRoute } from 'next';
+import { getAllProjects } from '@/lib/projects';
+import { getAllPosts } from '@/lib/blog';
 
-const BASE_URL = "https://taptappun.net";
-export const dynamic = "force-static";
+const BASE_URL = 'https://taptappun.net';
+export const dynamic = 'force-static';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getAllProjects();
-  const posts    = await getAllPosts();
+  const posts = await getAllPosts();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE_URL,                     lastModified: new Date(), changeFrequency: "weekly",  priority: 1.0 },
-    { url: `${BASE_URL}/en`,             lastModified: new Date(), changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${BASE_URL}/about`,          lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/en/about`,       lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/projects`,       lastModified: new Date(), changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${BASE_URL}/en/projects`,    lastModified: new Date(), changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${BASE_URL}/blog`,           lastModified: new Date(), changeFrequency: "weekly",  priority: 0.8 },
-    { url: `${BASE_URL}/en/blog`,        lastModified: new Date(), changeFrequency: "weekly",  priority: 0.8 },
-    { url: `${BASE_URL}/contact`,        lastModified: new Date(), changeFrequency: "yearly",  priority: 0.7 },
-    { url: `${BASE_URL}/en/contact`,     lastModified: new Date(), changeFrequency: "yearly",  priority: 0.7 },
+    {
+      url: BASE_URL,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/en`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/en/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/projects`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/en/projects`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/en/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/en/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.flatMap(p => [
-    { url: `${BASE_URL}/projects/${p.slug}`,    lastModified: p.date ? new Date(p.date) : new Date(), changeFrequency: "monthly" as const, priority: p.featured ? 0.8 : 0.6 },
-    { url: `${BASE_URL}/en/projects/${p.slug}`, lastModified: p.date ? new Date(p.date) : new Date(), changeFrequency: "monthly" as const, priority: p.featured ? 0.8 : 0.6 },
+  const projectRoutes: MetadataRoute.Sitemap = projects.flatMap((p) => [
+    {
+      url: `${BASE_URL}/projects/${p.slug}`,
+      lastModified: p.date ? new Date(p.date) : new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: p.featured ? 0.8 : 0.6,
+    },
+    {
+      url: `${BASE_URL}/en/projects/${p.slug}`,
+      lastModified: p.date ? new Date(p.date) : new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: p.featured ? 0.8 : 0.6,
+    },
   ]);
 
-  const blogRoutes: MetadataRoute.Sitemap = posts.flatMap(p => [
-    { url: `${BASE_URL}/blog/${p.slug}`,    lastModified: new Date(p.date), changeFrequency: "yearly" as const, priority: 0.6 },
-    { url: `${BASE_URL}/en/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: "yearly" as const, priority: 0.6 },
+  const blogRoutes: MetadataRoute.Sitemap = posts.flatMap((p) => [
+    {
+      url: `${BASE_URL}/blog/${p.slug}`,
+      lastModified: new Date(p.date),
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/en/blog/${p.slug}`,
+      lastModified: new Date(p.date),
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    },
   ]);
 
   return [...staticRoutes, ...projectRoutes, ...blogRoutes];

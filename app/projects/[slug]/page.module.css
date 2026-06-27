@@ -22,10 +22,16 @@
   text-decoration: none;
   transition: color var(--transition-fast);
 }
-.breadcrumbLink:hover { color: var(--color-primary); }
+.breadcrumbLink:hover {
+  color: var(--color-primary);
+}
 
-.breadcrumbSep { color: var(--color-text-muted); }
-.breadcrumbCurrent { color: var(--color-text); }
+.breadcrumbSep {
+  color: var(--color-text-muted);
+}
+.breadcrumbCurrent {
+  color: var(--color-text);
+}
 
 /* Header */
 .header {
@@ -45,7 +51,7 @@
   font-family: var(--font-mono);
   color: var(--color-primary);
   background: var(--color-primary-dim);
-  border: 1px solid rgba(0,232,122,0.3);
+  border: 1px solid rgba(0, 232, 122, 0.3);
   padding: 2px var(--space-2);
   border-radius: var(--radius-sm);
 }
@@ -110,9 +116,14 @@
   font-size: var(--text-sm);
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: opacity var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    opacity var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
-.btnPrimary:hover { opacity: 0.9; box-shadow: 0 0 20px var(--color-primary-glow); }
+.btnPrimary:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 20px var(--color-primary-glow);
+}
 
 .btnGhost {
   display: inline-flex;
@@ -126,9 +137,14 @@
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 }
-.btnGhost:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.btnGhost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
 
 /* MDX content */
 .content {
@@ -242,9 +258,14 @@
   color: var(--color-text-secondary);
   font-size: var(--text-sm);
   text-decoration: none;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 }
-.relatedCard:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.relatedCard:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
 
 /* Back link */
 .backWrap {
@@ -259,4 +280,6 @@
   text-decoration: none;
   transition: color var(--transition-fast);
 }
-.backLink:hover { color: var(--color-primary); }
+.backLink:hover {
+  color: var(--color-primary);
+}
