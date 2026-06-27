@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import type { Locale, Dictionary } from '@/lib/i18n/dictionaries';
-import { baseUrl } from './accounts';
+import type { Locale } from '@/lib/i18n/dictionaries';
+import { BASE_URL } from './accounts';
 
 /**
  * ロケールとページ辞書からメタデータを生成する
@@ -12,10 +12,10 @@ export function buildMetadata(
 ): Metadata {
   const lang = locale === 'ja' ? 'ja_JP' : 'en_US';
   const canonical =
-    options?.canonical ?? (locale === 'en' ? `${baseUrl}/en` : baseUrl);
+    options?.canonical ?? (locale === 'en' ? `${BASE_URL}/en` : BASE_URL);
 
   return {
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL(BASE_URL),
     title: {
       default: pageMeta.title,
       template: `%s | taptappun`,
@@ -57,8 +57,8 @@ export function buildMetadata(
     alternates: {
       canonical,
       languages: {
-        'ja-JP': baseUrl,
-        en: `${baseUrl}/en`,
+        'ja-JP': BASE_URL,
+        en: `${BASE_URL}/en`,
       },
     },
     robots: { index: true, follow: true },

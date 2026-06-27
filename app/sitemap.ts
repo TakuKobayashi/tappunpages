@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getAllProjects } from '@/lib/projects';
 import { getAllPosts } from '@/lib/blog';
+import { BASE_URL } from '../components/seo/accounts';
 
-const BASE_URL = 'https://taptappun.net';
 export const dynamic = 'force-static';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

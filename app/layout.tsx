@@ -3,7 +3,7 @@ import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import { LangDetector } from '@/components/i18n/LangDetector';
 import { seoMetadata } from '@/components/seo/metadata';
-import { baseUrl, githubUrl, twitterUrl } from '@/components/seo/accounts';
+import { BASE_URL, GITHUB_URL, TWITTER_URL } from '@/components/seo/accounts';
 
 export const metadata = seoMetadata;
 
@@ -33,8 +33,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'taptappun',
-              url: baseUrl,
-              sameAs: [twitterUrl, githubUrl],
+              url: BASE_URL,
+              sameAs: [TWITTER_URL, GITHUB_URL],
               jobTitle: 'Product Engineer',
             }),
           }}

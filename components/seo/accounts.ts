@@ -1,5 +1,5 @@
-export const baseUrl = 'https://taptappun.net';
+export const BASE_URL = 'https://taptappun.net';
 
-export const githubUrl = 'https://github.com/taptappun';
+export const GITHUB_URL = 'https://github.com/taptappun';
 
-export const twitterUrl = 'https://x.com/taptappun';
+export const TWITTER_URL = 'https://x.com/taptappun';
