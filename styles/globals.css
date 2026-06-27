@@ -118,10 +118,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    BACKGROUND SYSTEM
    Pages use data-bg attribute or bg-* classes
    ============================================= */
-.bg-blue   { background-image: url('/images/bg-blue.webp');   background-size: cover; background-position: center top; }
-.bg-green  { background-image: url('/images/bg-green.webp');  background-size: cover; background-position: center top; }
-.bg-yellow { background-image: url('/images/bg-yellow.webp'); background-size: cover; background-position: center top; }
-.bg-game   { background-image: url('/images/bg-game.webp');   background-size: cover; background-position: center top; }
+.bg-blue   { background-image: url('/images/bg-blue.svg');   background-size: cover; background-position: center top; }
+.bg-green  { background-image: url('/images/bg-green.svg');  background-size: cover; background-position: center top; }
+.bg-yellow { background-image: url('/images/bg-yellow.svg'); background-size: cover; background-position: center top; }
+.bg-game   { background-image: url('/images/bg-game.png');   background-size: cover; background-position: center top; }
 
 /* Fixed-cover page background */
 .page-bg-fixed {
@@ -305,9 +305,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
   padding: var(--sp12) var(--sp6);
 }
-.section-band.band-blue   { background-image: url('/images/bg-squares-blue.webp');   background-size: cover; }
-.section-band.band-yellow { background-image: url('/images/bg-squares-yellow.webp'); background-size: cover; }
-.section-band.band-green  { background-image: url('/images/bg-stripe.webp');          background-size: cover; }
+.section-band.band-blue   { background-image: url('/images/bg-squares-blue.svg');   background-size: cover; }
+.section-band.band-yellow { background-image: url('/images/bg-squares-yellow.svg'); background-size: cover; }
+.section-band.band-green  { background-image: url('/images/bg-stripe.svg');          background-size: cover; }
 .section-band.band-teal   { background: linear-gradient(180deg, #72CEDC 0%, #5AB8CC 100%); }
 
 /* Diagonal band dividers */
@@ -580,7 +580,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    CTA SECTION — bright sky-blue (replaces black)
    ============================================= */
 .section-cta {
-  background-image: url('/images/bg-blue.webp');
+  background-image: url('/images/bg-blue.svg');
   background-size: cover;
   background-position: center;
   padding: var(--sp20) var(--sp6);

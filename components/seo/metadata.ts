@@ -39,7 +39,7 @@ export function buildMetadata(
       card: "summary_large_image",
       title: pageMeta.title,
       description: pageMeta.description,
-      creator: "@phantomcatworks",
+      creator: "@taptappun",
       images: ["/og-image.png"],
     },
     alternates: {
