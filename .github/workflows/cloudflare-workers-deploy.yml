@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy Cloudflare Workers
+jobs:
+  builddeploy:
+    name: Deploy Cloudflare Workers
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        root-project-path: [./]
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup ubuntu
+      run: |
+        sudo apt-get --quiet update --yes
+    - name: pnpm setup
+      uses: pnpm/action-setup@v6
+      with:
+        version: 10
+    - name: Use Node.js 24
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        cache: pnpm
+    - name: pnpm install
+      working-directory: ${{ matrix.root-project-path }}
+      run: pnpm install --frozen-lockfile=false
+    - name: build frontend
+      working-directory: ${{ matrix.root-project-path }}
+      run: pnpm run build
+    - name: deploy to cloudflare workers
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
