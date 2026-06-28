@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { en as t } from '@/lib/i18n/dictionaries';
 import { getAllPosts } from '@/lib/blog';
+import { ContentListItem } from '@/components/ui/ContentListItem';
 
 export const metadata: Metadata = buildMetadata('en', t.blog.meta);
 
@@ -54,28 +54,15 @@ export default async function EnBlogPage() {
                 <ul className="list-items">
                   {posts.map((p) => (
                     <li key={p.slug} className="list-item">
-                      <Link href={`/en/blog/${p.slug}`}>
-                        <div
-                          className="li-thumb"
-                          style={{
-                            background:
-                              'linear-gradient(135deg,#FFE180,#FFDC6C)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <span style={{ fontSize: '1.6rem' }}>📝</span>
-                        </div>
-                        <div className="li-body">
-                          <span className="li-title">{p.title}</span>
-                          <span className="li-desc">
-                            {p.date}
-                            {p.readingTime ? ` · ${p.readingTime}` : ''}
-                          </span>
-                        </div>
-                        <div className="li-arrow">▶</div>
-                      </Link>
+                      <ContentListItem
+                        title={p.title}
+                        description={`${p.date}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
+                        icon={p.icon}
+                        defaultIcon="📝"
+                        iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
+                        externalUrl={p.externalUrl}
+                        internalHref={`/en/blog/${p.slug}`}
+                      />
                     </li>
                   ))}
                 </ul>

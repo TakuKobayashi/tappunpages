@@ -2,9 +2,12 @@
 title: "AR Timecapsule Platform"
 description: "位置情報 × AR でメッセージを残すプラットフォーム。特定の場所に行くと過去のメッセージが AR で浮かび上がる。"
 date: "2024-08-01"
+order: 20240801
+icon: "📍"
 tags: ["Unity AR", "Cloudflare", "Geohash", "R2", "ARCore", "ARKit"]
 featured: true
 github: "https://github.com/taptappun"
+# externalUrl: "https://github.com/taptappun/ar-timecapsule"
 related: ["sniper-game"]
 ---
 
@@ -13,35 +16,16 @@ related: ["sniper-game"]
 現実世界の特定座標に AR メッセージを「埋める」プラットフォーム。
 ユーザーはその場所を訪れることで初めてメッセージを見ることができる。
 
-## Architecture
-
-```
-Unity AR Foundation (Android/iOS)
-  ↕ REST API + WebSocket
-Cloudflare Workers + Hono
-  ↕
-Cloudflare D1 (SQLite) + R2 (media)
-  ↕
-Geohash 近傍探索
-```
-
 ## Key Features
 
 - **ARCore / ARKit 対応** — Unity AR Foundation でクロスプラットフォーム
 - **ジオハッシュ近傍探索** — 効率的な位置ベース検索
 - **カーソルベースページネーション** — 大量データの無限スクロール
 - **R2 メディアストレージ** — 画像・動画のタイムカプセル
-- **vitest テストスイート** — API の自動テスト
-
-## Technical Highlights
-
-Geohash を使った近傍検索は、D1 (SQLite) のみで実装。
-精度レベルを動的に調整することで、スパースな地域でも適切な検索半径を確保。
 
 ## Stack
 
 - **AR Client**: Unity 2022, AR Foundation, ARCore, ARKit
 - **Backend**: Cloudflare Workers, Hono, Drizzle ORM
 - **Storage**: Cloudflare D1, R2
-- **Testing**: vitest
 - **Location**: Geohash algorithm

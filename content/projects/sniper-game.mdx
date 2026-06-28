@@ -2,9 +2,12 @@
 title: "Multiplayer PLATEAU Sniper Game"
 description: "国土交通省の3D都市データ PLATEAU を使ったリアルタイム対戦スナイパーゲーム。Unity + Next.js + PartyKit/WebRTC で構築。"
 date: "2024-10-01"
+order: 20241001
+icon: "🎯"
 tags: ["Unity", "WebRTC", "PLATEAU", "Cloudflare", "Next.js", "PartyKit"]
 featured: true
 github: "https://github.com/taptappun"
+# externalUrl: "https://github.com/taptappun/sniper-game"
 related: ["ai-vtuber", "ar-timecapsule"]
 ---
 
@@ -35,15 +38,10 @@ Cloudflare Workers + D1 (score / rooms)
 - **弾道シミュレーション** — 距離・風速・重力を考慮した物理演算
 - **マッチメイキング** — Next.js + Cloudflare Workers
 
-## Technical Highlights
-
-PLATEAU の 3D Tiles データを Unity で動的ロードし、ストリーミングレンダリング。
-MessagePack によるバイナリシリアライズで通信量を最小化。
-
 ## Stack
 
 - **Game Engine**: Unity 2022 LTS, C#
-- **3D Data**: PLATEAU (国土交通省 3D 都市モデル)
+- **3D Data**: PLATEAU（国土交通省 3D 都市モデル）
 - **Multiplayer**: PartyKit, WebRTC, Cloudflare Durable Objects
 - **Web**: Next.js 15, TypeScript
 - **Serialization**: MessagePack

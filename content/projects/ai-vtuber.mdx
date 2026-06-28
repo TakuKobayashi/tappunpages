@@ -2,9 +2,13 @@
 title: "AI VTuber Voice Communication System"
 description: "リアルタイム音声対話AIキャラクターシステム。Next.js + VOICEVOX + VRM/VRMA レンダリングで構築した没入型AIアシスタント。"
 date: "2024-11-01"
+order: 20241101
+icon: "🤖"
 tags: ["Next.js", "AI", "WebRTC", "VRM", "VOICEVOX", "TypeScript", "Hono"]
 featured: true
 github: "https://github.com/taptappun"
+# externalUrl: "https://github.com/taptappun/ai-vtuber"
+# ↑ 外部リンクにしたい場合はコメントアウトを外す。指定しない場合は詳細ページを表示。
 related: ["sniper-game", "ar-timecapsule"]
 ---
 
@@ -31,11 +35,6 @@ User Input (text/voice)
 - **会話履歴管理** — Jotai によるステート管理
 - **RPG メッセージウィンドウ** — ゲームライクな UI
 - **i18n 対応** — 日本語/英語の切り替え
-
-## Technical Highlights
-
-リアルタイム音声合成のレイテンシ最適化として、テキスト生成と音声合成をストリーミングでパイプライン処理。
-VRM アニメーションと音声の同期を WebAudio API で制御。
 
 ## Stack
 

@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { buildMetadata } from '@/components/seo/metadata';
+import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllPosts } from '@/lib/blog';
+import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Product Engineering・AI・Mobile 開発の技術ブログ。',
-};
+export const metadata: Metadata = buildMetadata('ja', t.blog.meta);
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
@@ -19,9 +18,8 @@ export default async function BlogPage() {
               className="section-heading"
               style={{ color: 'var(--text-dark)' }}
             >
-              ARTICLES
+              {t.blog.heading}
             </h1>
-
             {posts.length === 0 ? (
               <div
                 style={{
@@ -48,7 +46,7 @@ export default async function BlogPage() {
                     color: 'var(--text-muted)',
                   }}
                 >
-                  Coming soon — 記事を準備中です。
+                  {t.blog.empty}
                 </p>
               </div>
             ) : (
@@ -56,28 +54,15 @@ export default async function BlogPage() {
                 <ul className="list-items">
                   {posts.map((p) => (
                     <li key={p.slug} className="list-item">
-                      <Link href={`/blog/${p.slug}`}>
-                        <div
-                          className="li-thumb"
-                          style={{
-                            background:
-                              'linear-gradient(135deg, #FFE180, #FFDC6C)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <span style={{ fontSize: '1.6rem' }}>📝</span>
-                        </div>
-                        <div className="li-body">
-                          <span className="li-title">{p.title}</span>
-                          <span className="li-desc">
-                            {p.date}
-                            {p.readingTime ? ` · ${p.readingTime}` : ''}
-                          </span>
-                        </div>
-                        <div className="li-arrow">▶</div>
-                      </Link>
+                      <ContentListItem
+                        title={p.title}
+                        description={`${p.date}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
+                        icon={p.icon}
+                        defaultIcon="📝"
+                        iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
+                        externalUrl={p.externalUrl}
+                        internalHref={`/blog/${p.slug}`}
+                      />
                     </li>
                   ))}
                 </ul>

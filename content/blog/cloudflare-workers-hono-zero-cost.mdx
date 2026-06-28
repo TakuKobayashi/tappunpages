@@ -1,8 +1,12 @@
 ---
-title: "Cloudflare Workers + Hono で作るゼロコスト API バックエンド"
+title: "Cloudflare Workers + Hono でゼロコスト API バックエンド"
 description: "Cloudflare Workers, Hono, D1, R2 を組み合わせて、月額ほぼ無料で本番運用できる API バックエンドを構築する方法を解説します。"
 date: "2024-11-15"
+order: 20241115
+icon: "☁️"
 tags: ["Cloudflare", "Hono", "TypeScript", "Backend", "Zero-cost"]
+# externalUrl: "https://zenn.dev/taptappun/articles/xxx"
+# ↑ Zenn や Qiita の記事 URL を指定すると外部リンクになります
 ---
 
 ## はじめに
@@ -12,8 +16,6 @@ Cloudflare Workers を使えば、月10万リクエストまで無料で、
 グローバルに分散されたエッジ API を構築できます。
 
 ## なぜ Cloudflare Workers + Hono なのか
-
-### Hono の特徴
 
 Hono は Cloudflare Workers に最適化された超軽量 Web フレームワークです。
 
@@ -29,16 +31,14 @@ app.get("/api/hello", (c) => {
 export default app;
 ```
 
-### D1 (SQLite) との統合
+## D1 (SQLite) との統合
 
 Cloudflare D1 は Workers から直接使える SQLite データベースです。
-Drizzle ORM と組み合わせることで、型安全なクエリを書けます。
 
 ```typescript
 import { drizzle } from "drizzle-orm/d1";
 
 const db = drizzle(env.DB);
-
 const users = await db.select().from(usersTable).all();
 ```
 
@@ -51,7 +51,4 @@ const users = await db.select().from(usersTable).all();
 
 ## まとめ
 
-Cloudflare Workers + Hono + D1 の組み合わせは、
-MVP 段階のプロダクトに最適なスタックです。
-ゼロコストで始め、スケールに応じてコストが増加する従量課金モデルは、
-スタートアップのリスク管理にもマッチします。
+Cloudflare Workers + Hono + D1 の組み合わせは、MVP 段階のプロダクトに最適なスタックです。

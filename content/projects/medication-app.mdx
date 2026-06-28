@@ -2,9 +2,12 @@
 title: "Medication Management App"
 description: "OCR と QR コードによる服薬管理アプリ。Android/iOS 両対応のフルスタック実装。薬のパッケージを撮影するだけで自動登録。"
 date: "2024-09-01"
+order: 20240901
+icon: "💊"
 tags: ["Android", "iOS", "Kotlin", "Swift", "OCR", "SQLite", "Cloudflare"]
 featured: false
 github: "https://github.com/taptappun"
+# externalUrl: "https://play.google.com/..."
 related: ["ai-vtuber"]
 ---
 
@@ -13,17 +16,6 @@ related: ["ai-vtuber"]
 薬のパッケージをカメラで撮影するだけで、OCR が薬名・用量・服用タイミングを自動認識して登録。
 QR コードによる服薬確認機能で、飲み忘れ・飲み間違いを防止する。
 
-## Architecture
-
-```
-Android (Kotlin + Jetpack Compose)
-iOS (Swift + SwiftUI)
-  ↕ REST API
-Cloudflare Workers + Hono
-  ↕
-Cloudflare D1 (SQLite)
-```
-
 ## Key Features
 
 - **OCR 自動登録** — ML Kit / Vision Framework で薬情報を抽出
@@ -31,12 +23,6 @@ Cloudflare D1 (SQLite)
 - **服薬リマインダー** — Android AlarmManager / iOS UserNotifications
 - **クロスプラットフォーム** — Android + iOS 同一バックエンド
 - **オフライン対応** — Room / GRDB.swift によるローカル DB
-
-## Technical Highlights
-
-Room (Android) と GRDB.swift (iOS) で共通の ActiveRecord パターンを採用し、
-プラットフォーム間のコードメンタルモデルを統一。
-Cloudflare D1 との同期は差分更新のみで通信量を最小化。
 
 ## Stack
 
