@@ -1,4 +1,6 @@
 allowBuilds:
-  esbuild: set this to true or false
+  esbuild: false
   sharp: false
-  workerd: set this to true or false
+  workerd: false
+packages:
+  - worker
