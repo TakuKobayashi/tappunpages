@@ -28,6 +28,9 @@ jobs:
     - name: pnpm install
       working-directory: ${{ matrix.root-project-path }}
       run: pnpm install --frozen-lockfile=false
+    - name: worker pnpm install
+      working-directory: ${{ matrix.root-project-path }}/worker
+      run: pnpm install --frozen-lockfile=false
     - name: build frontend
       working-directory: ${{ matrix.root-project-path }}
       run: pnpm run build
