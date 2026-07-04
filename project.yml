@@ -1,0 +1,16 @@
+name: tappunpages
+slug: tappunpages
+description: Portfolio website showcasing personal projects and skills, built with Next.js, TypeScript, and deployed via Cloudflare Workers for optimized performance and international reach.
+description_ja: Next.jsとTypeScriptで構築された、個人のプロジェクトやスキルを紹介するポートフォリオサイト。Cloudflare Workersを利用してパフォーマンスを最適化し、グローバルな展開に対応しています。
+translation_locked: false
+status: incubating
+repo: git@github.com:TakuKobayashi/tappunpages.git
+tags:
+  - nextjs
+  - typescript
+  - cloudflareworkers
+  - hono
+  - portfolio
+  - webdev
+  - staticgen
+  - mdx
