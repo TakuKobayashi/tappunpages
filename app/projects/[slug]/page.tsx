@@ -47,7 +47,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             }}
           >
             <Link
-              href="/projects"
+              href="/jp/projects"
               style={{
                 color: 'rgba(255,255,255,0.8)',
                 textDecoration: 'underline',
@@ -63,7 +63,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="article-panel">
             <div className="article-close">
               <Link
-                href="/projects"
+                href="/jp/projects"
                 style={{
                   color: 'var(--white)',
                   display: 'flex',

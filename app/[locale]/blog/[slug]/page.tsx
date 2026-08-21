@@ -3,29 +3,32 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { MDXContent } from '@/components/ui/MDXContent';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { buildMetadata } from '@/components/seo/metadata';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: RouteLocale; slug: string }>;
 }
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-  return posts.map((p) => ({ slug: p.slug }));
+  return routeLocales.flatMap((locale) => posts.map((p) => ({ locale, slug: p.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return {};
-  return buildMetadata('en', {
+  return buildMetadata(toDictionaryLocale(locale), {
     title: post.title,
     description: post.description,
   });
 }
 
-export default async function EnBlogPostPage({ params }: Props) {
-  const { slug } = await params;
+export default async function LocalizedBlogPostPage({ params }: Props) {
+  const { locale, slug } = await params;
+  const t = getDictionary(toDictionaryLocale(locale));
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
@@ -50,10 +53,10 @@ export default async function EnBlogPostPage({ params }: Props) {
             }}
           >
             <Link
-              href="/en/blog"
+              href={`/${locale}/blog`}
               style={{ textDecoration: 'underline', color: 'var(--text-dark)' }}
             >
-              Articles
+              {t.blog.heading}
             </Link>
             <span>/</span>
             <span>{post.title}</span>
@@ -61,7 +64,7 @@ export default async function EnBlogPostPage({ params }: Props) {
           <div className="article-panel">
             <div className="article-close">
               <Link
-                href="/en/blog"
+                href={`/${locale}/blog`}
                 style={{
                   color: 'var(--white)',
                   display: 'flex',
@@ -69,7 +72,7 @@ export default async function EnBlogPostPage({ params }: Props) {
                   gap: 'var(--sp2)',
                 }}
               >
-                ✕ <span>Back to Articles</span>
+                ✕ <span>{t.blog.back}</span>
               </Link>
             </div>
             <div className="article-body">

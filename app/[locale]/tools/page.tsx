@@ -1,12 +1,21 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
-import { en as t } from '@/lib/i18n/dictionaries';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { tools } from '@/lib/tools';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('en', t.tools.meta);
+export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
+export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).tools.meta);
+}
 
-export default function EnToolsPage() {
+export default async function LocalizedToolsPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  const t = getDictionary(dictionaryLocale);
   return (
     <>
       <div className="page-bg-fixed bg-green" aria-hidden="true" />
@@ -21,7 +30,7 @@ export default function EnToolsPage() {
                   <li key={tool.slug} className="list-item">
                     <ContentListItem
                       title={tool.title}
-                      description={`${tool.kind.en} — ${tool.description.en}`}
+                      description={`${t.tools.items[tool.slug].kind} — ${t.tools.items[tool.slug].description}`}
                       icon={tool.icon}
                       iconBg="linear-gradient(135deg,#7CC87A,#5AAD58)"
                       externalUrl={tool.url}

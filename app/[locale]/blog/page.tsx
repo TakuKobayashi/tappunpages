@@ -1,12 +1,20 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
-import { en as t } from '@/lib/i18n/dictionaries';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { getAllPosts } from '@/lib/blog';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('en', t.blog.meta);
+export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
+export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).blog.meta);
+}
 
-export default async function EnBlogPage() {
+export default async function LocalizedBlogPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+  const { locale } = await params;
+  const t = getDictionary(toDictionaryLocale(locale));
   const posts = await getAllPosts();
   return (
     <>
@@ -61,7 +69,7 @@ export default async function EnBlogPage() {
                         defaultIcon="📝"
                         iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
                         externalUrl={p.externalUrl}
-                        internalHref={`/en/blog/${p.slug}`}
+                        internalHref={`/${locale}/blog/${p.slug}`}
                       />
                     </li>
                   ))}

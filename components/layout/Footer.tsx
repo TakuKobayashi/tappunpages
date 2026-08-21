@@ -20,7 +20,7 @@ export function Footer() {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = getDictionary(locale);
-  const base = locale === 'en' ? '/en' : '';
+  const base = locale === 'en' ? '/en' : '/jp';
 
   return (
     <footer className={styles.footer}>
@@ -70,7 +70,7 @@ export function Footer() {
               English
             </Link>
           ) : (
-            <Link href="/" className={styles.link}>
+            <Link href="/jp" className={styles.link}>
               日本語
             </Link>
           )}

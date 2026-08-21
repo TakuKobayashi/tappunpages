@@ -2,34 +2,39 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { buildMetadata } from '@/components/seo/metadata';
-import { en as t } from '@/lib/i18n/dictionaries';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { tools } from '@/lib/tools';
+import { getAllProjects } from '@/lib/projects';
 
-export const metadata: Metadata = buildMetadata('en', t.home.meta, {
-  canonical: 'https://taptappun.net/en',
-});
+export function generateStaticParams() {
+  return routeLocales.map((locale) => ({ locale }));
+}
 
-const PROJECTS = [
-  { title: 'AI VTuber System', href: '/en/projects/ai-vtuber' },
-  { title: 'Sniper Game (PLATEAU)', href: '/en/projects/sniper-game' },
-  { title: 'Medication App', href: '/en/projects/medication-app' },
-  { title: 'AR Timecapsule', href: '/en/projects/ar-timecapsule' },
-];
+export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).home.meta, {
+    canonical: `https://taptappun.net/${locale}`,
+  });
+}
 
-const ARTICLES_HREFS = [
-  '/en/blog/cloudflare-workers-hono-zero-cost',
-  '/en/blog',
-  '/en/blog',
-];
-
-export default function EnglishHomePage() {
+export default async function LocalizedHomePage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+  const { locale } = await params;
+  const t = getDictionary(toDictionaryLocale(locale));
+  const base = `/${locale}`;
+  const projects = (await getAllProjects()).slice(0, 4).map((project) => ({
+    title: project.title,
+    href: `${base}/projects/${project.slug}`,
+  }));
+  const articleHrefs = [`${base}/blog/cloudflare-workers-hono-zero-cost`, `${base}/blog`, `${base}/blog`];
   const h = t.home;
   return (
     <>
       <div className="page-bg-fixed bg-game" aria-hidden="true" />
       <div className="page-wrap">
         <section
-          aria-label="Hero"
+          aria-label={h.a11y.hero}
           style={{
             minHeight: '100vh',
             display: 'flex',
@@ -124,10 +129,10 @@ export default function EnglishHomePage() {
               marginBottom: 'var(--sp12)',
             }}
           >
-            <Link href="/en/projects" className="btn-more yellow-btn">
+            <Link href={`${base}/projects`} className="btn-more yellow-btn">
               {h.ctaProjects}
             </Link>
-            <Link href="/en/contact" className="btn-more white-btn">
+            <Link href={`${base}/contact`} className="btn-more white-btn">
               {h.ctaContact}
             </Link>
           </div>
@@ -177,7 +182,7 @@ export default function EnglishHomePage() {
           >
             <Image
               src="/images/down-arrow.webp"
-              alt="Scroll down"
+              alt={h.a11y.scrollDown}
               width={80}
               height={30}
               className="down-arrow-btn"
@@ -186,7 +191,7 @@ export default function EnglishHomePage() {
           </div>
         </section>
 
-        <section className="section-band band-blue" aria-label="Projects">
+        <section className="section-band band-blue" aria-label={h.a11y.projects}>
           <div className="container">
             <h2 className="section-heading yellow">{h.projects.heading}</h2>
             <p className="page-intro">{h.projects.description}</p>
@@ -199,7 +204,7 @@ export default function EnglishHomePage() {
                 marginBottom: 'var(--sp6)',
               }}
             >
-              {PROJECTS.map((p) => (
+              {projects.map((p) => (
                 <Link
                   key={p.title}
                   href={p.href}
@@ -226,7 +231,7 @@ export default function EnglishHomePage() {
             </div>
             <div style={{ textAlign: 'right' }}>
               <Link
-                href="/en/projects"
+                href={`${base}/projects`}
                 className="btn-more white-btn"
                 style={{ fontSize: 'var(--text-xs)' }}
               >
@@ -245,7 +250,7 @@ export default function EnglishHomePage() {
           aria-hidden="true"
         />
 
-        <section className="section-band band-green" aria-label="Tools">
+        <section className="section-band band-green" aria-label={h.a11y.tools}>
           <div className="container">
             <h2 className="section-heading white">{h.tools.heading}</h2>
             <p className="page-intro">{h.tools.description}</p>
@@ -267,7 +272,7 @@ export default function EnglishHomePage() {
                       </div>
                       <div className="li-body">
                         <span className="li-title">{item.title}</span>
-                        <span className="li-desc">{item.description.en}</span>
+                        <span className="li-desc">{t.tools.items[item.slug].description}</span>
                       </div>
                       <div className="li-arrow">↗</div>
                     </a>
@@ -276,7 +281,7 @@ export default function EnglishHomePage() {
               </ul>
             </div>
             <div style={{ textAlign: 'right', marginTop: 'var(--sp4)' }}>
-              <Link href="/en/tools" className="btn-more white-btn" style={{ fontSize: 'var(--text-xs)' }}>
+              <Link href={`${base}/tools`} className="btn-more white-btn" style={{ fontSize: 'var(--text-xs)' }}>
                 {h.tools.more}
               </Link>
             </div>
@@ -292,7 +297,7 @@ export default function EnglishHomePage() {
           aria-hidden="true"
         />
 
-        <section className="section-band band-yellow" aria-label="Articles">
+        <section className="section-band band-yellow" aria-label={h.a11y.articles}>
           <div className="container">
             <h2
               className="section-heading"
@@ -304,7 +309,7 @@ export default function EnglishHomePage() {
               <ul className="list-items">
                 {h.articles.items.map((a, i) => (
                   <li key={a.title} className="list-item">
-                    <a href={ARTICLES_HREFS[i]}>
+                    <a href={articleHrefs[i]}>
                       <div
                         className="li-thumb"
                         style={{
@@ -328,7 +333,7 @@ export default function EnglishHomePage() {
             </div>
             <div style={{ textAlign: 'right', marginTop: 'var(--sp4)' }}>
               <Link
-                href="/en/blog"
+                href={`${base}/blog`}
                 className="btn-more yellow-btn"
                 style={{ fontSize: 'var(--text-xs)' }}
               >
@@ -347,7 +352,7 @@ export default function EnglishHomePage() {
           aria-hidden="true"
         />
 
-        <section className="section-band band-teal" aria-label="How I work">
+        <section className="section-band band-teal" aria-label={h.a11y.how}>
           <div className="container">
             <h2 className="section-heading white">{h.how.heading}</h2>
             <div
@@ -401,11 +406,11 @@ export default function EnglishHomePage() {
           </div>
         </section>
 
-        <section className="section-cta" aria-label="Contact CTA">
+        <section className="section-cta" aria-label={h.a11y.contact}>
           <h2>{h.cta.heading}</h2>
           <p>{h.cta.desc}</p>
           <Link
-            href="/en/contact"
+            href={`${base}/contact`}
             className="btn-more yellow-btn"
             style={{
               fontSize: 'var(--text-base)',

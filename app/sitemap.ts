@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: BASE_URL,
+      url: `${BASE_URL}/jp`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,
@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${BASE_URL}/jp/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/projects`,
+      url: `${BASE_URL}/jp/projects`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/tools`,
+      url: `${BASE_URL}/jp/tools`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -59,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/blog`,
+      url: `${BASE_URL}/jp/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -71,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/contact`,
+      url: `${BASE_URL}/jp/contact`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.7,
@@ -86,7 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const projectRoutes: MetadataRoute.Sitemap = projects.flatMap((p) => [
     {
-      url: `${BASE_URL}/projects/${p.slug}`,
+      url: `${BASE_URL}/jp/projects/${p.slug}`,
       lastModified: p.date ? new Date(p.date) : new Date(),
       changeFrequency: 'monthly' as const,
       priority: p.featured ? 0.8 : 0.6,
@@ -101,7 +101,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogRoutes: MetadataRoute.Sitemap = posts.flatMap((p) => [
     {
-      url: `${BASE_URL}/blog/${p.slug}`,
+      url: `${BASE_URL}/jp/blog/${p.slug}`,
       lastModified: new Date(p.date),
       changeFrequency: 'yearly' as const,
       priority: 0.6,

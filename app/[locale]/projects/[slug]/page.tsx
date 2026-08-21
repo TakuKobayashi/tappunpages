@@ -3,26 +3,29 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllProjects, getProjectBySlug } from '@/lib/projects';
 import { MDXContent } from '@/components/ui/MDXContent';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { buildMetadata } from '@/components/seo/metadata';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: RouteLocale; slug: string }>;
 }
 
 export async function generateStaticParams() {
   const projects = await getAllProjects();
-  return projects.map((p) => ({ slug: p.slug }));
+  return routeLocales.flatMap((locale) => projects.map((p) => ({ locale, slug: p.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const p = await getProjectBySlug(slug);
   if (!p) return {};
-  return buildMetadata('en', { title: p.title, description: p.description });
+  return buildMetadata(toDictionaryLocale(locale), { title: p.title, description: p.description });
 }
 
-export default async function EnProjectDetailPage({ params }: Props) {
-  const { slug } = await params;
+export default async function LocalizedProjectDetailPage({ params }: Props) {
+  const { locale, slug } = await params;
+  const t = getDictionary(toDictionaryLocale(locale));
   const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
@@ -47,13 +50,13 @@ export default async function EnProjectDetailPage({ params }: Props) {
             }}
           >
             <Link
-              href="/en/projects"
+              href={`/${locale}/projects`}
               style={{
                 color: 'rgba(255,255,255,0.8)',
                 textDecoration: 'underline',
               }}
             >
-              Projects
+              {t.projects.heading}
             </Link>
             <span>/</span>
             <span style={{ color: 'var(--white)' }}>{project.title}</span>
@@ -61,7 +64,7 @@ export default async function EnProjectDetailPage({ params }: Props) {
           <div className="article-panel">
             <div className="article-close">
               <Link
-                href="/en/projects"
+                href={`/${locale}/projects`}
                 style={{
                   color: 'var(--white)',
                   display: 'flex',
@@ -69,7 +72,7 @@ export default async function EnProjectDetailPage({ params }: Props) {
                   gap: 'var(--sp2)',
                 }}
               >
-                ✕ <span>Back to Projects</span>
+                ✕ <span>{t.projects.back}</span>
               </Link>
             </div>
             <div className="article-body">

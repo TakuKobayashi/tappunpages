@@ -269,7 +269,7 @@ export default function AboutPage() {
           <h2>{a.cta.heading}</h2>
           <p>&nbsp;</p>
           <Link
-            href="/contact"
+              href="/jp/contact"
             className="btn-more yellow-btn"
             style={{
               fontSize: 'var(--text-base)',

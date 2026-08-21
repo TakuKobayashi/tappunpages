@@ -1,11 +1,22 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
-import { en as t } from '@/lib/i18n/dictionaries';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 
-export const metadata: Metadata = buildMetadata('en', t.about.meta);
+export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).about.meta);
+}
 
-export default function EnAboutPage() {
+export function generateStaticParams() {
+  return routeLocales.map((locale) => ({ locale }));
+}
+
+export default async function LocalizedAboutPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+  const { locale } = await params;
+  const t = getDictionary(toDictionaryLocale(locale));
   const a = t.about;
   return (
     <>
@@ -112,7 +123,7 @@ export default function EnAboutPage() {
 
         <section
           className="section-band band-green"
-          aria-label="Career timeline"
+          aria-label={a.a11y.timeline}
         >
           <div className="container">
             <h2 className="section-heading white">{a.timeline.heading}</h2>
@@ -216,7 +227,7 @@ export default function EnAboutPage() {
           aria-hidden="true"
         />
 
-        <section className="section-band band-yellow" aria-label="Values">
+        <section className="section-band band-yellow" aria-label={a.a11y.values}>
           <div className="container">
             <h2
               className="section-heading"
@@ -269,7 +280,7 @@ export default function EnAboutPage() {
           <h2>{a.cta.heading}</h2>
           <p>&nbsp;</p>
           <Link
-            href="/en/contact"
+              href={`/${locale}/contact`}
             className="btn-more yellow-btn"
             style={{
               fontSize: 'var(--text-base)',

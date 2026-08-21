@@ -61,7 +61,7 @@ export default async function BlogPage() {
                         defaultIcon="📝"
                         iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
                         externalUrl={p.externalUrl}
-                        internalHref={`/blog/${p.slug}`}
+                        internalHref={`/jp/blog/${p.slug}`}
                       />
                     </li>
                   ))}

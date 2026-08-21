@@ -21,7 +21,7 @@ export default function ToolsPage() {
                   <li key={tool.slug} className="list-item">
                     <ContentListItem
                       title={tool.title}
-                      description={`${tool.kind.ja} — ${tool.description.ja}`}
+                      description={`${t.tools.items[tool.slug].kind} — ${t.tools.items[tool.slug].description}`}
                       icon={tool.icon}
                       iconBg="linear-gradient(135deg,#7CC87A,#5AAD58)"
                       externalUrl={tool.url}

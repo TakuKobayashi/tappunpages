@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: Props) {
             }}
           >
             <Link
-              href="/blog"
+              href="/jp/blog"
               style={{ textDecoration: 'underline', color: 'var(--text-dark)' }}
             >
               Articles
@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="article-panel">
             <div className="article-close">
               <Link
-                href="/blog"
+                href="/jp/blog"
                 style={{
                   color: 'var(--white)',
                   display: 'flex',

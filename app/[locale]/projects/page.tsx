@@ -1,12 +1,20 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
-import { en as t } from '@/lib/i18n/dictionaries';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { getAllProjects } from '@/lib/projects';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('en', t.projects.meta);
+export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
+export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).projects.meta);
+}
 
-export default async function EnProjectsPage() {
+export default async function LocalizedProjectsPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+  const { locale } = await params;
+  const t = getDictionary(toDictionaryLocale(locale));
   const projects = await getAllProjects();
   return (
     <>
@@ -29,7 +37,7 @@ export default async function EnProjectsPage() {
                       featured={p.featured}
                       featuredLabel={t.projects.featured}
                       externalUrl={p.externalUrl}
-                      internalHref={`/en/projects/${p.slug}`}
+                      internalHref={`/${locale}/projects/${p.slug}`}
                     />
                   </li>
                 ))}

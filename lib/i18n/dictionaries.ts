@@ -45,6 +45,7 @@ export interface Dictionary {
     };
     cta: { heading: string; desc: string; btn: string };
     stats: { value: string; label: string }[];
+    a11y: { hero: string; scrollDown: string; projects: string; tools: string; articles: string; how: string; contact: string };
   };
   about: {
     meta: { title: string; description: string };
@@ -61,22 +62,26 @@ export interface Dictionary {
       items: { icon: string; title: string; desc: string }[];
     };
     cta: { heading: string; btn: string };
+    a11y: { timeline: string; values: string };
   };
   projects: {
     meta: { title: string; description: string };
     heading: string;
     featured: string;
+    back: string;
   };
   tools: {
     meta: { title: string; description: string };
     heading: string;
     description: string;
     note: string;
+    items: Record<string, { kind: string; description: string }>;
   };
   blog: {
     meta: { title: string; description: string };
     heading: string;
     empty: string;
+    back: string;
   };
   contact: {
     meta: { title: string; description: string };
@@ -210,6 +215,7 @@ export const ja = {
       { value: '#1', label: 'ハッカソン受賞' },
       { value: '5+', label: '年の開発経験' },
     ],
+    a11y: { hero: 'メインビジュアル', scrollDown: '下へスクロール', projects: '制作実績', tools: 'ツールと実験', articles: '記事', how: '仕事の進め方', contact: 'お問い合わせ' },
   },
 
   // --- About ---
@@ -298,6 +304,7 @@ export const ja = {
       ],
     },
     cta: { heading: 'WORK TOGETHER?', btn: 'お問い合わせ ▶' },
+    a11y: { timeline: '経歴', values: '大切にしていること' },
   },
 
   // --- Projects ---
@@ -309,6 +316,7 @@ export const ja = {
     },
     heading: 'PROJECTS',
     featured: '★',
+    back: '制作物一覧へ',
   },
 
   tools: {
@@ -316,6 +324,12 @@ export const ja = {
     heading: 'TOOLS & LABS',
     description: '日々の小さな不便を解消するツールと、気になった技術を実際に触って確かめるための個人制作・実験をまとめています。仕事やコミュニティでの実績は Projects で紹介しています。',
     note: '小さなプロトタイプも含め、随時追加していきます。',
+    items: {
+      'fullstack-media-converter': {
+        kind: '便利ツール',
+        description: '画像・音声・動画などのメディアを、ブラウザから手軽に変換できるフルスタックツール。',
+      },
+    },
   },
 
   // --- Blog ---
@@ -326,6 +340,7 @@ export const ja = {
     },
     heading: 'ARTICLES',
     empty: 'Coming soon — 記事を準備中です。',
+    back: '記事一覧へ',
   },
 
   // --- Contact ---
@@ -491,6 +506,7 @@ export const en: Dictionary = {
       { value: '#1', label: 'Hackathon wins' },
       { value: '5+', label: 'Years building' },
     ],
+    a11y: { hero: 'Hero', scrollDown: 'Scroll down', projects: 'Projects', tools: 'Tools and experiments', articles: 'Articles', how: 'How I work', contact: 'Contact' },
   },
 
   about: {
@@ -578,6 +594,7 @@ export const en: Dictionary = {
       ],
     },
     cta: { heading: 'WORK TOGETHER?', btn: 'Get in touch ▶' },
+    a11y: { timeline: 'Career timeline', values: 'Values' },
   },
 
   projects: {
@@ -587,6 +604,7 @@ export const en: Dictionary = {
     },
     heading: 'PROJECTS',
     featured: '★',
+    back: 'Back to Projects',
   },
 
   tools: {
@@ -594,6 +612,12 @@ export const en: Dictionary = {
     heading: 'TOOLS & LABS',
     description: 'A collection of personal utilities that solve small everyday problems and experiments built to learn by making. For client, team, and community work, see Projects.',
     note: 'More small prototypes and experiments will be added over time.',
+    items: {
+      'fullstack-media-converter': {
+        kind: 'Utility',
+        description: 'A full-stack utility for converting images, audio, video, and other media from the browser.',
+      },
+    },
   },
 
   blog: {
@@ -604,6 +628,7 @@ export const en: Dictionary = {
     },
     heading: 'ARTICLES',
     empty: 'Coming soon — articles are being prepared.',
+    back: 'Back to Articles',
   },
 
   contact: {

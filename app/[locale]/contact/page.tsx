@@ -1,11 +1,20 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
-import { en as t } from '@/lib/i18n/dictionaries';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { ContactForm } from '@/components/sections/ContactForm';
 
-export const metadata: Metadata = buildMetadata('en', t.contact.meta);
+export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
+export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).contact.meta);
+}
 
-export default function EnContactPage() {
+export default async function LocalizedContactPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+  const { locale } = await params;
+  const dictionaryLocale = toDictionaryLocale(locale);
+  const t = getDictionary(dictionaryLocale);
   const c = t.contact;
   return (
     <>
@@ -115,7 +124,7 @@ export default function EnContactPage() {
                   </div>
                 </div>
               </div>
-              <ContactForm locale="en" />
+              <ContactForm locale={dictionaryLocale} />
             </div>
           </div>
         </section>

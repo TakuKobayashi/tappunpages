@@ -12,7 +12,7 @@ export function buildMetadata(
 ): Metadata {
   const lang = locale === 'ja' ? 'ja_JP' : 'en_US';
   const canonical =
-    options?.canonical ?? (locale === 'en' ? `${BASE_URL}/en` : BASE_URL);
+    options?.canonical ?? (locale === 'en' ? `${BASE_URL}/en` : `${BASE_URL}/jp`);
 
   return {
     metadataBase: new URL(BASE_URL),
@@ -57,7 +57,7 @@ export function buildMetadata(
     alternates: {
       canonical,
       languages: {
-        'ja-JP': BASE_URL,
+        'ja-JP': `${BASE_URL}/jp`,
         en: `${BASE_URL}/en`,
       },
     },

@@ -14,7 +14,7 @@ export function Nav() {
   const t = getDictionary(locale);
 
   // ナビリンクのベースパス（ロケールプレフィックスを除いた絶対パス）
-  const base = locale === 'en' ? '/en' : '';
+  const base = locale === 'en' ? '/en' : '/jp';
 
   const NAV_LINKS = [
     { href: `${base}/`, label: t.nav.home },

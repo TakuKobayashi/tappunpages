@@ -8,16 +8,16 @@ import { tools } from '@/lib/tools';
 export const metadata: Metadata = buildMetadata('ja', t.home.meta);
 
 const PROJECTS = [
-  { title: 'AI VTuber System', href: '/projects/ai-vtuber' },
-  { title: 'Sniper Game (PLATEAU)', href: '/projects/sniper-game' },
-  { title: 'Medication App', href: '/projects/medication-app' },
-  { title: 'AR Timecapsule', href: '/projects/ar-timecapsule' },
+  { title: 'AI VTuber System', href: '/jp/projects/ai-vtuber' },
+  { title: 'Sniper Game (PLATEAU)', href: '/jp/projects/sniper-game' },
+  { title: 'Medication App', href: '/jp/projects/medication-app' },
+  { title: 'AR Timecapsule', href: '/jp/projects/ar-timecapsule' },
 ];
 
 const ARTICLES_HREFS = [
-  '/blog/cloudflare-workers-hono-zero-cost',
-  '/blog',
-  '/blog',
+  '/jp/blog/cloudflare-workers-hono-zero-cost',
+  '/jp/blog',
+  '/jp/blog',
 ];
 
 export default function HomePage() {
@@ -123,10 +123,10 @@ export default function HomePage() {
               marginBottom: 'var(--sp12)',
             }}
           >
-            <Link href="/projects" className="btn-more yellow-btn">
+            <Link href="/jp/projects" className="btn-more yellow-btn">
               {h.ctaProjects}
             </Link>
-            <Link href="/contact" className="btn-more white-btn">
+            <Link href="/jp/contact" className="btn-more white-btn">
               {h.ctaContact}
             </Link>
           </div>
@@ -226,7 +226,7 @@ export default function HomePage() {
             </div>
             <div style={{ textAlign: 'right' }}>
               <Link
-                href="/projects"
+                href="/jp/projects"
                 className="btn-more white-btn"
                 style={{ fontSize: 'var(--text-xs)' }}
               >
@@ -268,7 +268,9 @@ export default function HomePage() {
                       </div>
                       <div className="li-body">
                         <span className="li-title">{item.title}</span>
-                        <span className="li-desc">{item.description.ja}</span>
+                        <span className="li-desc">
+                          {t.tools.items[item.slug].description}
+                        </span>
                       </div>
                       <div className="li-arrow">↗</div>
                     </a>
@@ -278,7 +280,7 @@ export default function HomePage() {
             </div>
             <div style={{ textAlign: 'right', marginTop: 'var(--sp4)' }}>
               <Link
-                href="/tools"
+                href="/jp/tools"
                 className="btn-more white-btn"
                 style={{ fontSize: 'var(--text-xs)' }}
               >
@@ -334,7 +336,7 @@ export default function HomePage() {
             </div>
             <div style={{ textAlign: 'right', marginTop: 'var(--sp4)' }}>
               <Link
-                href="/blog"
+                href="/jp/blog"
                 className="btn-more yellow-btn"
                 style={{ fontSize: 'var(--text-xs)' }}
               >
@@ -413,7 +415,7 @@ export default function HomePage() {
           <h2>{h.cta.heading}</h2>
           <p>{h.cta.desc}</p>
           <Link
-            href="/contact"
+            href="/jp/contact"
             className="btn-more yellow-btn"
             style={{
               fontSize: 'var(--text-base)',
