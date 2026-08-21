@@ -5,16 +5,7 @@ import { usePathname } from 'next/navigation';
 import { getLocaleFromPath } from '@/lib/i18n/routing';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import styles from './Footer.module.css';
-
-const SOCIAL = [
-  { href: 'https://github.com/taptappun', label: 'GH', title: 'GitHub' },
-  {
-    href: 'https://twitter.com/phantomcatworks',
-    label: '𝕏',
-    title: 'X (Twitter)',
-  },
-  { href: 'https://linkedin.com/in/taptappun', label: 'in', title: 'LinkedIn' },
-];
+import { SOCIAL_LINKS } from '@/components/seo/accounts';
 
 export function Footer() {
   const pathname = usePathname();
@@ -33,17 +24,23 @@ export function Footer() {
         <p className={styles.tagline}>{t.footer.tagline}</p>
 
         <div className={styles.social} aria-label="Social links">
-          {SOCIAL.map((s) => (
+          {SOCIAL_LINKS.filter((social) => social.href).map((social) => (
             <a
-              key={s.href}
-              href={s.href}
+              key={social.label}
+              href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              title={s.title}
-              aria-label={s.title}
+              title={social.label}
+              aria-label={social.label}
               className={styles.socialLink}
             >
-              {s.label}
+              <img
+                src={social.icon}
+                alt=""
+                width="21"
+                height="21"
+                className={styles.socialIcon}
+              />
             </a>
           ))}
         </div>

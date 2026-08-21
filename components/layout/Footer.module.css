@@ -1,7 +1,7 @@
 /* Footer — 明るい水色グラデ（デザイン原稿に合わせた明るいカラーパレット） */
 .footer {
   background: linear-gradient(180deg, #7cc87a 0%, #5cb87a 100%);
-  background-image: url('/images/bg-green.webp');
+  background-image: url('/images/bg-green.svg');
   background-size: cover;
   background-position: center bottom;
   border-top: 3px solid rgba(255, 255, 255, 0.4);
@@ -50,6 +50,8 @@
 
 .social {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--sp3);
 }
 
@@ -77,6 +79,13 @@
   background: rgba(255, 255, 255, 0.3);
   border-color: var(--white);
   transform: translateY(-2px);
+}
+
+.socialIcon {
+  display: block;
+  width: 21px;
+  height: 21px;
+  filter: brightness(0) invert(1);
 }
 
 .links {

@@ -182,7 +182,7 @@ button {
   background-position: center top;
 }
 .bg-game {
-  background-image: url('/images/bg-game.png');
+  background-image: url('/images/bg-game.webp');
   background-size: cover;
   background-position: center top;
 }

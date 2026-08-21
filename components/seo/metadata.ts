@@ -43,16 +43,14 @@ export function buildMetadata(
       title: pageMeta.title,
       description: pageMeta.description,
       siteName: 'taptappun.dev',
-      images: [
-        { url: '/og-image.png', width: 1200, height: 630, alt: pageMeta.title },
-      ],
+      images: [{ url: '/images/bg-game.webp', alt: pageMeta.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: pageMeta.title,
       description: pageMeta.description,
       creator: '@taptappun',
-      images: ['/og-image.png'],
+      images: ['/images/bg-game.webp'],
     },
     alternates: {
       canonical,
