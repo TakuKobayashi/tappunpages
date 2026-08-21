@@ -5,11 +5,11 @@ export interface Tool {
   url: string;
 }
 
-export const tools: Tool[] = [
+export const tools = [
   {
     slug: 'fullstack-media-converter',
     title: 'fullstack-media-converter',
     icon: '🎞️',
-    url: 'https://github.com/taptappun/fullstack-media-converter',
+    url: 'https://github.com/TakuKobayashi/fullstack-media-converter',
   },
-];
+] as const satisfies readonly Tool[];

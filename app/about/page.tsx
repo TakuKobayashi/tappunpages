@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { SocialLinks } from '@/components/ui/SocialLinks';
+import { GITHUB_URL } from '@/components/seo/accounts';
 
 export const metadata: Metadata = buildMetadata('ja', t.about.meta);
 
@@ -52,23 +53,31 @@ export default function AboutPage() {
                   boxShadow: 'var(--shadow-md)',
                 }}
               >
-                <div
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TakuKobayashi on GitHub"
                   style={{
                     width: 72,
                     height: 72,
-                    borderRadius: 'var(--r-lg)',
-                    background: 'var(--grad-yellow)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontFamily: 'var(--font-logo)',
-                    fontSize: '1.4rem',
+                    borderRadius: '50%',
+                    display: 'block',
+                    overflow: 'hidden',
                     border: '2px solid var(--border-gray)',
                     marginBottom: 'var(--sp3)',
                   }}
                 >
-                  tp
-                </div>
+                  <img
+                    src="/images/github-avatar.webp"
+                    alt="taptappunのGitHubプロフィール画像"
+                    width="72"
+                    height="72"
+                    loading="eager"
+                    fetchPriority="high"
+                    style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </a>
                 <div
                   style={{
                     fontWeight: 700,
@@ -88,15 +97,19 @@ export default function AboutPage() {
                 >
                   {a.role}
                 </div>
-                <div
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
-                    fontSize: 'var(--text-sm)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 'var(--text-xs)',
                     color: 'var(--text-mid)',
-                    marginBottom: 'var(--sp4)',
+                    textDecoration: 'none',
                   }}
                 >
-                  {a.location}
-                </div>
+                  @TakuKobayashi ↗
+                </a>
               </aside>
             </div>
           </div>

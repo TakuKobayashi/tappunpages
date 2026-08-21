@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://taptappun.net';
 
-export const GITHUB_URL = 'https://github.com/taptappun';
+export const GITHUB_URL = 'https://github.com/TakuKobayashi';
 
 export const TWITTER_URL = 'https://x.com/taptappun';
 
@@ -14,6 +14,11 @@ export interface SocialLink {
 const icon = (slug: string) =>
   `https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${slug}.svg`;
 
+// LinkedIn was removed from newer Simple Icons releases. Keep its last
+// available major pinned so every SocialLinks instance renders reliably.
+const LINKEDIN_ICON =
+  'https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/linkedin.svg';
+
 /** href を入力したサービスだけフッターに表示される。 */
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: 'GitHub', href: GITHUB_URL, icon: icon('github'), featured: true },
@@ -21,7 +26,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'LinkedIn',
     href: 'https://jp.linkedin.com/in/%E6%8B%93-%E5%B0%8F%E6%9E%97-710479a4',
-    icon: icon('linkedin'),
+    icon: LINKEDIN_ICON,
     featured: true,
   },
   { label: 'Qiita', href: 'https://qiita.com/taptappun', icon: icon('qiita'), featured: true },

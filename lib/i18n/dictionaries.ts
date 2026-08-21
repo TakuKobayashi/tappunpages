@@ -53,7 +53,6 @@ export interface Dictionary {
     heading: string;
     bio: string[];
     role: string;
-    location: string;
     timeline: {
       heading: string;
       items: { year: string; title: string; org: string; desc: string }[];
@@ -226,16 +225,15 @@ export const ja = {
     meta: {
       title: 'About',
       description:
-        'Product Engineer として、プロダクトを前進させることに特化したフルスタックエンジニア。',
+        'モバイル、Web、バックエンドを横断し、アイデアを動くプロダクトとして届けるフルスタックProduct Engineer。',
     },
-    heading: 'お前は誰よ？',
+    heading: 'ABOUT ME',
     bio: [
-      '東京・府中在住のフルスタックエンジニア。Android・iOS からバックエンド・インフラまで、プロダクトを一人で0から1にすることが得意です。',
-      'Fintech（仮想通貨取引所）、AI 統合、ゲーム開発、モバイルアプリ、SaaS プロダクトなど幅広い領域での実装経験を持ち、特に曖昧な要件から素早く動くものを作ることに強みがあります。',
-      'ハッカソンでの受賞経験を通じて培った「Build fast / Show early / Iterate」の文化を軸に、スタートアップや新規事業に貢献します。20カ国以上の海外旅行経験から生まれたグローバルな視点で、海外案件にも対応します。',
+      'モバイル、Web、バックエンド、インフラまでを横断し、アイデアを0から動くプロダクトへ育てるフルスタックProduct Engineerです。曖昧な要件を整理し、検証できる形まで素早く実装することを得意としています。',
+      'Fintech、AI統合、ゲーム、モバイルアプリ、SaaSなど幅広い領域で、設計・実装・リリース・改善を一貫して経験してきました。技術を使うこと自体ではなく、ユーザーに届く価値と事業の前進を成果として考えています。',
+      'GitHubでは2012年から開発成果を公開し、現在は280件を超える公開リポジトリがあります。ハッカソンや個人開発で培った「Build fast / Show early / Iterate」を軸に、早いフィードバックからプロダクトの精度を高めます。',
     ],
-    role: 'Product Engineer',
-    location: '📍 Tokyo, Japan',
+    role: 'Full-stack Product Engineer',
     timeline: {
       heading: 'TIMELINE',
       items: [
@@ -248,7 +246,7 @@ export const ja = {
         {
           year: '2022–2024',
           title: 'Senior Android Engineer',
-          org: 'Startup (Tokyo)',
+          org: 'Startup',
           desc: 'Kotlin + Jetpack Compose でゼロからアプリ設計・実装。CI/CD・テスト自動化。',
         },
         {
@@ -290,9 +288,9 @@ export const ja = {
           desc: '仕様変更を恐れない。変化に強いアーキテクチャ。',
         },
         {
-          icon: '🌏',
-          title: 'Global Ready',
-          desc: '20カ国以上の旅行経験。非同期・英語でのコミュニケーションが強み。',
+          icon: '⌘',
+          title: 'Open Development',
+          desc: '継続的な個人開発と公開を通じて、知見をコードとして共有する。',
         },
         {
           icon: '🎮',
@@ -518,16 +516,15 @@ export const en: Dictionary = {
     meta: {
       title: 'About',
       description:
-        'Full-stack Product Engineer specializing in turning ambiguous requirements into shipped products.',
+        'A full-stack Product Engineer who turns ideas into shipped products across mobile, web, backend, and infrastructure.',
     },
-    heading: 'Who am I?',
+    heading: 'ABOUT ME',
     bio: [
-      'Full-stack engineer based in Fuchu, Tokyo. I specialize in taking products from 0 to 1 solo — from Android/iOS through backend and infra.',
-      'I have hands-on experience across Fintech (crypto exchange), AI integration, game development, mobile apps, and SaaS — with a particular strength in rapidly turning vague requirements into working software.',
-      "Through multiple hackathon wins I've internalized a 'Build fast / Show early / Iterate' culture. With 20+ countries of travel experience I'm comfortable working globally with async communication in English.",
+      'I am a full-stack Product Engineer working across mobile, web, backend, and infrastructure. I turn ambiguous ideas into testable products, taking ownership from early definition through implementation and release.',
+      'My experience spans fintech, AI integrations, games, mobile apps, and SaaS. I measure engineering by the value delivered to users and the progress it creates for a product—not by technology alone.',
+      "I have shared my work on GitHub since 2012 and now maintain more than 280 public repositories. My approach is shaped by hackathons and independent products: build fast, show early, learn from feedback, and iterate.",
     ],
-    role: 'Product Engineer',
-    location: '📍 Tokyo, Japan',
+    role: 'Full-stack Product Engineer',
     timeline: {
       heading: 'TIMELINE',
       items: [
@@ -540,7 +537,7 @@ export const en: Dictionary = {
         {
           year: '2022–2024',
           title: 'Senior Android Engineer',
-          org: 'Startup (Tokyo)',
+          org: 'Startup',
           desc: 'Designed and built apps from scratch with Kotlin + Jetpack Compose. CI/CD and test automation.',
         },
         {
@@ -582,9 +579,9 @@ export const en: Dictionary = {
           desc: "Spec changes aren't problems. Architecture that welcomes change.",
         },
         {
-          icon: '🌏',
-          title: 'Global Ready',
-          desc: '20+ countries of travel. Strong async communication in English.',
+          icon: '⌘',
+          title: 'Open Development',
+          desc: 'Share practical knowledge through sustained independent work and public code.',
         },
         {
           icon: '🎮',
