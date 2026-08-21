@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 
 export const metadata: Metadata = buildMetadata('ja', t.about.meta);
 
@@ -262,6 +263,13 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="section-band band-teal">
+          <div className="container">
+            <h2 className="section-heading white">{a.socialHeading}</h2>
+            <SocialLinks showLabels variant="profile" ariaLabel={a.socialHeading} />
           </div>
         </section>
 

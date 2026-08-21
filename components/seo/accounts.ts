@@ -8,6 +8,7 @@ export interface SocialLink {
   label: string;
   href?: string;
   icon: string;
+  featured?: boolean;
 }
 
 const icon = (slug: string) =>
@@ -15,14 +16,15 @@ const icon = (slug: string) =>
 
 /** href を入力したサービスだけフッターに表示される。 */
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'GitHub', href: GITHUB_URL, icon: icon('github') },
-  { label: 'X', href: TWITTER_URL, icon: icon('x') },
+  { label: 'GitHub', href: GITHUB_URL, icon: icon('github'), featured: true },
+  { label: 'X', href: TWITTER_URL, icon: icon('x'), featured: true },
   {
     label: 'LinkedIn',
     href: 'https://jp.linkedin.com/in/%E6%8B%93-%E5%B0%8F%E6%9E%97-710479a4',
     icon: icon('linkedin'),
+    featured: true,
   },
-  { label: 'Qiita', href: 'https://qiita.com/taptappun', icon: icon('qiita') },
+  { label: 'Qiita', href: 'https://qiita.com/taptappun', icon: icon('qiita'), featured: true },
   { label: 'Instagram', href: '', icon: icon('instagram') },
   { label: 'Threads', href: '', icon: icon('threads') },
   { label: 'Facebook', href: '', icon: icon('facebook') },

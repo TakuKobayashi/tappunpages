@@ -6,6 +6,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries';
 import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { tools } from '@/lib/tools';
 import { getAllProjects } from '@/lib/projects';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 
 export function generateStaticParams() {
   return routeLocales.map((locale) => ({ locale }));
@@ -135,6 +136,9 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
             <Link href={`${base}/contact`} className="btn-more white-btn">
               {h.ctaContact}
             </Link>
+          </div>
+          <div style={{ marginBottom: 'var(--sp8)' }}>
+            <SocialLinks featuredOnly ariaLabel={h.a11y.socialLinks} />
           </div>
           <div
             style={{

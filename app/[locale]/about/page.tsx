@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -273,6 +274,13 @@ export default async function LocalizedAboutPage({ params }: { params: Promise<{
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="section-band band-teal">
+          <div className="container">
+            <h2 className="section-heading white">{a.socialHeading}</h2>
+            <SocialLinks showLabels variant="profile" ariaLabel={a.socialHeading} />
           </div>
         </section>
 

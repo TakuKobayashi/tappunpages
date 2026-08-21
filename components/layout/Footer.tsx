@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { getLocaleFromPath } from '@/lib/i18n/routing';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import styles from './Footer.module.css';
-import { SOCIAL_LINKS } from '@/components/seo/accounts';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 
 export function Footer() {
   const pathname = usePathname();
@@ -23,27 +23,7 @@ export function Footer() {
         </div>
         <p className={styles.tagline}>{t.footer.tagline}</p>
 
-        <div className={styles.social} aria-label="Social links">
-          {SOCIAL_LINKS.filter((social) => social.href).map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={social.label}
-              aria-label={social.label}
-              className={styles.socialLink}
-            >
-              <img
-                src={social.icon}
-                alt=""
-                width="21"
-                height="21"
-                className={styles.socialIcon}
-              />
-            </a>
-          ))}
-        </div>
+        <SocialLinks featuredOnly ariaLabel={t.footer.socialLinks} />
 
         <nav className={styles.links} aria-label="Footer navigation">
           <Link href={`${base}/about`} className={styles.link}>

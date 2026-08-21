@@ -19,6 +19,7 @@ export interface Dictionary {
   footer: {
     tagline: string;
     copy: string;
+    socialLinks: string;
     links: { about: string; projects: string; tools: string; blog: string; contact: string };
   };
   home: {
@@ -45,7 +46,7 @@ export interface Dictionary {
     };
     cta: { heading: string; desc: string; btn: string };
     stats: { value: string; label: string }[];
-    a11y: { hero: string; scrollDown: string; projects: string; tools: string; articles: string; how: string; contact: string };
+    a11y: { hero: string; scrollDown: string; projects: string; tools: string; articles: string; how: string; contact: string; socialLinks: string };
   };
   about: {
     meta: { title: string; description: string };
@@ -63,6 +64,7 @@ export interface Dictionary {
     };
     cta: { heading: string; btn: string };
     a11y: { timeline: string; values: string };
+    socialHeading: string;
   };
   projects: {
     meta: { title: string; description: string };
@@ -131,6 +133,7 @@ export const ja = {
   footer: {
     tagline: 'Product Engineer — Build fast. Ship early. Iterate.',
     copy: 'All rights reserved.',
+    socialLinks: '主要なSNSプロフィール',
     links: {
       about: 'About',
       projects: 'Projects',
@@ -215,7 +218,7 @@ export const ja = {
       { value: '#1', label: 'ハッカソン受賞' },
       { value: '5+', label: '年の開発経験' },
     ],
-    a11y: { hero: 'メインビジュアル', scrollDown: '下へスクロール', projects: '制作実績', tools: 'ツールと実験', articles: '記事', how: '仕事の進め方', contact: 'お問い合わせ' },
+    a11y: { hero: 'メインビジュアル', scrollDown: '下へスクロール', projects: '制作実績', tools: 'ツールと実験', articles: '記事', how: '仕事の進め方', contact: 'お問い合わせ', socialLinks: '主要なSNSプロフィール' },
   },
 
   // --- About ---
@@ -305,6 +308,7 @@ export const ja = {
     },
     cta: { heading: 'WORK TOGETHER?', btn: 'お問い合わせ ▶' },
     a11y: { timeline: '経歴', values: '大切にしていること' },
+    socialHeading: 'PROFILES',
   },
 
   // --- Projects ---
@@ -417,6 +421,7 @@ export const en: Dictionary = {
   footer: {
     tagline: 'Product Engineer — Build fast. Ship early. Iterate.',
     copy: 'All rights reserved.',
+    socialLinks: 'Featured social profiles',
     links: {
       about: 'About',
       projects: 'Projects',
@@ -506,7 +511,7 @@ export const en: Dictionary = {
       { value: '#1', label: 'Hackathon wins' },
       { value: '5+', label: 'Years building' },
     ],
-    a11y: { hero: 'Hero', scrollDown: 'Scroll down', projects: 'Projects', tools: 'Tools and experiments', articles: 'Articles', how: 'How I work', contact: 'Contact' },
+    a11y: { hero: 'Hero', scrollDown: 'Scroll down', projects: 'Projects', tools: 'Tools and experiments', articles: 'Articles', how: 'How I work', contact: 'Contact', socialLinks: 'Featured social profiles' },
   },
 
   about: {
@@ -595,6 +600,7 @@ export const en: Dictionary = {
     },
     cta: { heading: 'WORK TOGETHER?', btn: 'Get in touch ▶' },
     a11y: { timeline: 'Career timeline', values: 'Values' },
+    socialHeading: 'PROFILES',
   },
 
   projects: {

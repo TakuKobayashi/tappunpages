@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { tools } from '@/lib/tools';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 
 export const metadata: Metadata = buildMetadata('ja', t.home.meta);
 
@@ -129,6 +130,9 @@ export default function HomePage() {
             <Link href="/jp/contact" className="btn-more white-btn">
               {h.ctaContact}
             </Link>
+          </div>
+          <div style={{ marginBottom: 'var(--sp8)' }}>
+            <SocialLinks featuredOnly ariaLabel={h.a11y.socialLinks} />
           </div>
           <div
             style={{
