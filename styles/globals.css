@@ -822,3 +822,20 @@ button {
   font-size: var(--text-base);
   font-weight: 500;
 }
+.page-intro {
+  max-width: 720px;
+  margin: calc(var(--sp6) * -1) auto var(--sp8);
+  padding: var(--sp4) var(--sp5);
+  color: var(--text-dark);
+  line-height: 1.8;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.page-note {
+  margin-top: var(--sp5);
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  font-size: var(--text-sm);
+}

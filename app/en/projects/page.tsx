@@ -15,6 +15,7 @@ export default async function EnProjectsPage() {
         <section style={{ padding: 'var(--sp12) var(--sp6) var(--sp8)' }}>
           <div className="container">
             <h1 className="section-heading white">{t.projects.heading}</h1>
+            <p className="page-intro">{t.home.projects.description}</p>
             <div className="list-container">
               <ul className="list-items">
                 {projects.map((p) => (

@@ -55,6 +55,9 @@ export function Footer() {
           <Link href={`${base}/projects`} className={styles.link}>
             {t.footer.links.projects}
           </Link>
+          <Link href={`${base}/tools`} className={styles.link}>
+            {t.footer.links.tools}
+          </Link>
           <Link href={`${base}/blog`} className={styles.link}>
             {t.footer.links.blog}
           </Link>

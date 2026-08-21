@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
+import { tools } from '@/lib/tools';
 
 export const metadata: Metadata = buildMetadata('ja', t.home.meta);
 
@@ -188,6 +189,7 @@ export default function HomePage() {
         <section className="section-band band-blue" aria-label="Projects">
           <div className="container">
             <h2 className="section-heading yellow">{h.projects.heading}</h2>
+            <p className="page-intro">{h.projects.description}</p>
             <div
               style={{
                 display: 'flex',
@@ -247,11 +249,12 @@ export default function HomePage() {
         <section className="section-band band-green" aria-label="Tools">
           <div className="container">
             <h2 className="section-heading white">{h.tools.heading}</h2>
+            <p className="page-intro">{h.tools.description}</p>
             <div className="list-container">
               <ul className="list-items">
-                {h.tools.items.map((item) => (
-                  <li key={item.title} className="list-item">
-                    <a href="/projects">
+                {tools.map((item) => (
+                  <li key={item.slug} className="list-item">
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">
                       <div
                         className="li-thumb"
                         style={{
@@ -265,9 +268,9 @@ export default function HomePage() {
                       </div>
                       <div className="li-body">
                         <span className="li-title">{item.title}</span>
-                        <span className="li-desc">{item.desc}</span>
+                        <span className="li-desc">{item.description.ja}</span>
                       </div>
-                      <div className="li-arrow">▶</div>
+                      <div className="li-arrow">↗</div>
                     </a>
                   </li>
                 ))}
@@ -275,7 +278,7 @@ export default function HomePage() {
             </div>
             <div style={{ textAlign: 'right', marginTop: 'var(--sp4)' }}>
               <Link
-                href="/projects"
+                href="/tools"
                 className="btn-more white-btn"
                 style={{ fontSize: 'var(--text-xs)' }}
               >

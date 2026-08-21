@@ -9,6 +9,7 @@ export interface Dictionary {
     home: string;
     about: string;
     projects: string;
+    tools: string;
     blog: string;
     contact: string;
     langSwitch: string;
@@ -18,7 +19,7 @@ export interface Dictionary {
   footer: {
     tagline: string;
     copy: string;
-    links: { about: string; projects: string; blog: string; contact: string };
+    links: { about: string; projects: string; tools: string; blog: string; contact: string };
   };
   home: {
     meta: { title: string; description: string };
@@ -26,9 +27,10 @@ export interface Dictionary {
     description: string;
     ctaProjects: string;
     ctaContact: string;
-    projects: { heading: string; more: string };
+    projects: { heading: string; description: string; more: string };
     tools: {
       heading: string;
+      description: string;
       more: string;
       items: { title: string; desc: string }[];
     };
@@ -64,6 +66,12 @@ export interface Dictionary {
     meta: { title: string; description: string };
     heading: string;
     featured: string;
+  };
+  tools: {
+    meta: { title: string; description: string };
+    heading: string;
+    description: string;
+    note: string;
   };
   blog: {
     meta: { title: string; description: string };
@@ -102,6 +110,7 @@ export const ja = {
     home: 'ホーム',
     about: 'お前は誰よ？',
     projects: '制作物',
+    tools: 'ツール・実験',
     blog: '記事',
     contact: 'Contact',
     langSwitch: 'EN',
@@ -120,6 +129,7 @@ export const ja = {
     links: {
       about: 'About',
       projects: 'Projects',
+      tools: 'Tools & Labs',
       blog: 'Blog',
       contact: 'Contact',
     },
@@ -139,15 +149,15 @@ export const ja = {
     ctaContact: 'お仕事のご相談',
     projects: {
       heading: 'PROJECTS',
+      description: '仕事やコミュニティの中で、課題解決やプロダクトづくりに取り組んだ実績です。',
       more: 'もっと見る ▶',
     },
     tools: {
-      heading: 'TOOLS',
-      more: 'もっと見る ▶',
+      heading: 'TOOLS & LABS',
+      description: '日々の「こんなものがあったら便利」から生まれたツールと、技術を試すための個人制作・実験です。',
+      more: 'ツール・実験をすべて見る ▶',
       items: [
-        { title: 'SignalForge CLI', desc: 'Git活動から自動SNS投稿生成' },
-        { title: 'RecStudio', desc: 'ブラウザ録画 + Whisper文字起こし' },
-        { title: 'demo-video-gen', desc: 'AI駆動のプロモ動画自動生成 CLI' },
+        { title: 'fullstack-media-converter', desc: '画像・音声・動画をブラウザから手軽に変換' },
       ],
     },
     articles: {
@@ -301,6 +311,13 @@ export const ja = {
     featured: '★',
   },
 
+  tools: {
+    meta: { title: 'Tools & Labs', description: '便利ツールや、新しい技術を試すために作った個人制作・実験の一覧。' },
+    heading: 'TOOLS & LABS',
+    description: '日々の小さな不便を解消するツールと、気になった技術を実際に触って確かめるための個人制作・実験をまとめています。仕事やコミュニティでの実績は Projects で紹介しています。',
+    note: '小さなプロトタイプも含め、随時追加していきます。',
+  },
+
   // --- Blog ---
   blog: {
     meta: {
@@ -371,6 +388,7 @@ export const en: Dictionary = {
     home: 'Home',
     about: 'About',
     projects: 'Projects',
+    tools: 'Tools & Labs',
     blog: 'Blog',
     contact: 'Contact',
     langSwitch: 'JA',
@@ -387,6 +405,7 @@ export const en: Dictionary = {
     links: {
       about: 'About',
       projects: 'Projects',
+      tools: 'Tools & Labs',
       blog: 'Blog',
       contact: 'Contact',
     },
@@ -405,23 +424,17 @@ export const en: Dictionary = {
     ctaContact: "Let's Work Together",
     projects: {
       heading: 'PROJECTS',
+      description: 'Work delivered with teams, clients, and communities to solve real product challenges.',
       more: 'See all ▶',
     },
     tools: {
-      heading: 'TOOLS',
-      more: 'See all ▶',
+      heading: 'TOOLS & LABS',
+      description: 'Personal utilities and experiments built to solve everyday friction or explore new technology.',
+      more: 'Explore all tools & labs ▶',
       items: [
         {
-          title: 'SignalForge CLI',
-          desc: 'Git activity → auto-generated bilingual social posts',
-        },
-        {
-          title: 'RecStudio',
-          desc: 'Browser screen recording + Whisper transcription',
-        },
-        {
-          title: 'demo-video-gen',
-          desc: 'AI-driven promo video generation CLI',
+          title: 'fullstack-media-converter',
+          desc: 'Convert images, audio, and video from your browser',
         },
       ],
     },
@@ -574,6 +587,13 @@ export const en: Dictionary = {
     },
     heading: 'PROJECTS',
     featured: '★',
+  },
+
+  tools: {
+    meta: { title: 'Tools & Labs', description: 'Personal utilities and experimental builds for exploring new technology.' },
+    heading: 'TOOLS & LABS',
+    description: 'A collection of personal utilities that solve small everyday problems and experiments built to learn by making. For client, team, and community work, see Projects.',
+    note: 'More small prototypes and experiments will be added over time.',
   },
 
   blog: {

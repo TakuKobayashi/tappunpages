@@ -20,6 +20,7 @@ export function Nav() {
     { href: `${base}/`, label: t.nav.home },
     { href: `${base}/about`, label: t.nav.about },
     { href: `${base}/projects`, label: t.nav.projects },
+    { href: `${base}/tools`, label: t.nav.tools },
     { href: `${base}/blog`, label: t.nav.blog },
     { href: `${base}/contact`, label: t.nav.contact },
   ];
