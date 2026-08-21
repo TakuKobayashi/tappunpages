@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
@@ -175,23 +174,6 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
                 </div>
               </div>
             ))}
-          </div>
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 'var(--sp8)',
-              left: '50%',
-              transform: 'translateX(-50%)',
-            }}
-          >
-            <Image
-              src="/images/down-arrow.webp"
-              alt={h.a11y.scrollDown}
-              width={80}
-              height={30}
-              className="down-arrow-btn"
-              unoptimized
-            />
           </div>
         </section>
 

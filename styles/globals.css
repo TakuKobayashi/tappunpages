@@ -721,24 +721,6 @@ button {
 }
 
 /* =============================================
-   DOWN ARROW BUTTON (hero scroll indicator)
-   ============================================= */
-.down-arrow-btn {
-  display: block;
-  width: 80px;
-  animation: bob 2s ease-in-out infinite;
-}
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
-}
-
-/* =============================================
    UTILITY
    ============================================= */
 .container {

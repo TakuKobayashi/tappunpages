@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { tools } from '@/lib/tools';
@@ -169,23 +168,6 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 'var(--sp8)',
-              left: '50%',
-              transform: 'translateX(-50%)',
-            }}
-          >
-            <Image
-              src="/images/down-arrow.webp"
-              alt="Scroll down"
-              width={80}
-              height={30}
-              className="down-arrow-btn"
-              unoptimized
-            />
           </div>
         </section>
 
