@@ -45,3 +45,25 @@
 .profile .icon {
   filter: none;
 }
+
+.card {
+  justify-content: flex-start;
+  gap: var(--sp2);
+}
+
+.card .link {
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+  background: rgba(26, 26, 26, 0.05);
+  border-color: rgba(26, 26, 26, 0.12);
+  color: var(--text-dark);
+}
+
+.card .link:hover {
+  background: rgba(26, 26, 26, 0.1);
+}
+
+.card .icon {
+  filter: none;
+}

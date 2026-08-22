@@ -121,6 +121,19 @@ export default async function LocalizedAboutPage({ params }: { params: Promise<{
                 >
                   @TakuKobayashi ↗
                 </a>
+                <div
+                  style={{
+                    height: 1,
+                    background: 'rgba(26,26,26,0.12)',
+                    margin: 'var(--sp4) 0',
+                  }}
+                  aria-hidden="true"
+                />
+                <SocialLinks
+                  featuredOnly
+                  variant="card"
+                  ariaLabel={a.socialHeading}
+                />
               </aside>
             </div>
           </div>
@@ -287,13 +300,6 @@ export default async function LocalizedAboutPage({ params }: { params: Promise<{
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="section-band band-teal">
-          <div className="container">
-            <h2 className="section-heading white">{a.socialHeading}</h2>
-            <SocialLinks showLabels variant="profile" ariaLabel={a.socialHeading} />
           </div>
         </section>
 

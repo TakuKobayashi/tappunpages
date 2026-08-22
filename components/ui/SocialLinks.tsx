@@ -5,7 +5,7 @@ interface Props {
   featuredOnly?: boolean;
   showLabels?: boolean;
   ariaLabel: string;
-  variant?: 'default' | 'profile';
+  variant?: 'default' | 'profile' | 'card';
 }
 
 export function SocialLinks({
@@ -20,7 +20,7 @@ export function SocialLinks({
 
   return (
     <div
-      className={`${styles.list} ${variant === 'profile' ? styles.profile : ''}`}
+      className={`${styles.list} ${variant === 'profile' ? styles.profile : ''} ${variant === 'card' ? styles.card : ''}`}
       aria-label={ariaLabel}
     >
       {links.map((social) => (
