@@ -3,6 +3,7 @@ import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllPosts } from '@/lib/blog';
 import { ContentListItem } from '@/components/ui/ContentListItem';
+import { formatPublishedDate } from '@/lib/content-data';
 
 export const metadata: Metadata = buildMetadata('ja', t.blog.meta, { path: 'blog' });
 
@@ -56,7 +57,7 @@ export default async function BlogPage() {
                     <li key={p.slug} className="list-item">
                       <ContentListItem
                         title={p.title}
-                        description={`${p.date}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
+                        description={`${formatPublishedDate(p.publishedAt)}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
                         icon={p.icon}
                         defaultIcon="📝"
                         iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"

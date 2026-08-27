@@ -1,0 +1,542 @@
+- slug: qiita-ea493fda8c315d9d79e3
+  title: ローカルLLMを使って自動的にリリースノートを作成するGithub Actions Marketplaceを作った
+  description: Gitに保存された変更履歴をローカルLLMに読ませ、GitHubのリリースノートやPull Requestの説明文を自動作成するGitHub Actionsを作りました。
+  url: https://qiita.com/taptappun/items/ea493fda8c315d9d79e3
+  published_at: 2026-08-28T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GitHub
+    - GitHubActions
+    - TypeScript
+    - ollama
+    - 生成AI
+  source: Qiita
+- slug: qiita-56c1f868eaf77aef7621
+  title: Next.js(React)でフロントエンド、Honoでバックエンドを開発したものをCloudflare Workersにデプロイ出来るようにしました
+  description: 先日よりCloudflare 公式のドキュメントより 「新しいプロジェクトにはCloudflare PagesよりもCloudflare Workersの使用を推奨しています。」と発表されました。
+    現代において主なユースケースとしては「Cloudflare Workers に SPA アプリケーションをデプロイす…
+  url: https://qiita.com/taptappun/items/56c1f868eaf77aef7621
+  published_at: 2025-05-09T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - TypeScript
+    - cloudflare
+    - Next.js
+    - CloudflareWorkers
+    - Hono
+  source: Qiita
+- slug: qiita-f83b5b9b3fd8bc8bcd9e
+  title: 履歴書と職務経歴書のメンテナンスの自動化
+  description: 本記事は、転職活動して気づいた「これをやっていれば.../やってよかった」アドベントカレンダー 25日目の記事です。
+  url: https://qiita.com/taptappun/items/f83b5b9b3fd8bc8bcd9e
+  published_at: 2025-01-01T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - 転職活動
+  source: Qiita
+- slug: qiita-3872a209fe7bb6142de2
+  title: Qiita OAuth API を使ってコマンドを叩くだけでQiita APIトークンを取得する
+  description: Qiita公式がCLI上からQiitaに記事を投稿できるqiita-cliというツールを公開しています。 qiita-cliについて詳しくはこちらを参照してください
+  url: https://qiita.com/taptappun/items/3872a209fe7bb6142de2
+  published_at: 2024-12-23T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Node.js
+    - CLI
+    - TypeScript
+    - QiitaAPI
+    - clasp
+  source: Qiita
+- slug: qiita-179a335a53d55bf211dd
+  title: 格安Androidタブレットをデータ収集用のクローラーマシンとして動かすようにするための設定メモ
+  description: Android端末にLinuxをインストールして使用することができることがわかった。
+    最近のAmazonで売っているようなAndroidタブレットは1万円を切るような格安にもかかわらずRAMが4GB(増設したら8GB)、ストレージも128GBのようなスペックが非常に優秀である端末が多く売られている。(普段使いする…
+  url: https://qiita.com/taptappun/items/179a335a53d55bf211dd
+  published_at: 2024-10-14T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - Ubnutu
+  source: Qiita
+- slug: qiita-efa68dfc493be1c314b9
+  title: 社内勉強会を会社のカルチャーとして定着させた取り組みや心がけ
+  description: 現在所属しているビットバンクでは2020年7月～現在も社内勉強会を毎週開催しています。(社内では ナレッジ共有会 という名前で開催しています)
+    勉強会の開催を提案してから、実際に開催し、現在まで毎週開催している社内でも人気の施策となりました。 ここでは勉強会の毎週開催の運営フローと運営にあたり心がけていることを述…
+  url: https://qiita.com/taptappun/items/efa68dfc493be1c314b9
+  published_at: 2024-07-18T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - 勉強会
+    - ポエム
+    - コミュニケーション
+    - 運営
+  source: Qiita
+- slug: qiita-e499dfa937cd8f04d74d
+  title: GitHub Hacking ~GitHubを容量無制限のクラウドストレージとして使用する試み~
+  description: 今回紹介している内容はGitHubの公式からは「やるなよ!!」と言われている内容を紹介しています 私のディスク容量はいくつですか？ これを理解した上で以降を読み進めてください
+  url: https://qiita.com/taptappun/items/e499dfa937cd8f04d74d
+  published_at: 2024-04-01T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - JavaScript
+    - Git
+    - Node.js
+    - GitHub
+    - 闇の魔術
+  source: Qiita
+- slug: qiita-50555bbe66e4135ece15
+  title: Github Actionsで自動的にAndroidアプリをビルドした後にFirebase App Distributionに配布する
+  description: Androidアプリの開発において Github Actionsにて自動的にビルドする環境作成 について紹介しました。 今回ビルドが完了した後、Firebase App
+    Distributionにアプリを配布する方法(CD環境の構築)について紹介していきます。 具体的に実際にアプリを自動的に配布している様子は以下…
+  url: https://qiita.com/taptappun/items/50555bbe66e4135ece15
+  published_at: 2023-01-13T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - GitHub
+    - Firebase
+    - GitHubActions
+    - FirebaseAppDistribution
+  source: Qiita
+- slug: qiita-985b288dbb63d4123135
+  title: メンションしたのに反応が無い人に電話をかけて催促するシステムを作ったのでシステムの内容を紹介
+  description: 今回Twilioハッカソンに参加してやさしい呼び出しくんというプロダクトを開発し、最優秀賞を受賞することができました。 発表会の様子はこちらより確認できます
+  url: https://qiita.com/taptappun/items/985b288dbb63d4123135
+  published_at: 2023-01-10T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - TypeScript
+    - twilio
+    - aws-sdk
+    - ServerlessFramework
+    - slack-api
+  source: Qiita
+- slug: qiita-c4b29bbfc1699f0d495b
+  title: 新年のご挨拶(年賀状)メールを一斉に送信するGoogle Apps Script(GAS)を作ってみた
+  description: 2022年も年の瀬となりました。新年のご挨拶の準備として人によっては年賀状作りや投函に勤しんでいる方も多いと思います。普段交流があまりない人であっても毎年の年賀状は送り合っているという人も多いと思います。
+    近年では新年のご挨拶は年賀状を送るのではなく、メールやLINEなどのSNSでのメッセージを送ることで新年のご…
+  url: https://qiita.com/taptappun/items/c4b29bbfc1699f0d495b
+  published_at: 2022-12-29T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GoogleAppsScript
+    - Gmail
+    - TypeScript
+    - GoogleSpreadSheet
+    - clasp
+  source: Qiita
+- slug: qiita-23eac00f829311e09dc0
+  title: Github ActionsでFirebase Test Labを使ってAndroidアプリの自動テストを行う環境の構築
+  description: Androidアプリの開発において Github Actionsにて自動的にビルドする環境作成 について紹介しました。 またビルドが完了した後にFirebase App
+    Distributionにアプリを配布する方法についてはGithub Actionsで自動的にAndroidアプリをビルドした後にFirebas…
+  url: https://qiita.com/taptappun/items/23eac00f829311e09dc0
+  published_at: 2022-12-26T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - GitHub
+    - Firebase
+    - FirebaseTestLab
+    - GitHubActions
+  source: Qiita
+- slug: qiita-e0d146ccbd23887113bf
+  title: Railsプロジェクトのデータベースの構造のER図をPlantUMLで自動的に吐き出せるようにしてみた
+  description: QiitaでもPlantUMLを表示できるようになってきたのでいよいよPlantUMLが民主化されてきました。 そこで「データベースの情報を基に自動的にER図作ってくれたらいいのになぁ...」と思ったので勢いで作ってみました。
+  url: https://qiita.com/taptappun/items/e0d146ccbd23887113bf
+  published_at: 2022-08-21T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - Rails
+    - MySQL
+    - PlantUML
+    - ER図
+  source: Qiita
+- slug: qiita-4a8f7ecaa3f91cb21be9
+  title: Github Actionsにて自動的にデプロイする環境作成(Webサイト編)
+  description: Github Actionsが使用できるようになったのでGithub上でのCI/CDの検証を行います。
+    開発において毎回デプロイ環境を構築したり、デプロイ手順書の作成、把握、手動での実施、といった一連のフローを行っていくのは非常に手間がかかります。 今回Github ActionsのCI/CDの検証を行い、定常的…
+  url: https://qiita.com/taptappun/items/4a8f7ecaa3f91cb21be9
+  published_at: 2022-07-26T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GitHub
+    - React
+    - GithubPages
+    - serverless
+    - GitHubActions
+  source: Qiita
+- slug: qiita-7c309b67e000a19c4666
+  title: Github Actionsにて自動的にビルドする環境作成(Unity編)
+  description: Github Actions を使用してGithubに git push が行われたら自動的にUnityビルドを行いその成果物をダウンロードできる仕組みを構築することができたので紹介します。
+    実際に自動的にUnityビルドを行っているプロジェクトは以下のプロジェクトになります。
+  url: https://qiita.com/taptappun/items/7c309b67e000a19c4666
+  published_at: 2022-07-26T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GitHub
+    - Unity
+    - GitHubActions
+    - QiitaEngineerFesta_GitHub
+  source: Qiita
+- slug: qiita-92ec63b7e89e53b68efa
+  title: Github Actionsにて自動的にビルドする環境作成(Android編)
+  description: Github ActionsでのCI/CDの検証を行いました。 その中で他の開発プロジェクトにも定常的に適用できるようなテンプレートを作成しました。 作成したテンプレートのプロジェクトは以下になります。
+    github-actions-examples
+  url: https://qiita.com/taptappun/items/92ec63b7e89e53b68efa
+  published_at: 2022-07-26T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - Linux
+    - gradle
+    - AndroidNDK
+    - GitHubActions
+  source: Qiita
+- slug: qiita-f26028d8585173b9893c
+  title: three.js with React
+  description: VRMファイルの中身を表示するWebサイトそ作る過程でReact 内で Three.js を扱ったので、使用した場合の知見などについて共有します。 ※ ここでは react-three-renderer
+    などのライブラリを使わず、素の React と Three.js を使う方法を紹介します。
+  url: https://qiita.com/taptappun/items/f26028d8585173b9893c
+  published_at: 2022-05-25T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - JavaScript
+    - WebGL
+    - three.js
+    - TypeScript
+    - React
+  source: Qiita
+- slug: qiita-f913dc8daaec931508a1
+  title: 最新のハッカソンの開催情報を自動で集めて、お知らせするBotを作ったので頭の中を紹介
+  description: 新着のハッカソン・ゲームジャム・アイディアソン・開発合宿の情報を自動的にお知らせしているBotです。よかったらフォローしてください!!
+  url: https://qiita.com/taptappun/items/f913dc8daaec931508a1
+  published_at: 2021-09-15T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - Rails
+    - AWS
+    - スクレイピング
+    - 自然言語処理
+  source: Qiita
+- slug: qiita-1a9dbc8dc62c072aabb5
+  title: Unity(C#) で「正しい」暗号化処理をするライブラリを作成しました
+  description: Unity(C#)において、共通鍵暗号の代表格であるAES暗号(正確にはAES暗号ではなくRijndael暗号)と公開鍵暗号の代表格であるRSA暗号、それぞれ手軽に実装でき、セキュアな(解読されづらい)ものになるようにしたライブラリを公開しました。
+    UnityCipher unitypackageをご希望の方はr…
+  url: https://qiita.com/taptappun/items/1a9dbc8dc62c072aabb5
+  published_at: 2021-03-09T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GitHub
+    - C#
+    - Security
+    - Unity
+    - 暗号
+  source: Qiita
+- slug: qiita-8af1d143ef92ce639429
+  title: 暗号資産(仮想通貨)取引所にたびたび送られてくる危険なトラップとその対策について
+  description: 普段はビットバンクという暗号資産(仮想通貨)取引所にてエンジニアをしています。 会社の技術的な内容やセキュリティの話などについては ビットバンク株式会社 Advent Calendar 2020
+    にて公開してますのでこちらも合わせて読んでみてください。
+  url: https://qiita.com/taptappun/items/8af1d143ef92ce639429
+  published_at: 2020-12-25T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - mail
+    - Security
+    - 標的型攻撃
+    - チャットツール
+    - フィッシング
+  source: Qiita
+- slug: qiita-f71ed3adcaad40ee825a
+  title: Twitterのフォロワーを自動的に増やす試み
+  description: ハッカソンの開催情報を自動でお知らせするBot HackathonPortal にて今回紹介する方法を実践して45日ほど稼働させた場合のフォロワー数の推移は以下のようになります。
+  url: https://qiita.com/taptappun/items/f71ed3adcaad40ee825a
+  published_at: 2020-10-05T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - Rails
+    - Twitter
+    - マーケティング
+    - bot
+  source: Qiita
+- slug: qiita-5a87eda053d7181430c9
+  title: nginx と Let's Encrypt で1台のサーバーで複数サイトを SSL 化
+  description: ここではLet's Encryptとnginxを使ってサイトをSSL化する方法と、さらにそのままnginxの機能を使って1台のサーバーで複数のサイトを運営し、それらのすべてSSL化した時にやったことをご紹介します。
+    nginxの設定ファイルを公開しましたので、詳細はこちらを参照してください。 https://gi…
+  url: https://qiita.com/taptappun/items/5a87eda053d7181430c9
+  published_at: 2020-09-27T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Python
+    - nginx
+    - CentOS
+    - pyenv
+    - Let’sEncrypt
+  source: Qiita
+- slug: qiita-fc6729425d330ac5f207
+  title: さくらのVPS上にサーバーを立てたときにやったこと備忘録
+  description: "- CentOS6 - ruby 2.4.1 - rails 5.1 - node.js 7.10.0 - mysql 5.7.18"
+  url: https://qiita.com/taptappun/items/fc6729425d330ac5f207
+  published_at: 2020-09-27T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - Rails
+    - MySQL
+    - nginx
+    - CentOS6
+  source: Qiita
+- slug: qiita-ae506d02ddef103a7acb
+  title: Google Spread Sheetをデータベースとして使い、Google Apps ScriptでWeb APIを作る
+  description: 今回 Google Spread Sheetをデータベースとして使用し、その内容をGoogle Apps Script(通称
+    GAS)を使ってWebAPIにすることでアプリの中で活用可能になる仕組み(テンプレート)を作成したのでその内容について紹介します。
+  url: https://qiita.com/taptappun/items/ae506d02ddef103a7acb
+  published_at: 2020-08-17T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GoogleAppsScript
+    - TypeScript
+    - webpack
+    - clasp
+    - Qiita夏祭り2020_パソナテック
+  source: Qiita
+- slug: qiita-b759df240c919d55c408
+  title: ゲームでよくされるチート手法とその対策 〜アプリケーションハッキング編〜
+  description: ゲーム、特にソシャゲ、ネトゲにおいて様々なハッキング(チート)が実際に行われます。
+    大きく分類すると、アプリケーションハッキング(クライアントサイドでのハッキング)とネットーワークハッキング(サーバーへのハッキング)とその他のハッキングがあります。 多くはエンジニアがよくやらかすバグであったり、知識(経験)不足を…
+  url: https://qiita.com/taptappun/items/b759df240c919d55c408
+  published_at: 2020-04-13T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - MySQL
+    - iOS
+    - Security
+    - Unity
+  source: Qiita
+- slug: qiita-b4bc01f812704642d399
+  title: Instagramから大量の画像を集める
+  description: "以前、Google画像検索からキーワードに沿った画像を大量に集める方法の紹介と\bWebサービスを作成したのでその紹介をしました。"
+  url: https://qiita.com/taptappun/items/b4bc01f812704642d399
+  published_at: 2020-04-08T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - Instagram
+    - スクレイピング
+    - Nokogiri
+    - クローラー
+  source: Qiita
+- slug: qiita-b93d233e3b3a21a1af8c
+  title: DynamoDBを使いやすくしたJavascript(Typescript)のライブラリを作成したので紹介します
+  description: NodeDynamoDBORM というDynamoDBでRailsのActiveRecordのように使うことができるNode.jsライブラリを作成しましたので紹介します。
+    よかったら、使ってください。またスターもください。 プルリクやご要望もお待ちしています。 DynamoDBについては後ろの方に紹介しているので…
+  url: https://qiita.com/taptappun/items/b93d233e3b3a21a1af8c
+  published_at: 2020-03-11T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Node.js
+    - AWS
+    - ActiveRecord
+    - TypeScript
+    - DynamoDB
+  source: Qiita
+- slug: qiita-51afcbbd00f1514bc895
+  title: ハッカソンの開催情報を自動でお知らせするBotをGithub Actionsに移行して運用費が0円になりました
+  description: 新着のハッカソン・ゲームジャム・アイディアソン・開発合宿の情報を自動的にお知らせしているBotがあります。 よかったらフォローしてください!!
+  url: https://qiita.com/taptappun/items/51afcbbd00f1514bc895
+  published_at: 2019-12-03T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Rails
+    - MySQL
+    - GitHub
+    - hackathon
+    - GitHubActions
+  source: Qiita
+- slug: qiita-1d3e2c9646cf7d4557db
+  title: ゲームでよく見落とされるテストケースとその再現手法
+  description: システムの開発をしていれば、開発したものをテストすると思います。
+    単体テストや結合テストなど、テスト手法はいくつか存在しますが、想定していなかったケースに対してテストを行うことは難しいです。また最後はシステムテスト(実際に動かして、触ってみるテスト)を行うことになると思います。
+    (テスト手法などについてはこちらを参照)
+  url: https://qiita.com/taptappun/items/1d3e2c9646cf7d4557db
+  published_at: 2019-06-14T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - SQL
+    - Security
+    - テスト
+    - Unity
+  source: Qiita
+- slug: qiita-83578a6ab3546ec1dc2d
+  title: ちょっとしたテクリで速度改善Tips
+  description: このようなインクリメントを後置くインクリメントと言います。 for文を使う場合
+  url: https://qiita.com/taptappun/items/83578a6ab3546ec1dc2d
+  published_at: 2019-05-07T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - C
+    - C++
+    - Rails
+    - MySQL
+    - C#
+  source: Qiita
+- slug: qiita-a5337d29a43d5d673c7f
+  title: ARCore 取扱説明書
+  description: 【更新情報】
+  url: https://qiita.com/taptappun/items/a5337d29a43d5d673c7f
+  published_at: 2018-12-09T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - C#
+    - Unity
+    - AndroidStudio
+    - ARCore
+  source: Qiita
+- slug: qiita-f165955e6bf4ab47504b
+  title: Hello WorldができたWebエンジニアの皆様へ。次はCRUDを目指してみよう！
+  description: 「掲示板」や「ブログ」などのシステムです。
+  url: https://qiita.com/taptappun/items/f165955e6bf4ab47504b
+  published_at: 2018-12-09T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Web
+    - ポエム
+    - HelloWorld
+    - 新人プログラマ応援
+    - crud
+  source: Qiita
+- slug: qiita-debb9d36099184a0b92e
+  title: UnityThreadQueueというUnityのライブラリを作成しました。
+  description: UnityThreadQueueという、Unity上でThreadを使って、非同期処理をQueueを使って行うためのライブラリを公開しました。
+    https://github.com/TakuKobayashi/UnityThreadQueue よかったら使っていただけたらと思います。m( )m。starももらえる…
+  url: https://qiita.com/taptappun/items/debb9d36099184a0b92e
+  published_at: 2018-11-22T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - GitHub
+    - C#
+    - Unity
+    - PlantUML
+    - Thread
+  source: Qiita
+- slug: qiita-7fae4317d751245b2089
+  title: Android の Runtime Permission を1行で対処
+  description: ここ最近のAndroidアプリを開発している際に、AndroidのRuntime Permissionに悩まされることがよくあります。 そのRuntime
+    Permissionの対応に1行追加するだけでRuntime Permissionに対応できるライブラリを作成しました。 https://github.com…
+  url: https://qiita.com/taptappun/items/7fae4317d751245b2089
+  published_at: 2018-07-03T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Java
+    - Android
+    - Git
+    - GitHub
+    - AndroidStudio
+  source: Qiita
+- slug: qiita-30914c590ef5b75944a6
+  title: Unity で 3Dモデル を取り扱う上で単調になりがちな作業をまとめて処理してくれるツールを作成しました
+  description: Unityを使って開発をしていると
+  url: https://qiita.com/taptappun/items/30914c590ef5b75944a6
+  published_at: 2018-06-01T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Git
+    - GitHub
+    - C#
+    - Unity
+    - 3D
+  source: Qiita
+- slug: qiita-bc38a446a06c83bd1898
+  title: Unity で ARKit & ARCore AR開発環境のマルチプラットーフォーム(iOS & Android)対応
+  description: ARKitとARCoreを共通のシーンで両方の環境に対応したビルドを作成できる、Unityのライブラリを作成しました。こちらにて公開しているのでご活用してください。
+    https://github.com/TakuKobayashi/UnityARKitAndARCoreCommon unitypackageにした…
+  url: https://qiita.com/taptappun/items/bc38a446a06c83bd1898
+  published_at: 2018-06-01T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Android
+    - iOS
+    - Unity
+    - ARKit
+    - ARCore
+  source: Qiita
+- slug: qiita-051e7d9d57770c7cb718
+  title: 画像クローラー
+  description: キーワードに沿った画像を大量に集めて、まとめてダウンロードすることができるWebツール、画像クローラーを作りましたのでご紹介します。こちらから
+  url: https://qiita.com/taptappun/items/051e7d9d57770c7cb718
+  published_at: 2018-05-21T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - Rails
+    - スクレイピング
+    - Nokogiri
+    - DeepLearning
+  source: Qiita
+- slug: qiita-a217b7017316881d6459
+  title: 最近のGoogle API Ruby Clientを使ってYoutubeで動画を探してファイルとしてダウンロードする
+  description: 今回実践した環境をご紹介します。
+  url: https://qiita.com/taptappun/items/a217b7017316881d6459
+  published_at: 2018-02-14T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - Ruby
+    - ffmpeg
+    - googleapi
+    - YouTube
+    - youtube-dl
+  source: Qiita
+- slug: qiita-07989c38ab02ec329dda
+  title: MySQLで遭遇したトランザクションとロックのお話(1)
+  description: DBについて発表した内容について詳しくかきます。 初回はトランザクションについて 資料のソース元はこちら http://www.slideshare.net/takukobayashi560/my-sqltake2-2
+  url: https://qiita.com/taptappun/items/07989c38ab02ec329dda
+  published_at: 2015-03-18T00:00:00Z
+  enable: true
+  icon: 📝
+  tags:
+    - MySQL
+    - DB
+    - 人に説明するための脳内整理
+  source: Qiita

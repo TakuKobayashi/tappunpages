@@ -2,7 +2,8 @@
   titleKey: tools.fullstack-media-converter.title
   descriptionKey: tools.fullstack-media-converter.description
   url: https://github.com/TakuKobayashi/fullstack-media-converter
-  date: "2024-01-01"
+  published_at: "2024-01-01T00:00:00Z"
+  enable: true
   icon: "🎞️"
   tags: [TypeScript, Media]
   source: Open Source

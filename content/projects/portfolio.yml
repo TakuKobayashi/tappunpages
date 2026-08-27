@@ -2,7 +2,8 @@
   titleKey: projects.ai-vtuber.title
   descriptionKey: projects.ai-vtuber.description
   url: https://github.com/taptappun
-  date: "2024-11-01"
+  published_at: "2024-11-01T00:00:00Z"
+  enable: true
   icon: "🤖"
   tags: [Next.js, AI, WebRTC, VRM, VOICEVOX, TypeScript, Hono]
   featured: true
@@ -11,7 +12,8 @@
   titleKey: projects.sniper-game.title
   descriptionKey: projects.sniper-game.description
   url: https://github.com/taptappun
-  date: "2024-10-01"
+  published_at: "2024-10-01T00:00:00Z"
+  enable: true
   icon: "🎯"
   tags: [Unity, WebRTC, PLATEAU, Cloudflare, Next.js]
   featured: true
@@ -20,7 +22,8 @@
   titleKey: projects.medication-app.title
   descriptionKey: projects.medication-app.description
   url: https://github.com/taptappun
-  date: "2024-09-01"
+  published_at: "2024-09-01T00:00:00Z"
+  enable: true
   icon: "💊"
   tags: [Android, iOS, Kotlin, Swift, OCR, Cloudflare]
 
@@ -28,7 +31,8 @@
   titleKey: projects.ar-timecapsule.title
   descriptionKey: projects.ar-timecapsule.description
   url: https://github.com/taptappun
-  date: "2024-08-01"
+  published_at: "2024-08-01T00:00:00Z"
+  enable: true
   icon: "📍"
   tags: [Unity AR, Cloudflare, Geohash, R2, ARCore, ARKit]
   featured: true

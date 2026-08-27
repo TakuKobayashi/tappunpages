@@ -1,9 +1,0 @@
-- slug: cloudflare-workers-hono-zero-cost
-  titleKey: articles.cloudflare-workers-hono-zero-cost.title
-  descriptionKey: articles.cloudflare-workers-hono-zero-cost.description
-  # 実際のQiita・ブログ記事URLに差し替えてください。
-  url: https://github.com/taptappun
-  date: "2024-11-15"
-  icon: "☁️"
-  tags: [Cloudflare, Hono, TypeScript, Backend]
-  source: External article

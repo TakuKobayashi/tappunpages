@@ -4,6 +4,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries';
 import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
 import { getAllPosts } from '@/lib/blog';
 import { ContentListItem } from '@/components/ui/ContentListItem';
+import { formatPublishedDate } from '@/lib/content-data';
 
 export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
@@ -65,7 +66,7 @@ export default async function LocalizedBlogPage({ params }: { params: Promise<{ 
                     <li key={p.slug} className="list-item">
                       <ContentListItem
                         title={p.title}
-                        description={`${p.date}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
+                        description={`${formatPublishedDate(p.publishedAt, locale === 'jp' ? 'ja-JP' : 'en-US')}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
                         icon={p.icon}
                         defaultIcon="📝"
                         iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
