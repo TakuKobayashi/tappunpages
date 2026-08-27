@@ -1,153 +1,16 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getAllProjects, getProjectBySlug } from '@/lib/projects';
-import { MDXContent } from '@/components/ui/MDXContent';
-import { getDictionary } from '@/lib/i18n/dictionaries';
-import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
-import { buildMetadata } from '@/components/seo/metadata';
-
-interface Props {
-  params: Promise<{ locale: RouteLocale; slug: string }>;
-}
+import { routeLocales, type RouteLocale } from '@/lib/i18n/locales';
 
 export async function generateStaticParams() {
   const projects = await getAllProjects();
-  return routeLocales.flatMap((locale) => projects.map((p) => ({ locale, slug: p.slug })));
+  return routeLocales.flatMap((locale) => projects.map(({ slug }) => ({ locale, slug })));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
-  const p = await getProjectBySlug(slug);
-  if (!p) return {};
-  return buildMetadata(toDictionaryLocale(locale), { title: p.title, description: p.description });
-}
-
-export default async function LocalizedProjectDetailPage({ params }: Props) {
-  const { locale, slug } = await params;
-  const t = getDictionary(toDictionaryLocale(locale));
-  const project = await getProjectBySlug(slug);
+export default async function LocalizedProjectDetailPage({ params }: {
+  params: Promise<{ locale: RouteLocale; slug: string }>;
+}) {
+  const project = await getProjectBySlug((await params).slug);
   if (!project) notFound();
-
-  return (
-    <>
-      <div className="page-bg-fixed bg-blue" aria-hidden="true" />
-      <div className="page-wrap">
-        <div
-          style={{
-            maxWidth: 'var(--prose-w)',
-            margin: '0 auto',
-            padding: 'var(--sp12) var(--sp6)',
-          }}
-        >
-          <nav
-            style={{
-              display: 'flex',
-              gap: 'var(--sp2)',
-              fontSize: 'var(--text-sm)',
-              marginBottom: 'var(--sp6)',
-              color: 'rgba(255,255,255,0.8)',
-            }}
-          >
-            <Link
-              href={`/${locale}/projects`}
-              style={{
-                color: 'rgba(255,255,255,0.8)',
-                textDecoration: 'underline',
-              }}
-            >
-              {t.projects.heading}
-            </Link>
-            <span>/</span>
-            <span style={{ color: 'var(--white)' }}>{project.title}</span>
-          </nav>
-          <div className="article-panel">
-            <div className="article-close">
-              <Link
-                href={`/${locale}/projects`}
-                style={{
-                  color: 'var(--white)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--sp2)',
-                }}
-              >
-                ✕ <span>{t.projects.back}</span>
-              </Link>
-            </div>
-            <div className="article-body">
-              <div className="article-header">
-                <div
-                  className="article-thumb"
-                  style={{
-                    background: 'linear-gradient(135deg,#a8e4f4,#5ac8e8)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <span style={{ fontSize: '1.8rem' }}>🎮</span>
-                </div>
-                <div>
-                  <div className="article-title">{project.title}</div>
-                  <div className="article-desc">{project.description}</div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: 'var(--sp1)',
-                      marginTop: 'var(--sp2)',
-                    }}
-                  >
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="tag-pill">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  {project.github && (
-                    <div
-                      style={{
-                        marginTop: 'var(--sp3)',
-                        display: 'flex',
-                        gap: 'var(--sp2)',
-                      }}
-                    >
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-more yellow-btn"
-                        style={{ fontSize: 'var(--text-xs)' }}
-                      >
-                        GitHub →
-                      </a>
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-more white-btn"
-                          style={{
-                            fontSize: 'var(--text-xs)',
-                            borderColor: 'var(--border-gray)',
-                            color: 'var(--text-dark)',
-                          }}
-                        >
-                          Live Demo →
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="article-content">
-                <MDXContent source={project.content} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  redirect(project.url);
 }

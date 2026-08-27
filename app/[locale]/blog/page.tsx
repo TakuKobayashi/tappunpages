@@ -69,7 +69,6 @@ export default async function LocalizedBlogPage({ params }: { params: Promise<{ 
                         defaultIcon="📝"
                         iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
                         externalUrl={p.externalUrl}
-                        internalHref={`/${locale}/blog/${p.slug}`}
                       />
                     </li>
                   ))}

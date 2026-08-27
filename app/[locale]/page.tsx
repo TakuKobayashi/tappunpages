@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
-import { tools } from '@/lib/tools';
+import { getAllTools } from '@/lib/tools';
 import { getAllProjects } from '@/lib/projects';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 
@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: R
 export default async function LocalizedHomePage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
   const { locale } = await params;
   const t = getDictionary(toDictionaryLocale(locale));
+  const tools = await getAllTools();
   const base = `/${locale}`;
   const projects = (await getAllProjects()).slice(0, 4).map((project) => ({
     title: project.title,
@@ -258,7 +259,7 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
                       </div>
                       <div className="li-body">
                         <span className="li-title">{item.title}</span>
-                        <span className="li-desc">{t.tools.items[item.slug].description}</span>
+                        <span className="li-desc">{item.description}</span>
                       </div>
                       <div className="li-arrow">↗</div>
                     </a>

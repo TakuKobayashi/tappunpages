@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
-import { tools } from '@/lib/tools';
+import { getAllTools } from '@/lib/tools';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 
 export const metadata: Metadata = buildMetadata('ja', t.home.meta);
@@ -20,7 +20,8 @@ const ARTICLES_HREFS = [
   '/jp/blog',
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const tools = await getAllTools();
   const h = t.home;
   return (
     <>
@@ -255,7 +256,7 @@ export default function HomePage() {
                       <div className="li-body">
                         <span className="li-title">{item.title}</span>
                         <span className="li-desc">
-                          {t.tools.items[item.slug].description}
+                          {item.description}
                         </span>
                       </div>
                       <div className="li-arrow">↗</div>

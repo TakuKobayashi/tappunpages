@@ -1,0 +1,9 @@
+- slug: cloudflare-workers-hono-zero-cost
+  title: Cloudflare Workers + HonoでゼロコストAPIバックエンド
+  description: Cloudflare Workers、Hono、D1、R2を組み合わせたAPIバックエンドの構成例。
+  # 実際のQiita・ブログ記事URLに差し替えてください。
+  url: https://github.com/taptappun
+  date: "2024-11-15"
+  icon: "☁️"
+  tags: [Cloudflare, Hono, TypeScript, Backend]
+  source: External article

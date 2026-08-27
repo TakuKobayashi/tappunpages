@@ -1,15 +1,7 @@
-export interface Tool {
-  slug: string;
-  title: string;
-  icon: string;
-  url: string;
-}
+import { readExternalContent, type ExternalContentItem } from './content-data';
 
-export const tools = [
-  {
-    slug: 'fullstack-media-converter',
-    title: 'fullstack-media-converter',
-    icon: '🎞️',
-    url: 'https://github.com/TakuKobayashi/fullstack-media-converter',
-  },
-] as const satisfies readonly Tool[];
+export type Tool = ExternalContentItem;
+
+export async function getAllTools(): Promise<Tool[]> {
+  return readExternalContent('tools');
+}

@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  pageExtensions: ['ts', 'tsx'],
 
   // pnpm workspace の誤検知を防ぐ
   // 上位ディレクトリに別の pnpm-lock.yaml / workspace がある場合に明示指定

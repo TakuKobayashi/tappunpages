@@ -37,7 +37,6 @@ export default async function LocalizedProjectsPage({ params }: { params: Promis
                       featured={p.featured}
                       featuredLabel={t.projects.featured}
                       externalUrl={p.externalUrl}
-                      internalHref={`/${locale}/projects/${p.slug}`}
                     />
                   </li>
                 ))}

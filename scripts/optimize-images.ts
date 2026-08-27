@@ -40,7 +40,7 @@ const LOSSY_QUALITY = 85;
  * 同名の SVG ファイルが存在するか確認する
  * 例: bg-blue.png → bg-blue.svg が存在すれば true
  */
-async function hasSvgSibling(filePath) {
+async function hasSvgSibling(filePath: string): Promise<boolean> {
   const dir = dirname(filePath);
   const ext = extname(filePath);
   const name = basename(filePath, ext);
@@ -60,7 +60,7 @@ async function hasSvgSibling(filePath) {
  * lossy 変換で問題なし。半透明/透明ピクセルが存在する場合のみ
  * lossless を使う。
  */
-async function hasRealAlpha(filePath) {
+async function hasRealAlpha(filePath: string): Promise<boolean> {
   try {
     const metadata = await sharp(filePath).metadata();
     if (!metadata.hasAlpha) return false;
@@ -83,7 +83,7 @@ async function hasRealAlpha(filePath) {
 /**
  * 1枚の画像を WebP に変換する
  */
-async function convertToWebP(filePath) {
+async function convertToWebP(filePath: string): Promise<void> {
   const ext = extname(filePath).toLowerCase();
   const dir = dirname(filePath);
   const name = basename(filePath, ext);
@@ -117,8 +117,8 @@ async function convertToWebP(filePath) {
     }
 
     const [srcStat, dstStat] = await Promise.all([stat(filePath), stat(outPath)]);
-    const ratio = ((1 - dstStat.size / srcStat.size) * 100).toFixed(1);
-    const saved = ratio > 0 ? `▼${ratio}%` : `▲${Math.abs(ratio)}%`;
+    const ratio = (1 - dstStat.size / srcStat.size) * 100;
+    const saved = ratio > 0 ? `▼${ratio.toFixed(1)}%` : `▲${Math.abs(ratio).toFixed(1)}%`;
 
     console.log(
       `  ✓ ${basename(filePath).padEnd(30)} → ${basename(outPath)}` +
@@ -126,15 +126,16 @@ async function convertToWebP(filePath) {
         `  ${(srcStat.size / 1024).toFixed(0)}KB → ${(dstStat.size / 1024).toFixed(0)}KB  ${saved}`,
     );
   } catch (err) {
-    console.error(`  ✗ ${basename(filePath)}: ${err.message}`);
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`  ✗ ${basename(filePath)}: ${message}`);
   }
 }
 
 /**
  * ディレクトリ内の変換対象ファイルを列挙する
  */
-async function collectFiles(dir) {
-  const results = [];
+async function collectFiles(dir: string): Promise<string[]> {
+  const results: string[] = [];
   try {
     const entries = await readdir(dir, { withFileTypes: true });
     for (const entry of entries) {

@@ -29,7 +29,6 @@ export default async function ProjectsPage() {
                       featured={p.featured}
                       featuredLabel={t.projects.featured}
                       externalUrl={p.externalUrl}
-                      internalHref={`/jp/projects/${p.slug}`}
                     />
                   </li>
                 ))}

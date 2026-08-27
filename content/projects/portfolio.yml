@@ -1,0 +1,34 @@
+- slug: ai-vtuber
+  title: AI VTuber Voice Communication System
+  description: Next.js、VOICEVOX、VRM/VRMAを組み合わせたリアルタイム音声対話AIシステム。
+  url: https://github.com/taptappun
+  date: "2024-11-01"
+  icon: "🤖"
+  tags: [Next.js, AI, WebRTC, VRM, VOICEVOX, TypeScript, Hono]
+  featured: true
+
+- slug: sniper-game
+  title: Multiplayer PLATEAU Sniper Game
+  description: PLATEAUの3D都市データを使ったリアルタイム対戦スナイパーゲーム。
+  url: https://github.com/taptappun
+  date: "2024-10-01"
+  icon: "🎯"
+  tags: [Unity, WebRTC, PLATEAU, Cloudflare, Next.js]
+  featured: true
+
+- slug: medication-app
+  title: Medication Management App
+  description: OCRとQRコードを活用したAndroid・iOS対応の服薬管理アプリ。
+  url: https://github.com/taptappun
+  date: "2024-09-01"
+  icon: "💊"
+  tags: [Android, iOS, Kotlin, Swift, OCR, Cloudflare]
+
+- slug: ar-timecapsule
+  title: AR Timecapsule Platform
+  description: 位置情報とARを使い、特定の場所にメッセージを残せるプラットフォーム。
+  url: https://github.com/taptappun
+  date: "2024-08-01"
+  icon: "📍"
+  tags: [Unity AR, Cloudflare, Geohash, R2, ARCore, ARKit]
+  featured: true
