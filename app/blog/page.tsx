@@ -2,10 +2,12 @@ import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllPosts } from '@/lib/blog';
-import { ContentListItem } from '@/components/ui/ContentListItem';
+import { ArticleList } from '@/components/ui/ArticleList';
 import { formatPublishedDate } from '@/lib/content-data';
 
-export const metadata: Metadata = buildMetadata('ja', t.blog.meta, { path: 'blog' });
+export const metadata: Metadata = buildMetadata('ja', t.blog.meta, {
+  path: 'blog',
+});
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
@@ -51,22 +53,16 @@ export default async function BlogPage() {
                 </p>
               </div>
             ) : (
-              <div className="list-container">
-                <ul className="list-items">
-                  {posts.map((p) => (
-                    <li key={p.slug} className="list-item">
-                      <ContentListItem
-                        title={p.title}
-                        description={`${formatPublishedDate(p.publishedAt)}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
-                        icon={p.icon}
-                        defaultIcon="📝"
-                        iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
-                        externalUrl={p.externalUrl}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ArticleList
+                articles={posts.map((p) => ({
+                  slug: p.slug,
+                  title: p.title,
+                  description: `${formatPublishedDate(p.publishedAt)}${p.readingTime ? ` · ${p.readingTime}` : ''}`,
+                  icon: p.icon,
+                  externalUrl: p.externalUrl,
+                }))}
+                moreLabel="もっと見る"
+              />
             )}
           </div>
         </section>

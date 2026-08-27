@@ -1,19 +1,37 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
-import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
+import {
+  routeLocales,
+  toDictionaryLocale,
+  type RouteLocale,
+} from '@/lib/i18n/locales';
 import { getAllPosts } from '@/lib/blog';
-import { ContentListItem } from '@/components/ui/ContentListItem';
+import { ArticleList } from '@/components/ui/ArticleList';
 import { formatPublishedDate } from '@/lib/content-data';
 
-export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
-export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+export function generateStaticParams() {
+  return routeLocales.map((locale) => ({ locale }));
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).blog.meta, { path: 'blog' });
+  return buildMetadata(
+    dictionaryLocale,
+    getDictionary(dictionaryLocale).blog.meta,
+    { path: 'blog' }
+  );
 }
 
-export default async function LocalizedBlogPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+export default async function LocalizedBlogPage({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}) {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
   const t = getDictionary(dictionaryLocale);
@@ -60,22 +78,16 @@ export default async function LocalizedBlogPage({ params }: { params: Promise<{ 
                 </p>
               </div>
             ) : (
-              <div className="list-container">
-                <ul className="list-items">
-                  {posts.map((p) => (
-                    <li key={p.slug} className="list-item">
-                      <ContentListItem
-                        title={p.title}
-                        description={`${formatPublishedDate(p.publishedAt, locale === 'jp' ? 'ja-JP' : 'en-US')}${p.readingTime ? ` · ${p.readingTime}` : ''}`}
-                        icon={p.icon}
-                        defaultIcon="📝"
-                        iconBg="linear-gradient(135deg, #FFE180, #FFDC6C)"
-                        externalUrl={p.externalUrl}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ArticleList
+                articles={posts.map((p) => ({
+                  slug: p.slug,
+                  title: p.title,
+                  description: `${formatPublishedDate(p.publishedAt, locale === 'jp' ? 'ja-JP' : 'en-US')}${p.readingTime ? ` · ${p.readingTime}` : ''}`,
+                  icon: p.icon,
+                  externalUrl: p.externalUrl,
+                }))}
+                moreLabel={locale === 'jp' ? 'もっと見る' : 'Show more'}
+              />
             )}
           </div>
         </section>
