@@ -2,7 +2,7 @@
   title: ローカルLLMを使って自動的にリリースノートを作成するGithub Actions Marketplaceを作った
   description: Gitに保存された変更履歴をローカルLLMに読ませ、GitHubのリリースノートやPull Requestの説明文を自動作成するGitHub Actionsを作りました。
   url: https://qiita.com/taptappun/items/ea493fda8c315d9d79e3
-  published_at: 2026-08-28T00:00:00Z
+  published_at: 2026-08-27T17:39:08Z
   enable: true
   icon: 📝
   tags:
