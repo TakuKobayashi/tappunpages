@@ -1,14 +1,9 @@
 import { MetadataRoute } from 'next';
-import { getAllProjects } from '@/lib/projects';
-import { getAllPosts } from '@/lib/blog';
 import { BASE_URL } from '../components/seo/accounts';
 
 export const dynamic = 'force-static';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const projects = await getAllProjects();
-  const posts = await getAllPosts();
-
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/jp`,
@@ -84,35 +79,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.flatMap((p) => [
-    {
-      url: `${BASE_URL}/jp/projects/${p.slug}`,
-      lastModified: p.date ? new Date(p.date) : new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: p.featured ? 0.8 : 0.6,
-    },
-    {
-      url: `${BASE_URL}/en/projects/${p.slug}`,
-      lastModified: p.date ? new Date(p.date) : new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: p.featured ? 0.8 : 0.6,
-    },
-  ]);
-
-  const blogRoutes: MetadataRoute.Sitemap = posts.flatMap((p) => [
-    {
-      url: `${BASE_URL}/jp/blog/${p.slug}`,
-      lastModified: new Date(p.date),
-      changeFrequency: 'yearly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${BASE_URL}/en/blog/${p.slug}`,
-      lastModified: new Date(p.date),
-      changeFrequency: 'yearly' as const,
-      priority: 0.6,
-    },
-  ]);
-
-  return [...staticRoutes, ...projectRoutes, ...blogRoutes];
+  return staticRoutes;
 }

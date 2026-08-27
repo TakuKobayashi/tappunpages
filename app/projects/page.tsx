@@ -4,7 +4,7 @@ import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllProjects } from '@/lib/projects';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('ja', t.projects.meta);
+export const metadata: Metadata = buildMetadata('ja', t.projects.meta, { path: 'projects' });
 
 export default async function ProjectsPage() {
   const projects = await getAllProjects();

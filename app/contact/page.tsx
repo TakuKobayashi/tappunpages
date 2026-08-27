@@ -3,7 +3,7 @@ import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { ContactForm } from '@/components/sections/ContactForm';
 
-export const metadata: Metadata = buildMetadata('ja', t.contact.meta);
+export const metadata: Metadata = buildMetadata('ja', t.contact.meta, { path: 'contact' });
 
 export default function ContactPage() {
   const c = t.contact;

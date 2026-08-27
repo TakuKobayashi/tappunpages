@@ -4,7 +4,7 @@ import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllTools } from '@/lib/tools';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('ja', t.tools.meta);
+export const metadata: Metadata = buildMetadata('ja', t.tools.meta, { path: 'tools' });
 
 export default async function ToolsPage() {
   const tools = await getAllTools();

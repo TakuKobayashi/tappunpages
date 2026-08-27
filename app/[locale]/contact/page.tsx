@@ -8,7 +8,7 @@ export function generateStaticParams() { return routeLocales.map((locale) => ({ 
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).contact.meta);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).contact.meta, { path: 'contact' });
 }
 
 export default async function LocalizedContactPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {

@@ -14,17 +14,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).home.meta, {
-    canonical: `https://taptappun.net/${locale}`,
-  });
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).home.meta);
 }
 
 export default async function LocalizedHomePage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
   const { locale } = await params;
-  const t = getDictionary(toDictionaryLocale(locale));
-  const tools = await getAllTools();
+  const dictionaryLocale = toDictionaryLocale(locale);
+  const t = getDictionary(dictionaryLocale);
+  const tools = await getAllTools(dictionaryLocale);
   const base = `/${locale}`;
-  const projects = (await getAllProjects()).slice(0, 4).map((project) => ({
+  const projects = (await getAllProjects(dictionaryLocale)).slice(0, 4).map((project) => ({
     title: project.title,
     href: `${base}/projects/${project.slug}`,
   }));

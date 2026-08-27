@@ -12,13 +12,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).tools.meta);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).tools.meta, { path: 'tools' });
 }
 
 export default async function LocalizedToolsPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
   const { locale } = await params;
-  const t = getDictionary(toDictionaryLocale(locale));
-  const tools = await getAllTools();
+  const dictionaryLocale = toDictionaryLocale(locale);
+  const t = getDictionary(dictionaryLocale);
+  const tools = await getAllTools(dictionaryLocale);
   return (
     <>
       <div className="page-bg-fixed bg-green" aria-hidden="true" />

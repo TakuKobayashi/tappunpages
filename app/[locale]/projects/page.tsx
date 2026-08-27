@@ -9,13 +9,14 @@ export function generateStaticParams() { return routeLocales.map((locale) => ({ 
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).projects.meta);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).projects.meta, { path: 'projects' });
 }
 
 export default async function LocalizedProjectsPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
   const { locale } = await params;
-  const t = getDictionary(toDictionaryLocale(locale));
-  const projects = await getAllProjects();
+  const dictionaryLocale = toDictionaryLocale(locale);
+  const t = getDictionary(dictionaryLocale);
+  const projects = await getAllProjects(dictionaryLocale);
   return (
     <>
       <div className="page-bg-fixed bg-green" aria-hidden="true" />

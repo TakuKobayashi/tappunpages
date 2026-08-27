@@ -9,7 +9,7 @@ import { GITHUB_URL } from '@/components/seo/accounts';
 export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).about.meta);
+  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).about.meta, { path: 'about' });
 }
 
 export function generateStaticParams() {

@@ -8,11 +8,15 @@ import { BASE_URL } from './accounts';
 export function buildMetadata(
   locale: Locale,
   pageMeta: { title: string; description: string },
-  options?: { canonical?: string }
+  options?: { canonical?: string; path?: string }
 ): Metadata {
   const lang = locale === 'ja' ? 'ja_JP' : 'en_US';
+  const routeLocale = locale === 'ja' ? 'jp' : 'en';
+  const pagePath = options?.path ? `/${options.path.replace(/^\/+|\/+$/g, '')}` : '';
   const canonical =
-    options?.canonical ?? (locale === 'en' ? `${BASE_URL}/en` : `${BASE_URL}/jp`);
+    options?.canonical ?? `${BASE_URL}/${routeLocale}${pagePath}`;
+  const jaUrl = `${BASE_URL}/jp${pagePath}`;
+  const enUrl = `${BASE_URL}/en${pagePath}`;
 
   return {
     metadataBase: new URL(BASE_URL),
@@ -39,6 +43,7 @@ export function buildMetadata(
     openGraph: {
       type: 'website',
       locale: lang,
+      alternateLocale: locale === 'ja' ? ['en_US'] : ['ja_JP'],
       url: canonical,
       title: pageMeta.title,
       description: pageMeta.description,
@@ -55,8 +60,9 @@ export function buildMetadata(
     alternates: {
       canonical,
       languages: {
-        'ja-JP': `${BASE_URL}/jp`,
-        en: `${BASE_URL}/en`,
+        'ja-JP': jaUrl,
+        en: enUrl,
+        'x-default': jaUrl,
       },
     },
     robots: { index: true, follow: true },

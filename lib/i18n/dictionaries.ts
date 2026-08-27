@@ -5,6 +5,7 @@ export const defaultLocale: Locale = 'ja';
 
 export interface Dictionary {
   locale: Locale;
+  content: Record<string, string>;
   nav: {
     home: string;
     about: string;
@@ -110,6 +111,20 @@ export interface Dictionary {
 
 export const ja = {
   locale: 'ja' as Locale,
+  content: {
+    'projects.ai-vtuber.title': 'AI VTuber Voice Communication System',
+    'projects.ai-vtuber.description': 'Next.js、VOICEVOX、VRM/VRMAを組み合わせたリアルタイム音声対話AIシステム。',
+    'projects.sniper-game.title': 'Multiplayer PLATEAU Sniper Game',
+    'projects.sniper-game.description': 'PLATEAUの3D都市データを使ったリアルタイム対戦スナイパーゲーム。',
+    'projects.medication-app.title': 'Medication Management App',
+    'projects.medication-app.description': 'OCRとQRコードを活用したAndroid・iOS対応の服薬管理アプリ。',
+    'projects.ar-timecapsule.title': 'AR Timecapsule Platform',
+    'projects.ar-timecapsule.description': '位置情報とARを使い、特定の場所にメッセージを残せるプラットフォーム。',
+    'articles.cloudflare-workers-hono-zero-cost.title': 'Cloudflare Workers + HonoでゼロコストAPIバックエンド',
+    'articles.cloudflare-workers-hono-zero-cost.description': 'Cloudflare Workers、Hono、D1、R2を組み合わせたAPIバックエンドの構成例。',
+    'tools.fullstack-media-converter.title': 'fullstack-media-converter',
+    'tools.fullstack-media-converter.description': 'ブラウザとサーバーの両方で利用できるメディア変換ツール。',
+  },
 
   // --- Nav ---
   nav: {
@@ -390,6 +405,20 @@ export const ja = {
 
 export const en: Dictionary = {
   locale: 'en' as Locale,
+  content: {
+    'projects.ai-vtuber.title': 'AI VTuber Voice Communication System',
+    'projects.ai-vtuber.description': 'A real-time conversational AI system combining Next.js, VOICEVOX, and VRM/VRMA.',
+    'projects.sniper-game.title': 'Multiplayer PLATEAU Sniper Game',
+    'projects.sniper-game.description': 'A real-time multiplayer sniper game built with PLATEAU 3D city data.',
+    'projects.medication-app.title': 'Medication Management App',
+    'projects.medication-app.description': 'A medication management app for Android and iOS using OCR and QR codes.',
+    'projects.ar-timecapsule.title': 'AR Timecapsule Platform',
+    'projects.ar-timecapsule.description': 'A location-based AR platform for leaving messages at specific places.',
+    'articles.cloudflare-workers-hono-zero-cost.title': 'Zero-cost API Backend with Cloudflare Workers and Hono',
+    'articles.cloudflare-workers-hono-zero-cost.description': 'An API backend architecture using Cloudflare Workers, Hono, D1, and R2.',
+    'tools.fullstack-media-converter.title': 'fullstack-media-converter',
+    'tools.fullstack-media-converter.description': 'A media conversion tool for both browser and server environments.',
+  },
 
   nav: {
     home: 'Home',

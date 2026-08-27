@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "tsx scripts/optimize-images.ts && next build",
+    "build": "tsx scripts/optimize-images.ts && next build && tsx scripts/localize-static-html.ts",
     "lint": "next lint",
     "deploy": "next build && wrangler deploy",
     "deploy:preview": "next build && wrangler deploy --env preview",

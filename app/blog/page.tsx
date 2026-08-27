@@ -4,7 +4,7 @@ import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllPosts } from '@/lib/blog';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('ja', t.blog.meta);
+export const metadata: Metadata = buildMetadata('ja', t.blog.meta, { path: 'blog' });
 
 export default async function BlogPage() {
   const posts = await getAllPosts();

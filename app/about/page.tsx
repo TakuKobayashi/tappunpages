@@ -5,7 +5,7 @@ import { ja as t } from '@/lib/i18n/dictionaries';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 import { GITHUB_URL } from '@/components/seo/accounts';
 
-export const metadata: Metadata = buildMetadata('ja', t.about.meta);
+export const metadata: Metadata = buildMetadata('ja', t.about.meta, { path: 'about' });
 
 export default function AboutPage() {
   const a = t.about;

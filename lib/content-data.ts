@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'yaml';
+import { getDictionary, type Locale } from './i18n/dictionaries';
 
 export interface ExternalContentItem {
   slug: string;
@@ -18,8 +19,10 @@ export interface ExternalContentItem {
   readingTime?: string;
 }
 
-type RawItem = Partial<Omit<ExternalContentItem, 'order' | 'slug'>> & {
+type RawItem = Partial<Omit<ExternalContentItem, 'order' | 'slug' | 'title' | 'description'>> & {
   slug?: string;
+  titleKey?: string;
+  descriptionKey?: string;
   order?: number;
 };
 
@@ -30,7 +33,8 @@ function dateToOrder(date: string): number {
   return Number.isFinite(value) ? value : 0;
 }
 
-export function readExternalContent(directoryName: string): ExternalContentItem[] {
+export function readExternalContent(directoryName: string, locale: Locale = 'ja'): ExternalContentItem[] {
+  const translations = getDictionary(locale).content;
   const directoryPath = path.join(process.cwd(), 'content', directoryName);
   const fileNames = fs.readdirSync(directoryPath).filter((fileName) => /\.ya?ml$/i.test(fileName));
   const items = fileNames.flatMap((fileName): ItemWithSource[] => {
@@ -50,11 +54,15 @@ export function readExternalContent(directoryName: string): ExternalContentItem[
   const slugs = new Set<string>();
   const normalized = items.map((item): ExternalContentItem => {
     const label = `${directoryName}/${item.fileName}[${item.itemIndex}]`;
-    for (const field of ['slug', 'title', 'description', 'url', 'date'] as const) {
+    for (const field of ['slug', 'titleKey', 'descriptionKey', 'url', 'date'] as const) {
       if (typeof item[field] !== 'string' || item[field].trim() === '') {
         throw new Error(`${label}.${field} must be a non-empty string`);
       }
     }
+    const title = translations[item.titleKey!];
+    const description = translations[item.descriptionKey!];
+    if (!title) throw new Error(`${label}.titleKey "${item.titleKey}" is missing from the ${locale} dictionary`);
+    if (!description) throw new Error(`${label}.descriptionKey "${item.descriptionKey}" is missing from the ${locale} dictionary`);
     if (slugs.has(item.slug!)) throw new Error(`${label}.slug is duplicated`);
     slugs.add(item.slug!);
 
@@ -66,7 +74,7 @@ export function readExternalContent(directoryName: string): ExternalContentItem[
     }
 
     return {
-      slug: item.slug!, title: item.title!, description: item.description!, url: item.url!, externalUrl: item.url!,
+      slug: item.slug!, title, description, url: item.url!, externalUrl: item.url!,
       date: item.date!, order: item.order ?? dateToOrder(item.date!), icon: item.icon,
       tags: Array.isArray(item.tags) ? item.tags : [], featured: item.featured ?? false,
       source: item.source,

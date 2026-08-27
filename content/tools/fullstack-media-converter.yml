@@ -1,6 +1,6 @@
 - slug: fullstack-media-converter
-  title: fullstack-media-converter
-  description: ブラウザとサーバーの両方で利用できるメディア変換ツール。
+  titleKey: tools.fullstack-media-converter.title
+  descriptionKey: tools.fullstack-media-converter.description
   url: https://github.com/TakuKobayashi/fullstack-media-converter
   date: "2024-01-01"
   icon: "🎞️"
