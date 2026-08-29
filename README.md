@@ -143,6 +143,37 @@ github: 'https://github.com/taptappun/repo'
 
 ---
 
+## URLからコンテンツYMLを追加
+
+種別とURLを指定すると、ページのHTML、OGP、JSON-LDからタイトル、説明、公開日時、タグ、出典を取得し、
+`content/<種別>/generated.yml`へ追記します。`published_at`はUTCへ変換されます。
+
+```bash
+pnpm content:add articles https://example.com/article
+pnpm content:add projects https://github.com/user/repository
+pnpm content:add tools https://example.com/tool
+```
+
+ローカルのOllamaで本文を分析し、タイトル、説明、タグ、出典を補正する場合は`--ollama`を指定します。
+
+```bash
+pnpm content:add articles https://example.com/article --ollama
+pnpm content:add projects https://github.com/user/repository --ollama --model qwen3.5:9b
+```
+
+主なオプション:
+
+- `--dry-run`: YMLを変更せず生成結果だけを表示
+- `--disable`: `enable: false`で追加
+- `--published-at 2026-08-30T12:00:00Z`: 公開日時をUTCで上書き
+- `--file custom.yml`: 保存先のYMLファイル名を変更
+- `--model qwen3.5:9b`: Ollamaのモデルを上書き（既定: `qwen3.5:9b`）
+- `--ollama-url http://localhost:11434`: Ollama APIのURLを指定
+
+同じURLまたはslugが登録済みの場合は追記しません。
+
+---
+
 ## 環境変数
 
 ```bash
