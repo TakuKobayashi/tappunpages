@@ -2,32 +2,54 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
-import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
+import {
+  routeLocales,
+  toDictionaryLocale,
+  type RouteLocale,
+} from '@/lib/i18n/locales';
 import { getAllTools } from '@/lib/tools';
 import { getAllProjects } from '@/lib/projects';
 import { SocialLinks } from '@/components/ui/SocialLinks';
+import { ContentListItem } from '@/components/ui/ContentListItem';
 
 export function generateStaticParams() {
   return routeLocales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).home.meta);
+  return buildMetadata(
+    dictionaryLocale,
+    getDictionary(dictionaryLocale).home.meta
+  );
 }
 
-export default async function LocalizedHomePage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+export default async function LocalizedHomePage({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}) {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
   const t = getDictionary(dictionaryLocale);
   const tools = await getAllTools(dictionaryLocale);
   const base = `/${locale}`;
-  const projects = (await getAllProjects(dictionaryLocale)).slice(0, 4).map((project) => ({
-    title: project.title,
-    href: `${base}/projects/${project.slug}`,
-  }));
-  const articleHrefs = [`${base}/blog/cloudflare-workers-hono-zero-cost`, `${base}/blog`, `${base}/blog`];
+  const projects = (await getAllProjects(dictionaryLocale))
+    .slice(0, 4)
+    .map((project) => ({
+      title: project.title,
+      href: `${base}/projects/${project.slug}`,
+    }));
+  const articleHrefs = [
+    `${base}/blog/cloudflare-workers-hono-zero-cost`,
+    `${base}/blog`,
+    `${base}/blog`,
+  ];
   const h = t.home;
   return (
     <>
@@ -177,7 +199,10 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
           </div>
         </section>
 
-        <section className="section-band band-blue" aria-label={h.a11y.projects}>
+        <section
+          className="section-band band-blue"
+          aria-label={h.a11y.projects}
+        >
           <div className="container">
             <h2 className="section-heading yellow">{h.projects.heading}</h2>
             <p className="page-intro">{h.projects.description}</p>
@@ -244,30 +269,26 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
               <ul className="list-items">
                 {tools.map((item) => (
                   <li key={item.slug} className="list-item">
-                    <a href={item.url} target="_blank" rel="noopener noreferrer">
-                      <div
-                        className="li-thumb"
-                        style={{
-                          background: 'linear-gradient(135deg,#7CC87A,#5AAD58)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <span style={{ fontSize: '1.6rem' }}>🛠</span>
-                      </div>
-                      <div className="li-body">
-                        <span className="li-title">{item.title}</span>
-                        <span className="li-desc">{item.description}</span>
-                      </div>
-                      <div className="li-arrow">↗</div>
-                    </a>
+                    <ContentListItem
+                      title={item.title}
+                      description={item.description}
+                      icon={item.icon}
+                      defaultIcon="🛠️"
+                      iconBg="linear-gradient(135deg,#7CC87A,#5AAD58)"
+                      externalUrl={item.url ?? item.repositoryUrl}
+                      repositoryUrl={item.url ? item.repositoryUrl : undefined}
+                      externalUrlLabel={locale === 'jp' ? 'サイト' : 'Website'}
+                    />
                   </li>
                 ))}
               </ul>
             </div>
             <div style={{ textAlign: 'right', marginTop: 'var(--sp4)' }}>
-              <Link href={`${base}/tools`} className="btn-more white-btn" style={{ fontSize: 'var(--text-xs)' }}>
+              <Link
+                href={`${base}/tools`}
+                className="btn-more white-btn"
+                style={{ fontSize: 'var(--text-xs)' }}
+              >
                 {h.tools.more}
               </Link>
             </div>
@@ -283,7 +304,10 @@ export default async function LocalizedHomePage({ params }: { params: Promise<{ 
           aria-hidden="true"
         />
 
-        <section className="section-band band-yellow" aria-label={h.a11y.articles}>
+        <section
+          className="section-band band-yellow"
+          aria-label={h.a11y.articles}
+        >
           <div className="container">
             <h2
               className="section-heading"

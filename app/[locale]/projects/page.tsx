@@ -1,18 +1,36 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
-import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
+import {
+  routeLocales,
+  toDictionaryLocale,
+  type RouteLocale,
+} from '@/lib/i18n/locales';
 import { getAllProjects } from '@/lib/projects';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export function generateStaticParams() { return routeLocales.map((locale) => ({ locale })); }
-export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+export function generateStaticParams() {
+  return routeLocales.map((locale) => ({ locale }));
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).projects.meta, { path: 'projects' });
+  return buildMetadata(
+    dictionaryLocale,
+    getDictionary(dictionaryLocale).projects.meta,
+    { path: 'projects' }
+  );
 }
 
-export default async function LocalizedProjectsPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+export default async function LocalizedProjectsPage({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}) {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
   const t = getDictionary(dictionaryLocale);
@@ -37,7 +55,9 @@ export default async function LocalizedProjectsPage({ params }: { params: Promis
                       iconBg="linear-gradient(135deg, #a8e4f4 0%, #5ac8e8 100%)"
                       featured={p.featured}
                       featuredLabel={t.projects.featured}
-                      externalUrl={p.externalUrl}
+                      externalUrl={p.url ?? p.repositoryUrl}
+                      repositoryUrl={p.url ? p.repositoryUrl : undefined}
+                      externalUrlLabel={locale === 'jp' ? 'サイト' : 'Website'}
                     />
                   </li>
                 ))}

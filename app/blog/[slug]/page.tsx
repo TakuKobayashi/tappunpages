@@ -5,8 +5,12 @@ export async function generateStaticParams() {
   return (await getAllPosts()).map(({ slug }) => ({ slug }));
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const post = await getPostBySlug((await params).slug);
   if (!post) notFound();
-  redirect(post.url);
+  redirect(post.externalUrl);
 }

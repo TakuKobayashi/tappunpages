@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/components/seo/metadata';
 import { getDictionary } from '@/lib/i18n/dictionaries';
-import { routeLocales, toDictionaryLocale, type RouteLocale } from '@/lib/i18n/locales';
+import {
+  routeLocales,
+  toDictionaryLocale,
+  type RouteLocale,
+} from '@/lib/i18n/locales';
 import { getAllTools } from '@/lib/tools';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
@@ -9,13 +13,25 @@ export function generateStaticParams() {
   return routeLocales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: RouteLocale }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}): Promise<Metadata> {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
-  return buildMetadata(dictionaryLocale, getDictionary(dictionaryLocale).tools.meta, { path: 'tools' });
+  return buildMetadata(
+    dictionaryLocale,
+    getDictionary(dictionaryLocale).tools.meta,
+    { path: 'tools' }
+  );
 }
 
-export default async function LocalizedToolsPage({ params }: { params: Promise<{ locale: RouteLocale }> }) {
+export default async function LocalizedToolsPage({
+  params,
+}: {
+  params: Promise<{ locale: RouteLocale }>;
+}) {
   const { locale } = await params;
   const dictionaryLocale = toDictionaryLocale(locale);
   const t = getDictionary(dictionaryLocale);
@@ -34,10 +50,16 @@ export default async function LocalizedToolsPage({ params }: { params: Promise<{
                   <li key={tool.slug} className="list-item">
                     <ContentListItem
                       title={tool.title}
-                      description={tool.source ? `${tool.source} · ${tool.description}` : tool.description}
+                      description={
+                        tool.source
+                          ? `${tool.source} · ${tool.description}`
+                          : tool.description
+                      }
                       icon={tool.icon}
                       iconBg="linear-gradient(135deg,#7CC87A,#5AAD58)"
-                      externalUrl={tool.url}
+                      externalUrl={tool.url ?? tool.repositoryUrl}
+                      repositoryUrl={tool.url ? tool.repositoryUrl : undefined}
+                      externalUrlLabel={locale === 'jp' ? 'サイト' : 'Website'}
                     />
                   </li>
                 ))}

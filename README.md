@@ -150,27 +150,31 @@ github: 'https://github.com/taptappun/repo'
 
 ```bash
 pnpm content:add articles https://example.com/article
-pnpm content:add projects https://github.com/user/repository
-pnpm content:add tools https://example.com/tool
+pnpm content:add projects https://example.com/app --repository-url https://github.com/user/repository
+pnpm content:add tools --repository-url https://github.com/user/tool
 ```
 
 ローカルのOllamaで本文を分析し、タイトル、説明、タグ、出典を補正する場合は`--ollama`を指定します。
 
 ```bash
 pnpm content:add articles https://example.com/article --ollama
-pnpm content:add projects https://github.com/user/repository --ollama --model qwen3.5:9b
+pnpm content:add projects https://example.com/app --repository-url https://github.com/user/repository --ollama
 ```
 
 主なオプション:
 
 - `--dry-run`: YMLを変更せず生成結果だけを表示
 - `--disable`: `enable: false`で追加
+- `--repository-url https://github.com/user/repository`: projects/toolsのリポジトリURLを追加
 - `--published-at 2026-08-30T12:00:00Z`: 公開日時をUTCで上書き
 - `--file custom.yml`: 保存先のYMLファイル名を変更
 - `--model qwen3.5:9b`: Ollamaのモデルを上書き（既定: `qwen3.5:9b`）
 - `--ollama-url http://localhost:11434`: Ollama APIのURLを指定
 
 同じURLまたはslugが登録済みの場合は追記しません。
+
+`projects`と`tools`では通常の`url`と`repository_url`を別々に保持できます。片方だけの場合は存在するURLが
+メインリンクとして使われ、両方ある場合はサイトとGitHubの2つのリンクが表示されます。`articles`には通常のURLが必須です。
 
 ---
 

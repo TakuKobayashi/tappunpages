@@ -500,6 +500,44 @@ button {
   text-decoration: none;
   color: var(--text-dark);
 }
+.list-item > .li-card {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: var(--text-dark);
+}
+.list-item .li-actions {
+  display: flex;
+  gap: var(--sp1);
+  padding-right: var(--sp3);
+  flex-shrink: 0;
+}
+.list-item .li-actions a {
+  padding: var(--sp2) var(--sp3);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r-md);
+  background: var(--grad-gold);
+  color: var(--white);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition:
+    opacity var(--t-fast),
+    transform var(--t-fast);
+}
+.list-item .li-actions a:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+@media (max-width: 700px) {
+  .list-item .li-actions {
+    padding-right: var(--sp2);
+  }
+  .list-item .li-actions a {
+    padding: var(--sp2);
+  }
+}
 .list-item .li-thumb {
   width: 60px;
   height: 60px;

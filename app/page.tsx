@@ -4,6 +4,7 @@ import { buildMetadata } from '@/components/seo/metadata';
 import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllTools } from '@/lib/tools';
 import { SocialLinks } from '@/components/ui/SocialLinks';
+import { ContentListItem } from '@/components/ui/ContentListItem';
 
 export const metadata: Metadata = buildMetadata('ja', t.home.meta);
 
@@ -241,26 +242,16 @@ export default async function HomePage() {
               <ul className="list-items">
                 {tools.map((item) => (
                   <li key={item.slug} className="list-item">
-                    <a href={item.url} target="_blank" rel="noopener noreferrer">
-                      <div
-                        className="li-thumb"
-                        style={{
-                          background: 'linear-gradient(135deg,#7CC87A,#5AAD58)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <span style={{ fontSize: '1.6rem' }}>🛠</span>
-                      </div>
-                      <div className="li-body">
-                        <span className="li-title">{item.title}</span>
-                        <span className="li-desc">
-                          {item.description}
-                        </span>
-                      </div>
-                      <div className="li-arrow">↗</div>
-                    </a>
+                    <ContentListItem
+                      title={item.title}
+                      description={item.description}
+                      icon={item.icon}
+                      defaultIcon="🛠️"
+                      iconBg="linear-gradient(135deg,#7CC87A,#5AAD58)"
+                      externalUrl={item.url ?? item.repositoryUrl}
+                      repositoryUrl={item.url ? item.repositoryUrl : undefined}
+                      externalUrlLabel="サイト"
+                    />
                   </li>
                 ))}
               </ul>

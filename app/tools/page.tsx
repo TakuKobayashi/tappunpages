@@ -4,7 +4,9 @@ import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllTools } from '@/lib/tools';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('ja', t.tools.meta, { path: 'tools' });
+export const metadata: Metadata = buildMetadata('ja', t.tools.meta, {
+  path: 'tools',
+});
 
 export default async function ToolsPage() {
   const tools = await getAllTools();
@@ -22,10 +24,16 @@ export default async function ToolsPage() {
                   <li key={tool.slug} className="list-item">
                     <ContentListItem
                       title={tool.title}
-                      description={tool.source ? `${tool.source} · ${tool.description}` : tool.description}
+                      description={
+                        tool.source
+                          ? `${tool.source} · ${tool.description}`
+                          : tool.description
+                      }
                       icon={tool.icon}
                       iconBg="linear-gradient(135deg,#7CC87A,#5AAD58)"
-                      externalUrl={tool.url}
+                      externalUrl={tool.url ?? tool.repositoryUrl}
+                      repositoryUrl={tool.url ? tool.repositoryUrl : undefined}
+                      externalUrlLabel="サイト"
                     />
                   </li>
                 ))}

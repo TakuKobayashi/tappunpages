@@ -7,7 +7,8 @@ type ContentItem = {
   slug: string;
   title: string;
   description: string;
-  url: string;
+  url?: string;
+  repository_url?: string;
   published_at: string;
   enable: boolean;
   icon: string;
@@ -32,12 +33,13 @@ const DEFAULT_ICONS: Record<ContentType, string> = {
 };
 
 const HELP = `Usage:
-  pnpm content:add <articles|projects|tools> <URL> [options]
+  pnpm content:add <articles|projects|tools> [URL] [options]
 
 Options:
   --ollama                 Ollamaでタイトル・説明・タグ・出典を補正
   --model <name>           Ollamaモデル名（既定: qwen3.5:9b）
   --ollama-url <URL>       Ollama API URL（既定: http://localhost:11434）
+  --repository-url <URL>   projects/toolsのGitHubリポジトリURL
   --published-at <ISO>     公開日時をUTCで指定（例: 2026-08-30T12:00:00Z）
   --disable                enable: false で追加
   --file <name.yml>        出力ファイル名（既定: generated.yml）
@@ -46,7 +48,8 @@ Options:
 
 Examples:
   pnpm content:add articles https://example.com/post
-  pnpm content:add projects https://github.com/user/repo --ollama
+  pnpm content:add projects https://example.com/app --repository-url https://github.com/user/repo --ollama
+  pnpm content:add projects --repository-url https://github.com/user/repo
   pnpm content:add tools https://example.com/tool --ollama --model gemma3:12b
 `;
 
@@ -316,7 +319,11 @@ function assertUnique(contentRoot: string, item: ContentItem): void {
       .readdirSync(directory)
       .filter((name) => /\.ya?ml$/i.test(name))) {
       for (const existing of readItems(path.join(directory, fileName))) {
-        if (existing.url === item.url)
+        const itemUrls = [item.url, item.repository_url].filter(Boolean);
+        const existingUrls = [existing.url, existing.repository_url].filter(
+          Boolean
+        );
+        if (itemUrls.some((url) => existingUrls.includes(url)))
           throw new Error(`URLは登録済みです: ${type}/${fileName}`);
         if (existing.slug === item.slug)
           throw new Error(
@@ -331,10 +338,14 @@ function parseArguments(args: string[]) {
   if (args[0] === '--') args = args.slice(1);
   if (args.includes('--help') || args.length === 0)
     return { help: true } as const;
-  const [rawType, rawUrl, ...options] = args;
+  const [rawType, ...remainingArgs] = args;
   if (!CONTENT_TYPES.has(rawType as ContentType))
     throw new Error(`種別が不正です: ${rawType}`);
-  if (!rawUrl) throw new Error('URLを指定してください');
+  const rawUrl =
+    remainingArgs[0] && !remainingArgs[0].startsWith('--')
+      ? remainingArgs.shift()
+      : undefined;
+  const options = remainingArgs;
   const values = new Map<string, string>();
   const flags = new Set<string>();
   for (let index = 0; index < options.length; index += 1) {
@@ -344,7 +355,13 @@ function parseArguments(args: string[]) {
       continue;
     }
     if (
-      ['--model', '--ollama-url', '--published-at', '--file'].includes(option)
+      [
+        '--model',
+        '--ollama-url',
+        '--repository-url',
+        '--published-at',
+        '--file',
+      ].includes(option)
     ) {
       const value = options[index + 1];
       if (!value || value.startsWith('--'))
@@ -360,10 +377,16 @@ function parseArguments(args: string[]) {
     throw new Error('--fileにはYMLファイル名だけを指定してください');
   const useOllama = flags.has('--ollama');
   const model = values.get('--model') ?? 'qwen3.5:9b';
+  const repositoryUrl = values.get('--repository-url');
+  if (rawType === 'articles' && !rawUrl)
+    throw new Error('articlesにはURLが必要です');
+  if (!rawUrl && !repositoryUrl)
+    throw new Error('URLまたは--repository-urlを指定してください');
   return {
     help: false,
     type: rawType as ContentType,
-    url: new URL(rawUrl),
+    url: rawUrl ? new URL(rawUrl) : undefined,
+    repositoryUrl: repositoryUrl ? new URL(repositoryUrl) : undefined,
     useOllama,
     disable: flags.has('--disable'),
     dryRun: flags.has('--dry-run'),
@@ -383,26 +406,32 @@ async function main(): Promise<void> {
     console.log(HELP);
     return;
   }
-  if (!['http:', 'https:'].includes(options.url.protocol))
-    throw new Error('http(s) URLだけを指定できます');
+  for (const url of [options.url, options.repositoryUrl]) {
+    if (url && !['http:', 'https:'].includes(url.protocol))
+      throw new Error('http(s) URLだけを指定できます');
+  }
 
-  console.log(`URLを取得しています: ${options.url.href}`);
-  const html = await fetchPage(options.url);
-  const metadata = parsePage(html, options.url);
+  const metadataUrl = options.url ?? options.repositoryUrl!;
+  console.log(`URLを取得しています: ${metadataUrl.href}`);
+  const html = await fetchPage(metadataUrl);
+  const metadata = parsePage(html, metadataUrl);
   const enriched = options.useOllama
     ? await enrichWithOllama(
         metadata,
         options.type,
-        options.url,
+        metadataUrl,
         options.model,
         options.ollamaUrl
       )
     : metadata;
   const item: ContentItem = {
-    slug: createSlug(options.url, enriched.title),
+    slug: createSlug(metadataUrl, enriched.title),
     title: enriched.title,
     description: enriched.description,
-    url: options.url.href,
+    ...(options.url ? { url: options.url.href } : {}),
+    ...(options.repositoryUrl
+      ? { repository_url: options.repositoryUrl.href }
+      : {}),
     published_at: normalizeUtc(options.publishedAt ?? metadata.publishedAt),
     enable: !options.disable,
     icon: DEFAULT_ICONS[options.type],

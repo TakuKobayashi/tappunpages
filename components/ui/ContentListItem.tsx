@@ -14,6 +14,10 @@ interface ContentListItemProps {
   featuredLabel?: string;
   /** 外部URL (指定あり → target="_blank" で外部リンク) */
   externalUrl?: string;
+  /** GitHubリポジトリへの独立した導線。externalUrlと異なる場合は2ボタン表示。 */
+  repositoryUrl?: string;
+  externalUrlLabel?: string;
+  repositoryUrlLabel?: string;
   /** 内部パス (externalUrl なしの場合に使用) */
   internalHref?: string;
 }
@@ -78,6 +82,9 @@ export function ContentListItem({
   featured,
   featuredLabel = '★',
   externalUrl,
+  repositoryUrl,
+  externalUrlLabel = 'Web',
+  repositoryUrlLabel = 'GitHub',
   internalHref = '#',
 }: ContentListItemProps) {
   const inner = (
@@ -104,20 +111,38 @@ export function ContentListItem({
         </span>
         <span className="li-desc">{description}</span>
       </div>
-      <div className="li-arrow">
-        {/* 外部リンクは ↗、内部は ▶ */}
-        {externalUrl ? '↗' : '▶'}
-      </div>
     </>
   );
+
+  if (externalUrl && repositoryUrl && externalUrl !== repositoryUrl) {
+    return (
+      <div className="li-card">
+        {inner}
+        <div className="li-actions">
+          <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+            {externalUrlLabel} ↗
+          </a>
+          <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
+            {repositoryUrlLabel} ↗
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   if (externalUrl) {
     return (
       <a href={externalUrl} target="_blank" rel="noopener noreferrer">
         {inner}
+        <div className="li-arrow">↗</div>
       </a>
     );
   }
 
-  return <Link href={internalHref}>{inner}</Link>;
+  return (
+    <Link href={internalHref}>
+      {inner}
+      <div className="li-arrow">▶</div>
+    </Link>
+  );
 }

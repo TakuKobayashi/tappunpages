@@ -4,7 +4,9 @@ import { ja as t } from '@/lib/i18n/dictionaries';
 import { getAllProjects } from '@/lib/projects';
 import { ContentListItem } from '@/components/ui/ContentListItem';
 
-export const metadata: Metadata = buildMetadata('ja', t.projects.meta, { path: 'projects' });
+export const metadata: Metadata = buildMetadata('ja', t.projects.meta, {
+  path: 'projects',
+});
 
 export default async function ProjectsPage() {
   const projects = await getAllProjects();
@@ -28,7 +30,9 @@ export default async function ProjectsPage() {
                       iconBg="linear-gradient(135deg, #a8e4f4 0%, #5ac8e8 100%)"
                       featured={p.featured}
                       featuredLabel={t.projects.featured}
-                      externalUrl={p.externalUrl}
+                      externalUrl={p.url ?? p.repositoryUrl}
+                      repositoryUrl={p.url ? p.repositoryUrl : undefined}
+                      externalUrlLabel="サイト"
                     />
                   </li>
                 ))}
