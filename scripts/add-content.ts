@@ -75,6 +75,32 @@ function cleanText(value: string): string {
   return decodeHtml(value).replace(/\s+/g, ' ').trim();
 }
 
+function containsJapanese(value: string): boolean {
+  return /[\u3040-\u30ff\u3400-\u9fff]/.test(value);
+}
+
+function normalizeTags(values: unknown[]): string[] {
+  const seen = new Set<string>();
+  return values
+    .map((value) => cleanText(String(value)).replace(/^#+/, ''))
+    .map((value) => value.replace(/\s+/g, ''))
+    .filter((value) => value.length > 0 && value.length <= 24)
+    .filter((value) => {
+      const key = value.toLocaleLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 8);
+}
+
+function needsOllama(metadata: PageMetadata): boolean {
+  return (
+    !containsJapanese(metadata.description) ||
+    metadata.tags.some((tag) => /\s/.test(tag) || tag.length > 24)
+  );
+}
+
 function getMeta(html: string, names: string[]): string | undefined {
   for (const name of names) {
     const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -160,17 +186,15 @@ function parsePage(html: string, pageUrl: URL): PageMetadata {
     getMeta(html, ['keywords', 'article:tag']),
     ...jsonLd.map((item) => item.keywords),
   ];
-  const tags = keywordValues
-    .flatMap((value) =>
+  const tags = normalizeTags(
+    keywordValues.flatMap((value) =>
       Array.isArray(value)
         ? value
         : typeof value === 'string'
           ? value.split(/[,、]/)
           : []
     )
-    .map((value) => cleanText(String(value)))
-    .filter(Boolean)
-    .slice(0, 8);
+  );
   const publishedAt = firstString(
     getMeta(html, ['article:published_time', 'datePublished', 'date']),
     ...jsonLd.map((item) => item.datePublished)
@@ -252,7 +276,8 @@ async function enrichWithOllama(
     required: ['title', 'description', 'tags', 'source'],
   };
   const prompt = `次のWebページをポートフォリオの${type}一覧へ登録します。
-事実を追加・推測せず、日本語で簡潔かつ自然なタイトルと120文字程度の説明、関連技術タグ（最大8件）、短い出典名を作ってください。
+事実を追加・推測せず、日本語で簡潔かつ自然なタイトルと120文字程度の日本語説明、関連技術タグ（最大8件）、短い出典名を作ってください。
+タグは「TypeScript」「CloudflareWorkers」「画像変換」のような技術名・機能名に限定し、各24文字以内かつ空白なしにしてください。検索文や「free browser converter」のような長いSEOキーワードは禁止です。
 JSON Schemaに厳密に従ってください。
 
 URL: ${pageUrl.href}
@@ -296,10 +321,13 @@ ${metadata.bodyText}`;
   ) {
     throw new Error('Ollamaの応答に必要な項目がありません');
   }
+  if (!containsJapanese(value.description)) {
+    throw new Error('Ollamaが日本語の説明文を返しませんでした');
+  }
   return {
     title: cleanText(value.title),
     description: cleanText(value.description).slice(0, 300),
-    tags: value.tags.map(String).map(cleanText).filter(Boolean).slice(0, 8),
+    tags: normalizeTags(value.tags),
     source: cleanText(value.source),
   };
 }
@@ -415,7 +443,13 @@ async function main(): Promise<void> {
   console.log(`URLを取得しています: ${metadataUrl.href}`);
   const html = await fetchPage(metadataUrl);
   const metadata = parsePage(html, metadataUrl);
-  const enriched = options.useOllama
+  const useOllama = options.useOllama || needsOllama(metadata);
+  if (useOllama && !options.useOllama) {
+    console.log(
+      `日本語説明または短いタグを生成するためOllama (${options.model}) を使用します`
+    );
+  }
+  const enriched = useOllama
     ? await enrichWithOllama(
         metadata,
         options.type,
